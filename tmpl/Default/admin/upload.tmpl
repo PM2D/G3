@@ -1,0 +1,31 @@
+[*=$this->Parse('header.tmpl')*]
+
+<div>
+
+  [<a href="admin.php?[*=SID*]">B aдминку</a>]<hr />
+  <div style="text-align: center">
+  <form action="admin.php?mod=upload&amp;[*=SID*]" method="post">
+   <div class="title">Галерея</div><fieldset>
+   Максимальный размер загружаемого файла:<br />
+   <small>(в байтах)</small>
+   <div class="base"><input type="text" name="gallery_max" value="[*=$GALLERY['max']*]" /></div>
+   Разрешенные типы файлов:<br />
+   <small>(через запятую)</small>
+   <div class="base"><input type="text" name="gallery_allowed" value="[*=$GALLERY['allowed']*]" /></div>
+   </fieldset>
+   <div class="title">Аватарки</div><fieldset style="text-align: center">
+   Максимальный размер загружаемого файла:<br />
+   <small>(в байтах)</small>
+   <div class="base"><input type="text" name="avatar_max" value="[*=$AVATAR['max']*]" /></div>
+   Разрешенные типы файлов:<br />
+   <small>(через запятую)</small>
+   <div class="base"><input type="text" name="avatar_allowed" value="[*=$AVATAR['allowed']*]" /></div>
+   </fieldset>
+   <input type="submit" value="Измeнить" />
+  </form></div><hr />
+  [<a href="admin.php?[*=SID*]">B aдминку</a>]<br />
+  [<a href="/?[*=SID*]">Ha глaвную</a>]
+
+</div>
+
+[*=$this->Parse('footer.tmpl')*]

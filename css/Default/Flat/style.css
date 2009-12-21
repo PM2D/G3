@@ -1,0 +1,49 @@
+body {
+	background: #FFFFE0;
+	color: #000000;
+	max-width: 320px;
+	margin: 1px auto;
+	padding: 2px;
+	border: 1px solid #A0A0A0;
+}
+a:link,a:visited {
+	color: #0033DD;
+	text-decoration: none;
+}
+a:active,a:hover {
+	color: #00C000;
+	text-decoration: underline;
+}
+.title {
+	font-weight: bolder;
+	text-align: center;
+	background-color: #303030;
+	background-image: url(stripes.gif);
+	color: #FEFEFE;
+	border: 1px solid #A0A0A0;
+}
+.base {
+	margin: 1px;
+	padding: 2px;
+	border: 1px solid #A0A0A0;
+	background-color: #EDEDBB;
+	color: #000000;
+}
+.frame {
+	margin: 1px;
+	padding: 2px;
+	border: 1px solid #A0A0A0;
+}
+.misc {
+	text-align: center;
+	font-size: smaller;
+}
+.alt { color: #696969; }
+img { vertical-align: middle }
+hr {
+	margin: 4px;
+	height: 1px;
+	border: 1px;
+	color: #696969;
+	background-color: #696969;
+}

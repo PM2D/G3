@@ -1,0 +1,173 @@
+[*=$this->Parse('header.tmpl')*]
+
+<div>
+
+<div class="base" style="text-align: center">
+  <img src="ico/_misc/logo.gif" alt="logo" />
+  <div class="title"><small>Доброго времени суток, <b>[*=$USER['login']*]</b></small></div>
+</div>
+
+<div class="frame">
+  <small><img src="ico/[*=$USER['icons']*]/pic1.gif" alt="&gt;" />
+  [*IF(3!=$USER['id']):*]
+   <a href="letters/?[*=SID*]">Записки</a>
+   [*IF($USER['newl']):*]
+    <b style="text-decoration: blink">[[*=$USER['newl']*]]</b>
+   [*ENDIF*]
+   |
+   <a href="info.php?[*=SID*]">Пpoфиль</a> |
+   <a href="options.php?[*=SID*]">Hacтpoйки</a>
+   <br />
+   <img src="ico/[*=$USER['icons']*]/pic1.gif" alt="&gt;" />
+   [*IF(1==$USER['state']):*]
+    <a href="banlist.php?[*=SID*]">Бaн-лиcт</a> |
+   [*ENDIF*]
+   [*IF(2==$USER['state']):*]
+    <a href="admin.php?[*=SID*]">Aдминкa</a> |
+   [*ENDIF*]
+   <a href="status.php?[*=SID*]">Статус</a> |
+   <a href="auth.php?logout&amp;[*=SID*]">Bыxoд</a>
+  [*ELSE:*]
+   <a href="auth.php?[*=SID*]">Авторизация</a> |
+   <a href="reg.php?[*=SID*]">Регистрация</a><br />
+   <img src="ico/[*=$USER['icons']*]/pic1.gif" alt="&gt;" />
+   <a href="css/?[*=SID*]">Стиль</a> |
+   <a href="ico/?[*=SID*]">Иконки</a> |
+   <a href="tmpl/?[*=SID*]">Вид</a> |
+   <a href="status.php?[*=SID*]">Статус</a>
+  [*ENDIF*]
+  </small>
+
+[*IF($NEWS):*]
+  <hr />
+  <div style="text-align: center">
+    <b><a href="news/?[*=SID*]">Новости сайта</a></b><br />
+    <a href="news/rss.php"><img src="ico/_misc/rss.gif" alt="" /></a>
+    <small>[*=$LASTNEW['time']*]</small>
+  </div>
+[*ENDIF*]
+</div>
+<hr />
+
+<div class="base">
+  <div class="title"><small>Общение</small></div>
+  <div class="frame">
+  [*IF($GBOOK):*]
+    <img src="ico/[*=$USER['icons']*]/pic2.gif" alt="-" /> <a href="gbook/?[*=SID*]">Гостевая</a> <small>[[*=$GBOOKCNT*]]</small><br />
+  [*ENDIF*]
+  [*IF($FORUM):*]
+    <img src="ico/[*=$USER['icons']*]/pic2.gif" alt="-" /> <a href="forum/?[*=SID*]">Форум</a> <small>[[*=$THEMES*]/[*=$POSTS*]]</small><br />
+  [*ENDIF*]
+  [*IF($CHAT):*]
+    <img src="ico/[*=$USER['icons']*]/pic2.gif" alt="-" /> <a href="chat/?[*=SID*]">Чат</a> <small>[онлайн: [*=$INCHAT*]]</small><br />
+  [*ENDIF*]
+  [*IF($BLOGS):*]
+    <img src="ico/[*=$USER['icons']*]/pic2.gif" alt="-" /> <a href="blogs/?[*=SID*]">Блоги</a><br />
+  [*ENDIF*]
+  </div>
+<hr />
+
+
+  <div class="title"><small>Файлы</small></div>
+  <div class="frame">
+  [*IF($DDIR):*]
+
+   <img src="ico/[*=$USER['icons']*]/pic2.gif" alt="-" /> <a href="/ddir/?[*=SID*]">Файлы</a> <small>[[*=$FILESCNT*]]</small><br />
+
+   [*IF($LASTFILES):*]
+
+    <div class="frame"><small>Новые файлы:<br />
+    [*FOREACH($LASTFILES as $FILE):*]
+     <img src="/ico/[*=$USER['icons']*]/[*=$FILE['type']*].gif" alt="[*=$FILE['type']*]" />
+     <a href="[*=$FILE['handler']*]">[*=$FILE['name']*]</a> [[*=$FILE['size']*], [*=$FILE['time']*]]<br />
+    [*ENDFOREACH*]
+    </small></div>
+
+   [*ELSEIF($DIRS):*]
+
+    <div class="frame"><small>
+    [*FOREACH($DIRS as $DIR):*]
+     <img src="/ico/[*=$USER['icons']*]/dir.gif" alt="dir" />
+     <a href="/ddir/?d=[*=$DIR['id']*]&amp;[*=SID*]">[*=$DIR['name']*]</a><br />
+    [*ENDFOREACH*]
+    </small></div>
+
+   [*ENDIF*]
+
+  [*ENDIF*]
+
+  [*IF($FILEX):*]
+    <img src="ico/[*=$USER['icons']*]/pic2.gif" alt="-" /> <a href="filex/?[*=SID*]">Обменник</a> <small>[[*=$FILEXCNT*]]</small><br />
+
+    [*IF($CATS):*]
+
+     <div class="frame"><small>
+     [*FOREACH($CATS as $CAT):*]
+       <img src="/ico/[*=$USER['icons']*]/dir.gif" alt="&gt;" />
+       <a href="/filex/view.php?c=[*=$CAT['id']*]&amp;[*=SID*]">[*=$CAT['title']*]</a>
+     [*ENDFOREACH*]
+     </small></div>
+
+    [*ENDIF*]
+
+  [*ENDIF*]
+
+  [*IF($GALLERY):*]
+    <img src="ico/[*=$USER['icons']*]/pic2.gif" alt="-" /> <a href="gallery/?[*=SID*]">Фотогалерея</a>
+  [*ENDIF*]
+
+  </div>
+<hr />
+
+
+  <div class="title"><small>Информация</small></div>
+  <div class="frame">
+   [*IF($RSSR):*]
+     <img src="ico/[*=$USER['icons']*]/pic2.gif" alt="-" /> <a href="rssr/?[*=SID*]">Ленты новостей</a><br />
+   [*ENDIF*]
+   [*IF($VOTES):*]
+     <img src="ico/[*=$USER['icons']*]/pic2.gif" alt="-" /> <a href="votes/?[*=SID*]">Опросы</a><br />
+   [*ENDIF*]
+   <img src="ico/[*=$USER['icons']*]/pic2.gif" alt="-" /> <a href="users.php?[*=SID*]">Пользователи</a><br />
+   <img src="ico/[*=$USER['icons']*]/pic2.gif" alt="-" /> <a href="stats.php?[*=SID*]">Статистика</a><br />
+   <img src="ico/[*=$USER['icons']*]/pic2.gif" alt="-" /> <a href="help.php?[*=SID*]">FAQ по сайту</a><br />
+  </div>
+<hr />
+
+
+  <div class="title"><small>Поддержка</small></div>
+  <div class="frame">
+   <img src="ico/[*=$USER['icons']*]/pic2.gif" alt="-" /> <a href="feedback.php?[*=SID*]">Обратная связь</a><br />
+   [*IF($LINKS):*]
+    <img src="ico/[*=$USER['icons']*]/pic2.gif" alt="-" /> <a href="links/?[*=SID*]">Партнеры и друзья</a>
+   [*ENDIF*]
+  </div>
+</div>
+<hr />
+
+
+<div class="frame">
+<div class="misc">
+   Онлайн: <a href="who.php?[*=SID*]">[*=$ONLINE*]</a><br />
+   Сегодня: <a href="today.php">[*readfile($_SERVER['DOCUMENT_ROOT'].'/var/hosts.dat')*]</a><br />
+   Cжaтиe: [*=$GZIP*]<br />
+   [*=perf()*] ceк
+</div>
+</div>
+
+
+<div class="base" style="text-align: center">
+  <!-- самое место для счетчиков :) -->
+  <small>
+  [*IF($ASACTIVE):*]
+   <a href="autoselect.php?force=wap&amp;[*=SID*]">Wap</a> /
+   <a href="autoselect.php?force=web&amp;[*=SID*]">Web</a> /
+   <a href="autoselect.php?[*=SID*]">Авто</a><br />
+  [*ENDIF*]
+  <small>Based on <a href="http://g3.steelwap.org">Gear-3</a></small>
+  </small>
+</div>
+
+</div>
+
+[*=$this->Parse('footer.tmpl')*]

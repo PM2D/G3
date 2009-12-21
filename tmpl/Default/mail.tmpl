@@ -1,0 +1,26 @@
+[*=$this->Parse('header.tmpl')*]
+
+<div style="text-align: center">
+
+  <form action="mail.php?send&amp;[*=SID*]" method="post">
+  <fieldset>
+  <span class="alt">E-mail:</span><br />
+  <input type="text" name="to" maxlength="60" value="[*=$TO*]" /><br />
+  <span class="alt">Tема сообщения:</span><br />
+  <input type="text" name="subj" /><br />
+  <span class="alt">Tекст сообщения:</span><br />
+  <textarea name="msg" rows="3" cols="20"></textarea><br />
+  [*IF(3==$USER['id']):*]
+    <span class="alt">[*=$USER['login']*], введите код с картинки:</span><br />
+    <img src="/ico/_misc/captcha.php?[*=SID*]" alt="code" /><br />
+    <input type="text" size="5" name="code" /><br />
+  [*ENDIF*]
+  <input type="submit" value="Отправить" />
+  </fieldset>
+  </form>
+
+  [<a href="index.php?[*=SID*]">Ha глaвную</a>]
+
+</div>
+
+[*=$this->Parse('footer.tmpl')*]

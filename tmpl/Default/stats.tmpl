@@ -1,0 +1,21 @@
+[*=$this->Parse('header.tmpl')*]
+
+<div>
+
+  <div class="title">Cтaтиcтикa пользователей</div>
+  Всего пользователей [*=$USERS*].<br />
+  Из них мужского пола [*=$MALE*],<br />
+  и женского пола [*=$FEMALE*].<hr />
+
+  <div class="title">Статистика стилей</div>
+  [*FOREACH($STYLES as $STYLE):*]
+    <img src="ico/[*=$USER['icons']*]/style.gif" alt=" " />
+    <a href="/css/set.php?f=[*=$STYLE['name']*]&amp;[*=SID*]">[*=$STYLE['name']*]</a>
+    <small>используют [*=$STYLE['perc']*]% ([*=$STYLE['count']*])</small><br />
+  [*ENDFOREACH*]
+
+  <hr />[<a href="index.php?[*=SID*]">Ha глaвную</a>]
+
+</div>
+
+[*=$this->Parse('footer.tmpl')*]

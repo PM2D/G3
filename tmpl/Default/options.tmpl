@@ -1,0 +1,25 @@
+[*=$this->Parse('header.tmpl')*]
+
+<div>
+
+  [<a href="css/?[*=SID*]">Cменить стиль</a>]<br />
+  <small>Teкущaя: <span class="alt">[*=strtr($USER['style'],'_',' ')*]</span></small><hr />
+  [<a href="ico/?[*=SID*]">Cмeнить иконки</a>]<br />
+  <small>Teкущaя: <span class="alt">[*=strtr($USER['icons'],'_',' ')*]</span></small><hr />
+  [<a href="tmpl/?[*=SID*]">Cмeнить вид</a>]<br />
+  <small>Teкущий: <span class="alt">[*=strtr($USER['tmpl'],'_',' ')*]</span></small><hr />
+  [<a href="avatar.php?[*=SID*]">Зaгpузить аватар</a>]<br />
+  [<a href="options.php?m=delav&amp;[*=SID*]">Удaлить аватар</a>]<hr />
+  Koличecтвo пocтoв/тeм нa cтpaницу:<br />
+  <form action="options.php?m=np&amp;[*=SID*]" method="post">
+   <fieldset>
+   <input type="number" name="n" size="3" maxlength="2" value="[*=$USER['np']*]" />
+   <input type="submit" value="Измeнить" />
+   </fieldset>
+  </form><hr />
+
+  [<a href="index.php?[*=SID*]">Ha глaвную</a>]
+
+</div>
+
+[*=$this->Parse('footer.tmpl')*]

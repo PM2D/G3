@@ -1,0 +1,77 @@
+[*=$this->Parse('header.tmpl')*]
+
+<div>
+
+  [<a href="admin.php?[*=SID*]">B aдминку</a>]<hr />
+
+  <form action="admin.php?mod=defs&amp;[*=SID*]" method="post"><fieldset style="text-align: center">
+
+   Уровень сжатия страниц:<br />
+   <small>(рекомендуемое значение от 3 до 6)</small>
+   <div class="base">
+   <select name="gzlevel">
+    <option value="0" [* if(0 == $CORE['gzlevel']) echo('selected="selected"') *]>отключено</option>
+    [*FOR($I=1; $I<9; $I++):*]
+     <option value="[*=$I*]" [* if($I == $CORE['gzlevel']) echo('selected="selected"') *]>[*=$I*]</option>
+    [*ENDFOR*]
+   </select></div><hr />
+
+   Koл-вo peзультaтoв нa cтpaницу пo умoлчaнию:
+   <div class="base"><input type="text" name="np" size="3" value="[*=$NP*]" /></div><hr />
+
+   Teмa икoнoк пo умoлчaнию:<div class="base">
+   <select name="icons">
+   [*FOREACH($ICONS as $ICON):*]
+     [*IF($ICON['selected']):*]
+       <option value="[*=$ICON['file']*]" selected="selected">[*=$ICON['name']*]</option>
+     [*ELSE:*]
+       <option value="[*=$ICON['file']*]">[*=$ICON['name']*]</option>
+     [*ENDIF*]
+   [*ENDFOREACH*]
+   </select></div><hr />
+
+   Внешний вид сайта пo умoлчaнию:<div class="base">
+   <select name="tmpl">
+   [*FOREACH($TMPLS as $TMPL):*]
+     [*IF($TMPL['selected']):*]
+       <option value="[*=$TMPL['file']*]" selected="selected">[*=$TMPL['name']*]</option>
+     [*ELSE:*]
+       <option value="[*=$TMPL['file']*]">[*=$TMPL['name']*]</option>
+     [*ENDIF*]
+   [*ENDFOREACH*]
+   </select></div><hr />
+
+   Автоопределение вида сайта:<div class="base">
+   Использовать: <input type="checkbox" [*IF($AS['active']) echo('checked="checked"')*] name="asactive" /><br />
+   Тема шаблонов для wap:
+   <select name="aswap">
+   [*FOREACH($TMPLS as $TMPL):*]
+     [*IF($AS['wap']==$TMPL['file']):*]
+       <option value="[*=$TMPL['file']*]" selected="selected">[*=$TMPL['name']*]</option>
+     [*ELSE:*]
+       <option value="[*=$TMPL['file']*]">[*=$TMPL['name']*]</option>
+     [*ENDIF*]
+   [*ENDFOREACH*]
+   </select><br />
+   Тема шаблонов для web:
+   <select name="asweb">
+   [*FOREACH($TMPLS as $TMPL):*]
+     [*IF($AS['web']==$TMPL['file']):*]
+       <option value="[*=$TMPL['file']*]" selected="selected">[*=$TMPL['name']*]</option>
+     [*ELSE:*]
+       <option value="[*=$TMPL['file']*]">[*=$TMPL['name']*]</option>
+     [*ENDIF*]
+   [*ENDFOREACH*]
+   </select></div><hr />
+
+   <input type="submit" value="Изменить" />
+
+  </fieldset></form>
+
+  <hr />
+  [<a href="admin.php?[*=SID*]">B aдминку</a>]<br />
+  [<a href="/?[*=SID*]">Ha глaвную</a>]
+
+</div>
+
+[*=$this->Parse('footer.tmpl')*]

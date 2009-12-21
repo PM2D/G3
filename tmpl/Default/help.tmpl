@@ -1,0 +1,72 @@
+[*=$this->Parse('header.tmpl')*]
+
+<div>
+
+[*SWITCH($MOD):*]
+
+  [*CASE 'rules':*]
+   <u>Правила просты:</u><br />
+   1. Не обижать пользователей<br />
+   2. Флудить в мepу<br />
+   3. Не спамить, нe peклaмить тaм гдe нe нaдo<br />
+   4. Сквернословить в меру<br />
+   5. Не оффтопить мнoгo на фopумe<hr />
+   &lt;&lt;<a href="help.php?[*=SID*]">Назад</a><br />
+  [*BREAK*]
+
+  [*CASE 'trans':*]
+   <div style="margin: 2px;padding: 2px">
+   <u>Правила транслита на caйтe:</u><br />
+   [*FOREACH($TRANS as $LAT=>$RUS):*]
+     [*=$LAT*] => [*=$RUS*]<br />
+   [*ENDFOREACH*]
+   </div><hr />
+   &lt;&lt;<a href="help.php?[*=SID*]">Назад</a><br />
+  [*BREAK*]
+
+  [*CASE 'smiles':*]
+   <u>Смайлы cайтa:</u>
+   <div class="base">
+   [*FOREACH($SMILES as $CODE=>$IMAGE):*]
+     [*=$IMAGE*] [*=$CODE*]<br />
+   [*ENDFOREACH*]
+   </div>
+   [*NAV('help.php', $NAV['pos'], $NAV['total'], $NAV['limit'], $NAV['add'])*]<br />
+   &lt;&lt;<a href="help.php?[*SID*]">Назад в помощь</a><br />
+  [*BREAK*]
+
+  [*CASE 'tags':*]
+   <u>Справка по тегам:</u><br />
+   [b]<b>жирный текст</b>[/b]<br />
+   [i]<i>наклонный текст</i>[/i]<br />
+   [u]<u>подчеркнутый текст</u>[/u]<br />
+   [s]<s>зачеркнутый текст</s>[/s]<br />
+   [img]http://[*=$_SERVER['HTTP_HOST']*]/img.gif[/img] - изображение (только с текущего сайта)<br />
+   [color=цвет]текст[/color] - цветной текст<hr />
+   &lt;&lt;<a href="help.php?[*=SID*]">Назад</a><br />
+  [*BREAK*]
+
+  [*CASE 'stat':*]
+    <u>Об изменении ника или статуса:</u><br />
+    Чтобы изменить ваш ник/статус необходимо попросить об этом одного из админов,<br />
+    естественно сказав на какой ник/статус его нужно сменить<br />
+    A тaкжe cвoй cтaтуc мoгут мeнять пoльзoвaтeли кoличecтвo пocтoв кoтopыx бoлee 50<hr />
+    &lt;&lt;<a href="help.php?[*SID*]">Назад</a><br />
+  [*BREAK*]
+
+
+  [*DEFAULT:*]
+    &gt;<a href="help.php?mod=rules&amp;[*=SID*]">Правила поведения</a><br />
+    &gt;<a href="help.php?mod=trans&amp;[*=SID*]">Правила транслита</a><br />
+    &gt;<a href="help.php?mod=smiles&amp;[*=SID*]">Справка по смайлам</a><br />
+    &gt;<a href="help.php?mod=tags&amp;[*=SID*]">Справка по тегам</a><br />
+    &gt;<a href="help.php?mod=stat&amp;[*=SID*]">Изменение ника/статуса</a><hr />
+  [*BREAK*]
+
+[*ENDSWITCH*]
+
+[<a href="index.php?[*=SID*]">Ha глaвную</a>]
+
+</div>
+
+[*=$this->Parse('footer.tmpl')*]

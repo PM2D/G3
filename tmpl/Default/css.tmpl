@@ -1,0 +1,25 @@
+[*=$this->Parse('header.tmpl')*]
+
+<div>
+<div class="title">Bыбepитe стиль:</div><hr />
+[*FOREACH($THEMES as $THEME):*]
+  <div class="base">
+  <img src="/ico/[*=$USER['icons']*]/style.gif" alt=" "/>
+  <a href="set.php?f=[*=$THEME['file']*]&amp;[*=SID*]">[*=$THEME['name']*]</a>
+  </div>
+  <div class="frame">
+  <small><span class="alt">Описание:</span> [*=$THEME['about']*]<br />
+  <span class="alt">Автор:</span> [*=$THEME['author']*]</small>
+  </div><hr />
+[*ENDFOREACH*]
+
+<div style="text-align: center">
+  [*NAV('index.php', $NAV['pos'], $NAV['total'], $NAV['limit'])*]
+</div>
+<hr />
+
+[<a href="/?[*=SID*]">Ha глaвную</a>]
+
+</div>
+
+[*=$this->Parse('footer.tmpl')*]

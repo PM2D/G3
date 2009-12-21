@@ -1,0 +1,40 @@
+[*=$this->Parse('header.tmpl')*]
+
+<div>
+
+<div class="title">[*=$LOGIN*]</div><hr />
+
+<div style="text-align: center">
+  [*NAV('references.php', $NAV['pos'], $NAV['total'], $NAV['limit'], $NAV['add'])*]
+</div><hr />
+
+[*FOREACH($REFERENCES as $REFERENCE):*]
+  <div class="base">[*=$REFERENCE['reason']*]</div>
+  <small>[*=$REFERENCE['login']*]</small>
+  [*IF(0<$USER['state']):*]
+    [<a href="references.php?del=[*=$REFERENCE['id']*]&amp;[*=SID*]">удaлить</a>]
+  [*ENDIF*]
+  <hr />
+[*ENDFOREACH*]
+
+[*IF(!$REFERENCES):*]
+  <div style="text-align: center">Пусто</div><hr />
+[*ENDIF*]
+
+[*IF(3!=$USER['id'] AND $UID!=$USER['id']):*]
+  <div style="text-align: center">
+   <span class="alt">Добавить отзыв</span>
+   <form action="references.php?uid=[*=$UID*]&amp;do&amp;[*=SID*]" method="post">
+    <fieldset>
+    <textarea name="reason" rows="3" cols="20"></textarea><br />
+    <input type="submit" value=" OK " />
+    </fieldset>
+   </form>
+  </div><hr />
+[*ENDIF*]
+
+[<a href="index.php?[*=SID*]">Ha глaвную</a>]
+
+</div>
+
+[*=$this->Parse('footer.tmpl')*]

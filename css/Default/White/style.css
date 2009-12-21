@@ -1,0 +1,85 @@
+body {
+	background-color: #FFFFFF;
+	background-image: url(stripes.gif);
+	color: #000000;
+	max-width: 320px;
+	margin: 1px auto;
+	border: 1px solid #C0C0C0;
+}
+
+a:link,a:visited {
+	color: #505050;
+	text-decoration: none;
+}
+
+a:active,a:hover {
+	color: #0080F0;
+	text-decoration: underline;
+}
+
+input[type="text"], input[type="password"], textarea {
+	background-color: #F0F0F0;
+	color: #000000;
+	border: 2px inset #505050;
+	max-width: 100px;
+}
+
+input[type="submit"] {
+	margin: 2px;
+	padding: 3px;
+	background-color: #D0D0D0;
+	background-image: url(gradient.gif);
+	background-repeat: repeat-x;
+	border: 1px solid #C0C0C0;
+	font-weight: bolder;
+}
+
+div {
+	margin: 1px;
+}
+.title {
+	text-align: center;
+	background-color: #EEEEEE;
+	color: #000000;
+	padding: 1px;
+	border: 1px solid #C0C0C0;
+}
+
+.base .title {
+	font-size: smaller;
+	font-weight: bolder;
+}
+
+.frame,.base {
+	border: 1px solid #A0A0A0;
+	padding: 1px;
+	background-color: #D0D0D0;
+	background-image: url(gradient.gif);
+	background-position: top;
+	background-repeat: repeat-x;
+}
+
+.misc {
+	text-align: center;
+	font-size: smaller;
+}
+
+.alt { color: #14803C }
+
+img {
+	vertical-align: middle;
+	color: #003050;
+}
+
+hr {
+	margin: 2px 6px;
+	height: 1px;
+	border: 1px;
+	color: #80A0F0;
+	background-color: #90B0FF;
+}
+
+fieldset {
+	border: 1px solid #808080;
+	padding: 2px;
+}

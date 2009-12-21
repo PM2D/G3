@@ -1,0 +1,23 @@
+[*=$this->Parse('header.tmpl')*]
+
+<div>
+
+  [<a href="admin.php?[*=SID*]">B aдминку</a>]<hr />
+  [*FOREACH($LOG as $ROW):*]
+    <div class="base">
+     <div class="title">[*=$ROW['date']*]</div>
+     [*=$ROW['dscr']*]
+    </div><hr />
+  [*ENDFOREACH*]
+  [*IF(!$LOG):*]
+    <div class="base">Пусто.</div><hr />
+  [*ENDIF*]
+  <div style="text-align: center">
+   [*NAV('admin.php', $NAV['pos'], $NAV['total'], $NAV['limit'], $NAV['add'])*]
+  </div><hr />
+  [<a href="admin.php?[*=SID*]">B aдминку</a>]<br />
+  [<a href="/?[*=SID*]">Ha глaвную</a>]
+
+</div>
+
+[*=$this->Parse('footer.tmpl')*]

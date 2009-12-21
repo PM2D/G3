@@ -1,0 +1,23 @@
+[*='<?xml version="1.0" encoding="utf-8"?>'."\n"*]
+<!DOCTYPE html PUBLIC "-//WAPFORUM//DTD XHTML Mobile 1.0//EN" "http://www.wapforum.org/DTD/xhtml-mobile10.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="ru">
+<head>
+  <title>[*=$TITLE*]</title>
+  <link rel="stylesheet" type="text/css" href="/css/[*=$USER['tmpl']*]/[*=$USER['style']*]/style.css" />
+</head>
+<body><div>
+
+<div class="base" style="text-align: center">
+  <div class="title"><img src="/ico/[*=$USER['icons']*]/info.gif" alt="i" /></div>
+  [*=$MESSAGE*]
+</div>
+<hr />
+
+[*IF($BACK):*]
+  &lt;&lt;<a href="[*=$BACK*]">Вернуться</a>
+[*ELSE:*]
+  [<a href="/index.php?[*=SID*]">Ha главную</a>]
+[*ENDIF;*]
+
+</div></body>
+</html>

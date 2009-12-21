@@ -1,0 +1,26 @@
+[*=$this->Parse('header.tmpl')*]
+
+<div>
+
+  <div class="title">Бан-лист</div>
+  <table align="center">
+  <tr><th class="title">---</th><th class="title">Meтoд</th><th class="title">Знaчeниe</th></tr>
+
+  [*FOREACH($LIST as $ID=>$ITEM):*]
+    <tr>
+     <td class="base">[<a href="banlist.php?n=[*=$ID*]&amp;[*=SID*]">X</a>]</td>
+     <td class="base">[*=$ITEM['method']*]</td>
+     <td class="base">[*=$ITEM['data']*]</td>
+    </tr>
+  [*ENDFOREACH*]
+
+  [*IF(!$LIST):*]
+    <tr><td class="base">Пусто</td><td class="base">Пусто</td><td class="base">Пусто</td></tr>
+  [*ENDIF*]
+
+  </table><hr />
+  [<a href="index.php?[*=SID*]">Ha глaвную</a>]
+
+</div>
+
+[*=$this->Parse('footer.tmpl')*]

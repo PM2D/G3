@@ -1,0 +1,23 @@
+[*=$this->Parse('header.tmpl')*]
+
+<div>
+  [<a href="auth.php?[*=SID*]">Вернуться</a>]<hr />
+  <div style="text-align: center">
+  <div class="title">Форма восстановления пароля</div>
+  <form action="lostpass.php?[*=SID*]" method="post">
+  <fieldset>
+   <span class="alt">Логин:</span><br />
+   <input type="text" name="login" /><br />
+   <span class="alt">e-mail:</span><br />
+   <input type="text" name="email" /><br />
+   <small>Введите код с изображения:</small><br />
+   <img src="/ico/_misc/captcha.php?[*=SID*]" alt="code" /><br />
+   <input type="text" size="5" name="code" /><br />
+   <input type="submit" value="Восстановить" />
+  </fieldset>
+  </form>
+  </div><hr />
+  [<a href="index.php?[*=SID*]">На главную</a>]
+</div>
+
+[*=$this->Parse('footer.tmpl')*]

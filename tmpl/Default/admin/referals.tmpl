@@ -1,0 +1,23 @@
+[*=$this->Parse('header.tmpl')*]
+
+<div>
+
+  [<a href="admin.php?[*=SID*]">B aдминку</a>]<hr />
+  <small>
+
+  [*FOREACH($REFS as $REF):*]
+    <a href="go.php?[*=$REF*]">[*=$REF*]</a><hr />
+  [*ENDFOREACH*]
+
+  </small>
+
+  [*IF(!$REFS):*]
+    Пусто.<hr />
+  [*ENDIF*]
+
+  [<a href="admin.php?[*=SID*]">B aдминку</a>]<br />
+  [<a href="/?[*=SID*]">Ha глaвную</a>]
+
+</div>
+
+[*=$this->Parse('footer.tmpl')*]

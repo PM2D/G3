@@ -1,0 +1,42 @@
+[*=$this->Parse('header.tmpl')*]
+
+<div>
+  <div class="title">Управление модулями</div><hr />
+
+  [*FOREACH($MODULES as $MODULE):*]
+    <div class="base"><img src="/ico/[*=$USER['icons']*]/php.gif" alt=" " /> [*=$MODULE['title']*]</div>
+    <div class="frame">
+     [*IF($MODULE['installed']):*]
+       [*IF($MODULE['active']):*]
+         [<a href="admin.php?mod=modules&amp;suspend&amp;name=[*=$MODULE['name']*]&amp;[*=SID*]">отключить</a> -
+       [*ELSE:*]
+         [<a href="admin.php?mod=modules&amp;update&amp;name=[*=$MODULE['name']*]&amp;[*=SID*]">обновить</a> -
+         <a href="admin.php?mod=modules&amp;activate&amp;name=[*=$MODULE['name']*]&amp;[*=SID*]">активировать</a> -
+       [*ENDIF*]
+       <a href="admin.php?mod=modules&amp;uninstall&amp;name=[*=$MODULE['name']*]&amp;[*=SID*]">удалить</a>]
+     [*ELSE:*]
+       [<a href="admin.php?mod=modules&amp;install&amp;name=[*=$MODULE['name']*]&amp;[*=SID*]">установить</a>]
+     [*ENDIF*]
+     <br /><small>
+     <span class="alt">Версия:</span>
+     [*IF($MODULE['changelog']):*]
+       <a href="admin.php?mod=modules&amp;changelog&amp;name=[*=$MODULE['name']*]&amp;[*=SID*]">[*=$MODULE['version']*]</a>
+     [*ELSE:*]
+       [*=$MODULE['version']*]
+     [*ENDIF*]
+     <br />
+     <span class="alt">Автор:</span> [*=$MODULE['author']*]</small>
+    </div>
+    <hr />
+  [*ENDFOREACH*]
+
+  [*IF(!$MODULES):*]
+    Пусто.<hr />
+  [*ENDIF*]
+
+  [<a href="admin.php?[*=SID*]">B aдминку</a>]<br />
+  [<a href="/?[*=SID*]">Ha глaвную</a>]
+
+</div>
+
+[*=$this->Parse('footer.tmpl')*]

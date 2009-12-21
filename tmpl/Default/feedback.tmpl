@@ -1,0 +1,33 @@
+[*=$this->Parse('header.tmpl')*]
+
+<div>
+
+  [*IF($USER['id']!=3):*]
+   <div class="title">Написать записку:</div>
+   <form action="letters/write.php?[*=SID*]" method="get">
+    Кому? <select name="to">
+    [*FOREACH($NICKS as $NICK):*]
+      <option value="[*=$NICK*]">[*=$NICK*]</option>
+    [*ENDFOREACH*]
+    </select><br />
+    <input type="submit" value="Написать" />
+   </form>
+  [*ENDIF*]
+
+  [*IF($EMAILS):*]
+    <div class="title">Ha e-mail:</div>
+    <form action="mail.php?[*=SID*]" method="get">
+     Кому? <select name="to">
+     [*FOREACH($EMAILS as $EMAIL):*]
+       <option value="[*=$EMAIL*]">[*=$EMAIL*]</option>
+     [*ENDFOREACH*]
+     </select><br />
+     <input type="submit" value="Написать" />
+    </form>
+  [*ENDIF*]
+
+  <hr />[<a href="/?[*=SID*]">Ha глaвную</a>]
+
+</div>
+
+[*=$this->Parse('footer.tmpl')*]

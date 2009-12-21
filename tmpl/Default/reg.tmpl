@@ -1,0 +1,49 @@
+[*=$this->Parse('header.tmpl')*]
+
+<div style="padding: 1px">
+  <div style="text-align: center">
+   [<a href="help.php?mod=rules&amp;[*=SID*]">Правила</a>]
+  </div>
+  <form action="reg.php?[*=SID*]" method="post"><fieldset>
+   <span class="alt">Ник(login)*:</span>
+   <div class="base"><input type="text" name="login" /></div><hr />
+   <span class="alt">Пароль:*</span>
+   <div class="base"><input type="text" name="pass" /></div><hr />
+   <span class="alt">Имя:</span>
+   <div class="base"><input type="text" name="name" /></div><hr />
+   <span class="alt">Откуда:</span>
+   <div class="base"><input type="text" name="from" /></div><hr />
+   <span class="alt">Пол:</span><div class="a">
+   <select name="sex">
+    <option value="0">Неизвестен</option>
+    <option value="1">М</option>
+    <option value="2">Ж</option>
+    <option value="3">Средний</option>
+   </select></div><hr />
+   <span class="alt">E-mail:</span>
+   <div class="base"><input type="text" name="email" /></div><hr />
+   <span class="alt">Сайт:</span>
+   <div class="base"><input type="text" name="site" /><br />
+   <small>(Если несколько, то через пробел)</small></div><hr />
+   <span class="alt">ICQ UIN:</span>
+   <div class="base"><input type="text" name="icq" /></div><hr />
+   <span class="alt">Jabber ID:</span>
+   <div class="base"><input type="text" name="jabber" /></div><hr />
+   <span class="alt">Дата рождения (dd-mm-yyyy):</span>
+   <div class="base">
+   <input type="text" name="bday" size="2" maxlength="2" />-
+   <input type="text" name="bmonth" size="2" maxlength="2" />-
+   <input type="text" name="byear" size="4" maxlength="4" />
+   </div><hr />
+   <span class="alt">Дополнительно:</span>
+   <div class="base"><textarea rows="3" cols="20" name="about"></textarea></div><hr />
+   <span class="alt">Bведитe кoд<br />изoбpaжeнный нa кapтинкe:</span><br />
+   <img src="/ico/_misc/captcha.php?[*=SID*]" alt="code" />
+   <div class="base"><input type="text" name="code" size="6" /></div><hr />
+   <input type="submit" value="Регистрация" />
+  </fieldset></form>
+  <small>Поля помеченные звёздочкой обязательны для заполнения.</small>
+  <hr />&lt;&lt;<a href="index.php?[*=SID*]">Вернуться</a>
+</div>
+
+[*=$this->Parse('footer.tmpl')*]

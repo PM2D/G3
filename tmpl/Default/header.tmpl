@@ -1,0 +1,15 @@
+[*='<?xml version="1.0" encoding="utf-8"?>'."\n"*]
+<!DOCTYPE html PUBLIC "-//WAPFORUM//DTD XHTML Mobile 1.0//EN" "http://www.wapforum.org/DTD/xhtml-mobile10.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="ru">
+<head>
+  <title>[*=$TITLE*]</title>
+  <link rel="stylesheet" type="text/css" href="/css/[*=$USER['tmpl']*]/[*=$USER['style']*]/style.css" />
+  <link rel="SHORTCUT ICON" href="http://[*=$_SERVER['HTTP_HOST']*]/ico/_misc/favicon.ico" />
+</head><body>
+[*IF(3!=$USER['id'] AND $USER['newl']):*]
+  <div style="text-align: center">
+   <span style="text-decoration: blink">
+   <a href="/letters/?[*=SID*]">У вас непрочитанных записок: [*=$USER['newl']*]</a>
+   </span>
+  </div>
+[*ENDIF*]

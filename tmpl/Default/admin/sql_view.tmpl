@@ -1,0 +1,28 @@
+[*=$this->Parse('header.tmpl')*]
+
+<div>
+
+  Результат:<br />
+  <i>rows:[*=$NUMROWS*] fields:[*=$NUMFIELDS*]</i><hr />
+  <table border="1">
+   <tr>
+   [*FOREACH($FIELDS as $FIELD):*]
+     <th>[*=$FIELD*]</th>
+   [*ENDFOREACH*]
+   </tr>
+   [*FOREACH($ROWS as $ROW):*]
+     <tr>
+     [*FOREACH($ROW as $DATA):*]
+       <td>[*=$DATA*]</td>
+     [*ENDFOREACH*]
+     </tr>
+   [*ENDFOREACH*]
+  </table>
+  <hr />
+  [*=perf()*]<br />
+  &lt;&lt;<a href="admin.php?mod=mysql[*=SID*]">Bepнутьcя</a><br />
+  [<a href="/?[*=SID*]">Ha глaвную</a>]
+
+</div>
+
+[*=$this->Parse('footer.tmpl')*]

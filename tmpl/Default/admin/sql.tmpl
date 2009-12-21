@@ -1,0 +1,18 @@
+[*=$this->Parse('header.tmpl')*]
+
+<div>
+
+  [<a href="admin.php?[*=SID*]">B aдминку</a>]<hr />
+  <div class="title">MySQL-запрос базы данных:</div>
+  <form action="admin.php?mod=query&amp;[*=SID*]" method="post">
+  <fieldset>
+   <textarea rows="3" cols="24" name="que"></textarea><br />
+   <input type="submit" value="Послать" />
+  </fieldset>
+  </form><hr />
+  [<a href="admin.php?[*=SID*]">B aдминку</a>]<br />
+  [<a href="/?[*=SID*]">Ha глaвную</a>]
+
+</div>
+
+[*=$this->Parse('footer.tmpl')*]

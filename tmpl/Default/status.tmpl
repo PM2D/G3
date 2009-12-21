@@ -1,0 +1,62 @@
+[*=$this->Parse('header.tmpl')*]
+
+<div style="text-align: center">
+  <form action="status.php?[*=SID*]" method="post">
+   <fieldset>
+   <small class="alt">Установить статус:</small><br />
+   <select name="status">
+    <option value="0" [*IF(0==$USER['status']) echo('selected="selected"')*]>оффлайн</option>
+    <option value="1" [*IF(1==$USER['status']) echo('selected="selected"')*]>онлайн</option>
+    <option value="2" [*IF(2==$USER['status']) echo('selected="selected"')*]>злой</option>
+    <option value="3" [*IF(3==$USER['status']) echo('selected="selected"')*]>утка</option>
+    <option value="4" [*IF(4==$USER['status']) echo('selected="selected"')*]>уставший</option>
+    <option value="5" [*IF(5==$USER['status']) echo('selected="selected"')*]>вечеринка</option>
+    <option value="6" [*IF(6==$USER['status']) echo('selected="selected"')*]>пиво</option>
+    <option value="7" [*IF(7==$USER['status']) echo('selected="selected"')*]>думаю</option>
+    <option value="8" [*IF(8==$USER['status']) echo('selected="selected"')*]>ем</option>
+    <option value="9" [*IF(9==$USER['status']) echo('selected="selected"')*]>телевизор</option>
+    <option value="10" [*IF(10==$USER['status']) echo('selected="selected"')*]>друзья</option>
+    <option value="11" [*IF(11==$USER['status']) echo('selected="selected"')*]>чай/кофе</option>
+    <option value="12" [*IF(12==$USER['status']) echo('selected="selected"')*]>музыка</option>
+    <option value="13" [*IF(13==$USER['status']) echo('selected="selected"')*]>дела</option>
+    <option value="14" [*IF(14==$USER['status']) echo('selected="selected"')*]>кино</option>
+    <option value="15" [*IF(15==$USER['status']) echo('selected="selected"')*]>весело</option>
+    <option value="18" [*IF(18==$USER['status']) echo('selected="selected"')*]>учеба</option>
+    <option value="19" [*IF(19==$USER['status']) echo('selected="selected"')*]>покупки</option>
+    <option value="20" [*IF(20==$USER['status']) echo('selected="selected"')*]>болею</option>
+    <option value="22" [*IF(22==$USER['status']) echo('selected="selected"')*]>отрываюсь</option>
+    <option value="24" [*IF(24==$USER['status']) echo('selected="selected"')*]>работаю</option>
+    <option value="26" [*IF(26==$USER['status']) echo('selected="selected"')*]>пикник</option>
+    <option value="31" [*IF(31==$USER['status']) echo('selected="selected"')*]>вопрос</option>
+    <option value="33" [*IF(33==$USER['status']) echo('selected="selected"')*]>сердце</option>
+    <option value="35" [*IF(35==$USER['status']) echo('selected="selected"')*]>пишу</option>
+    <option value="38" [*IF(38==$USER['status']) echo('selected="selected"')*]>замерз</option>
+    <option value="39" [*IF(39==$USER['status']) echo('selected="selected"')*]>грустно</option>
+    <option value="40" [*IF(40==$USER['status']) echo('selected="selected"')*]>испуг/удивление</option>
+    <option value="41" [*IF(41==$USER['status']) echo('selected="selected"')*]>читаю</option>
+    <option value="43" [*IF(43==$USER['status']) echo('selected="selected"')*]>еду</option>
+   </select><br />
+   <small>Описание:</small><br />
+   <input type="text" name="sdescr" value="[*=$USER['sdescr']*]" maxlength="100" /><br />
+   <small class="alt">И перейти:</small>
+   <select name="forward">
+    <option value="/?[*=SID*]">на главную</option>
+    <option value="/forum/?[*=SID*]">на форум</option>
+    <option value="/blogs/?[*=SID*]">в блоги</option>
+    <option value="/gallery/?[*=SID*]">в галерею</option>
+    <option value="/chat/rooms.php?[*=SID*]">в чат</option>
+    <option value="/gbook/?[*=SID*]">в гостевую</option>
+    <option value="/news/?[*=SID*]">в новости</option>
+    <option value="/filex/?[*=SID*]">в обменник</option>
+    <option value="/dir/?[*=SID*]">к файлам</option>
+   </select><br />
+   <input type="submit" value="Изменить" />
+   </fieldset>
+  </form>
+</div><hr />
+
+<div>
+[<a href="index.php?[*=SID*]">На главную</a>]
+</div>
+
+[*=$this->Parse('footer.tmpl')*]

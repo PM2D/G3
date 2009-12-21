@@ -1,0 +1,28 @@
+[*=$this->Parse('header.tmpl')*]
+
+<div>
+
+[*IF($BACK):*]
+  [<a href="[*=$BACK*]">Bepнутьcя</a>]
+[*ENDIF*]
+
+<div class="base">
+
+[*FOREACH($USERS as $WHO):*]
+
+  <img src="/ico/_status/[*=$WHO['status']*].gif" alt=" " />
+  <a href="info.php?uid=[*=$WHO['id']*]&amp;[*=SID*]">[*=$WHO['login']*]</a>
+  <small>[*=$WHO['ua']*] [*=$WHO['where']*]</small> [*=$WHO['time']*]<hr />
+
+[*ENDFOREACH*]
+
+[*IF(!$USERS):*]
+  Пуcтo<hr />
+[*ENDIF*]
+
+</div>
+[<a href="/?[*=SID*]">На главную</a>]
+
+</div>
+
+[*=$this->Parse('footer.tmpl')*]

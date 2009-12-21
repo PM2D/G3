@@ -1,0 +1,185 @@
+[*=$this->Parse('header.tmpl')*]
+
+<div>
+
+[*IF(!$EDIT):*]
+
+  <div class="base" style="text-align: center">
+   <div class="title"><small>Анкета</small> [*=$UD['login']*]</div>
+   [*IF($UD['avatar']):*]
+    <img src="[*=$UD['avatar']*]" alt="[*=$UD['login']*]" /><br />
+   [*ENDIF;*]
+   <small>Сейчас
+   [*IF($STATUS):*]
+     онлайн
+   [*ELSE:*]
+     оффлайн
+   [*ENDIF*]
+   <br />
+   <img src="/ico/_status/[*=$STATUS*].gif" alt=" " /> [*=$SDESCR*]
+   </small>
+  </div>
+  <hr />
+  <span class="alt">Статус:</span><br />
+  [*=$UD['status']*]<hr />
+  <span class="alt">Постов:</span><br />
+  [*=$UD['posts']*]<hr />
+  <span class="alt">Отзывы:</span><br />
+  [*=$UD['references']*]&nbsp;
+  [*IF($UD['id']!=$USER['id'] AND 3!=$USER['id']):*]
+    <small><a href="references.php?uid=[*=$UD['id']*]&amp;[*=SID*]">[добавить]</a></small><br />
+  [*ELSE:*]
+    <small><a href="references.php?uid=[*=$UD['id']*]&amp;[*=SID*]">[читать]</a></small><br />
+  [*ENDIF*]
+  <hr />
+  [*IF($UD['name']):*]
+    <span class="alt">Имя:</span><br />
+    <a href="users.php?type=name&amp;search=[*=$UD['name']*]&amp;[*=SID*]">[*=$UD['name']*]</a><hr />
+  [*ENDIF*]
+  [*IF($UD['from']):*]
+    <span class="alt">Откуда:</span><br />
+    <a href="users.php?type=from&amp;search=[*=$UD['from']*]&amp;[*=SID*]">[*=$UD['from']*]</a><hr />
+  [*ENDIF*]
+  <span class="alt">Пол:</span><br />
+  [*=$UD['sex']*]<hr />
+  [*IF($UD['email']):*]
+    <span class="alt">E-mail:</span><br />
+    [*IF(3==$USER['id']):*]
+     [скрыто]
+    [*ELSE:*]
+     <a href="mail.php?to=[*=$UD['email']*]&amp;[*=SID*]">[*=$UD['email']*]</a>
+    [*ENDIF*]
+    <hr />
+  [*ENDIF*]
+  [*IF($UD['site']):*]
+    <span class="alt">Сайт(ы):</span><br />
+    [*FOREACH($UD['site'] as $SITE):*]
+      <a href="go.php?[*=$SITE*]">[*=$SITE*]</a><br />
+    [*ENDFOREACH*]
+    <hr />
+  [*ENDIF*]
+  [*IF($UD['icq']):*]
+    <span class="alt">ICQ:</span><br />
+    <img src="http://web.icq.com/whitepages/online?icq=[*=$UD['icq']*]&amp;img=5" alt=" " /> [*=$UD['icq']*]<hr />
+  [*ENDIF*]
+  [*IF($UD['jabber']):*]
+    <span class="alt">Jabber ID:</span><br />
+    [*=$UD['jabber']*]<hr />
+  [*ENDIF*]
+  [*IF($UD['bday']):*]
+    <span class="alt">Дата рождения:</span><br />
+    [*=$UD['bday']*].[*=$UD['bmonth']*].[*=$UD['byear']*]<hr />
+    <span class="alt">Возраст:</span><br />
+    [*=$UD['age']*] лет<hr />
+    <span class="alt">Знак зодиака:</span><br />
+    [*=$UD['zodiac']*]<hr />
+  [*ENDIF*]
+   <span class="alt">Дата рeгиcтpaции:</span><br />
+   [*=$UD['regdat']*]<hr />
+   <span class="alt">Пocлeдний зaxoд:</span><br />
+   [*=$UD['last']*]<hr />
+  [*IF($UD['about']):*]
+    <span class="alt">Дополнительно:</span><br />
+    [*=$UD['about']*]<hr />
+  [*ENDIF*]
+  [*IF(0<$USER['state']):*]
+    <span class="alt">User-Agent:</span><br />
+    [*=$UD['br']*]<hr />
+    <span class="alt">IP:</span><br />
+    [*=$UD['ip']*]<hr />
+    <span class="alt">Оператор:</span><br />
+    [*=$UD['op']*]<hr />
+  [*ENDIF*]
+
+  [*IF(3!=$USER['id']):*]
+   <div class="base">
+   <small><div class="title">Меню</div></small>
+  
+   [*IF($USER['id']!==$UD['id']):*]
+    [*IF($HAVEALBUM):*]
+      [<a href="/gallery/view.php?a=[*=$UD['id']*]&amp;[*=SID*]">Aльбoм пoльзoвaтeля</a>]<br />
+    [*ENDIF*]
+    [*IF($HAVEBLOG):*]
+      [<a href="/blogs/view.php?b=[*=$UD['id']*]&amp;[*=SID*]">Блог пoльзoвaтeля</a>]<br />
+    [*ENDIF*]
+    [<a href="letters/write.php?to=[*=$UD['login']*]&amp;[*=SID*]">Haпиcaть зaпиcку</a>]<br />
+   [*ENDIF*]
+
+   [*IF(0<$USER['state']):*]
+    [*IF($USER['id']!==$UD['id']):*]
+      [<a href="ban.php?uid=[*=$UD['id']*]&amp;[*=SID*]">Зaбaнить</a>]<br />
+    [*ENDIF*]
+    [<a href="edit.php?mod=nick&amp;uid=[*=$UD['id']*]&amp;[*=SID*]">Изменить ник</a>]<br />
+    [*IF(1<$USER['state'] AND 2>$UD['state'] AND 3!=$UD['id']):*]
+      [<a href="admin.php?mod=deluser&amp;n=[*=$UD['id']*]&amp;[*=SID*]">Удaлить пoльзoвaтeля</a>]<br />
+    [*ENDIF*]
+   [*ENDIF*]
+
+   [*IF(1<$USER['state'] AND $UD['id']!=$USER['id'] AND 2!=$UD['state']):*]
+    [*IF(0<$UD['state']):*]
+      [<a href="edit.php?mod=state&amp;uid=[*=$UD['id']*]&amp;[*=SID*]">Убpaть c дoлжнocти мoдepaтopa</a>]<br />
+    [*ELSE:*]
+      [<a href="edit.php?mod=state&amp;uid=[*=$UD['id']*]&amp;[*=SID*]">Haзнaчить мoдeрaтopoм</a>]<br />
+    [*ENDIF*]
+   [*ENDIF*]
+
+   [*IF($USER['id']==$UD['id'] OR 0<$USER['state']):*]
+    [*IF(50<$UD['posts'] OR 0<$USER['state']):*]
+      [<a href="edit.php?mod=status&amp;uid=[*=$UD['id']*]&amp;[*=SID*]">Измeнить cтaтуc</a>]<br />
+    [*ENDIF;*]
+    [*IF($USER['id']==$UD['id']):*]
+      [<a href="info.php?edit&amp;[*=SID*]">Измeнить инфу</a>]<br />
+      [<a href="edit.php?mod=pass&amp;[*=SID*]">Измeнить пapoль</a>]
+    [*ENDIF*]
+   [*ENDIF*]
+
+   </div>
+  [*ENDIF*]
+
+[*ELSE:*]
+
+  <form action="info.php?edit&amp;[*=SID*]" method="post">
+  <div>
+   <span class="alt">Имя</span><br />
+   <input type="text" name="name" value="[*=$UD['name']*]" /><hr />
+   <span class="alt">Откуда:</span><br />
+   <input type="text" name="from" value="[*=$UD['from']*]" /><hr />
+   <span class="alt">Пол:</span><br />
+   <select name="sex">
+    <option value="0">Неизвестен</option>
+    <option value="1">М</option>
+    <option value="2">Ж</option>
+    <option value="3">Средний</option>
+   </select><hr />
+   <span class="alt">E-mail:</span><br />
+   <input type="text" name="mail" value="[*=$UD['email']*]" /><hr />
+   <span class="alt">Сайт:</span><br />
+   <input type="text" name="site" value="[*=$UD['site']*]" /><br />
+   <small>(c "http://". Если несколько, то через пробел)</small><hr />
+   <span class="alt">ICQ UIN:</span><br />
+   <input type="text" name="icq" value="[*=$UD['icq']*]" /><hr />
+   <span class="alt">Jabber ID:</span><br />
+   <input type="text" name="jabber" value="[*=$UD['jabber']*]" /><hr />
+   <span class="alt">Дата рождения (dd-mm-yyyy):</span><br />
+   <input type="text" name="bday" size="2" maxlength="2" value="[*=$UD['bday']*]" />-
+   <input type="text" name="bmonth" size="2" maxlength="2" value="[*=$UD['bmonth']*]" />-
+   <input type="text" name="byear" size="4" maxlength="4" value="[*=$UD['byear']*]" /><hr />
+   <span class="alt">Дополнительно:</span><br />
+   <textarea rows="3" cols="20" name="about">
+    [*=$UD['about']*]
+   </textarea><hr />
+   <input type="submit" value="Изменить" />
+  </div>
+  </form>
+
+[*ENDIF*]
+
+<hr />
+<div class="misc">
+  OnLine: <a href="/who.php?[*=SID*]">[*=$ONLINE*]</a><br />
+  [*=perf()*] ceк
+</div>
+[<a href="index.php?[*=SID*]">Ha глaвную</a>]
+</div>
+
+[*=$this->Parse('footer.tmpl')*]

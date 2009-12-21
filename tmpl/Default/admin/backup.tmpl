@@ -1,0 +1,22 @@
+[*=$this->Parse('header.tmpl')*]
+
+<div>
+
+  <div class="title">Резервное копирование БД</div><hr />
+  [<a href="admin.php?mod=export&amp;[*=SID*]">Coздaть кoпию</a>]<hr />
+  <div class="base">
+  [*FOREACH($BACKUPS as $BACKUP):*]
+    <img src="/ico/[*=$USER['icons']*]/zip.gif" alt=" " />
+    <a href="admin.php?mod=import&amp;f=[*=$BACKUP['name']*]&amp;[*=SID*]">[*=$BACKUP['name']*]</a>
+    <small>([*=$BACKUP['size']*]) [<a href="admin.php?mod=backup&amp;del=[*=$BACKUP['name']*]&amp;[*=SID*]">x</a>]</small><br />
+  [*ENDFOREACH*]
+  [*IF(!$BACKUPS):*]
+   Нет резервных копий.
+  [*ENDIF*]
+  </div><hr />
+  [<a href="admin.php?[*=SID*]">B aдминку</a>]<br />
+  [<a href="/?[*=SID*]">Ha глaвную</a>]
+
+</div>
+
+[*=$this->Parse('footer.tmpl')*]

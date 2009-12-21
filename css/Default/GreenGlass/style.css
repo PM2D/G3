@@ -1,0 +1,98 @@
+body {
+	background: #DDEEDD;
+	color: #000000;
+	max-width: 320px;
+	margin: 1px auto;
+}
+
+a:link,a:visited {
+	color: #006000;
+	text-decoration: none;
+}
+
+a:active,a:hover {
+	color: #0000F0;
+	text-decoration: underline;
+}
+
+input[type="text"], input[type="password"], textarea {
+	background-color: #F0F0F0;
+	color: #000000;
+	border: 2px inset #505050;
+	-moz-border-radius: 4px;
+	-webkit-border-radius: 4px;
+}
+
+input[type="submit"] {
+	margin: 2px;
+	padding: 3px;
+	background-color: #80C080;
+	background-image: url(title.gif);
+	background-repeat: repeat-x;
+	border: 1px solid #C0C0C0;
+	font-weight: bolder;
+	-moz-border-radius: 4px;
+	-webkit-border-radius: 4px;
+}
+
+div {
+	margin: 1px;
+	-moz-border-radius: 6px;
+	-webkit-border-radius: 6px;
+}
+
+.title {
+	text-align: center;
+	background-color: #80C080;
+	background-image: url(title.gif);
+	background-repeat: repeat;
+	color: #000000;
+	padding: 1px;
+	border: 1px solid #80A080;
+}
+
+.base {
+	margin: 1px;
+	padding: 1px;
+	border-top: 4px solid #AABBAA;
+	border-bottom: 4px solid #AABBAA;
+	border-left: 1px solid #AABBAA;
+	border-right: 1px solid #AABBAA;
+	background-color: #BBCCBB
+}
+
+.frame {
+	border: 1px solid #80A080;
+	padding: 1px;
+}
+
+.base, .base .frame {
+	background-image: url(gradient.gif);
+	background-repeat: repeat-x;
+	background-position: top;
+}
+
+.misc {
+	text-align: center;
+	font-size: smaller;
+}
+
+.alt { color: #DC143C }
+
+img {
+	vertical-align: middle;
+	color: #503000;
+}
+
+hr {
+	margin: 2px 6px;
+	height: 1px;
+	border: 1px;
+	color: #C0C0C0;
+	background-color: #C0C0C0;
+}
+
+fieldset {
+	border: 1px solid #C0C0C0;
+	padding: 2px;
+}

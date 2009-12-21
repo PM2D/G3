@@ -1,0 +1,19 @@
+[*=$this->Parse('header.tmpl')*]
+
+<div>
+
+  [<a href="admin.php?[*=SID*]">B aдминку</a>]<hr />
+  <form action="admin.php?mod=cache&amp;[*=SID*]" method="post">
+  <fieldset>
+  [*FOREACH($DIRS as $DIR):*]
+   [*=$DIR['title']*]: <span class="alt">[*=$DIR['size']*]</span><br />
+   [<a href="admin.php?mod=cache&amp;clear=[*=$DIR['name']*]&amp;[*=SID*]">очистить</a>]<hr />
+  [*ENDFOREACH*]
+  </fieldset>
+  </form><hr />
+  [<a href="admin.php?[*=SID*]">B aдминку</a>]<br />
+  [<a href="/?[*=SID*]">Ha глaвную</a>]
+
+</div>
+
+[*=$this->Parse('footer.tmpl')*]

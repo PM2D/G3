@@ -1,0 +1,75 @@
+[*=$this->Parse('header.tmpl')*]
+
+<div>
+
+<div class="title">
+[*IF(!$SEARCH):*]
+  Cпиcoк пoльзoвaтeлeй
+[*ELSE:*]
+  Поиск по "[*=$SEARCH*]"
+[*ENDIF*]
+</div>
+
+[*IF(!$OPTIONS):*]
+  <small>[<a href="users.php?options&amp;[*=SID*]">настройки</a>]</small><br />
+[*ENDIF*]
+
+<small>[<a href="bday.php?[*=SID*]">именинники</a>]</small><br />
+
+<hr />
+
+[*IF($OPTIONS):*]
+
+  <form action="users.php?[*=SID*]" method="get">
+   <fieldset style="text-align: center">
+   <small class="alt">Упорядочить по</small><br />
+   <select name="order">
+    <option value="0">посл. заходу</option>
+    <option value="1">постам</option>
+    <option value="2">нику</option>
+    <option value="3">дате регистрации</option>
+   </select><br />
+   <small class="alt">В порядке возрастания </small>
+   <input type="checkbox" name="rev" /><br />
+   <small class="alt">Искать:</small><br />
+   <select name="type">
+    <option value="all">без условия (всех)</option>
+    <option value="login">по логину</option>
+    <option value="from">по полю "откуда"</option>
+    <option value="name">по имени</option>
+    <option value="male">всех мужского пола</option>
+    <option value="female">всех женского пола</option>
+    <option value="icq">всех с ICQ</option>
+    <option value="jabber">всех c Jabber</option>
+    <option value="mail">всех с e-mail</option>
+    <option value="site">всех с сайтом</option>
+    <option value="adms">всех aдминoв</option>
+    <option value="mdrs">всех мoдepaтopoв</option>
+   </select><br />
+   <small class="alt">Слово для поиска:</small><br />
+   <input type="text" name="search" /><br />
+   <input type="submit" value="Найти" />
+   </fieldset>
+  </form>
+
+[*ELSE:*]
+
+  [*FOREACH($LIST as $ITEM):*]
+    <img src="ico/[*=$USER['icons']*]/user.gif" alt="#" />
+    <a href="info.php?uid=[*=$ITEM['id']*]&amp;[*=SID*]">[*=$ITEM['login']*]</a>
+    <small>[[*=$ITEM['posts']*]]</small><small class="b"> [*=$ITEM['status']*]</small><br />
+  [*ENDFOREACH*]
+
+  <hr />
+  <div style="text-align: center">
+    [*NAV('users.php', $NAV['pos'], $NAV['total'], $NAV['limit'], $NAV['add'])*]<br />
+    [*PAGES('users.php', $NAV['pos'], $NAV['total'], $NAV['limit'], $NAV['add'])*]
+  </div>
+
+[*ENDIF*]
+
+<hr />[<a href="index.php?[*=SID*]">Ha глaвную</a>]
+
+</div>
+
+[*=$this->Parse('footer.tmpl')*]

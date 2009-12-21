@@ -1,0 +1,21 @@
+[*=$this->Parse('header.tmpl')*]
+
+<div>
+
+  <div class="title">Сегодняшние посетители:</div>
+  [*FOREACH($LIST as $ONE):*]
+    <img src="/ico/[*=$USER['icons']*]/user.gif" alt=" "/>
+    <a href="info.php?uid=[*=$ONE['uid']*]&amp;[*=SID*]">[*=$ONE['login']*]</a>
+    <small>[*=$ONE['ua']*]</small><br />
+  [*ENDFOREACH*]
+  <hr />
+  <div style="text-align: center">
+    [*NAV('today.php', $NAV['pos'], $NAV['total'], $NAV['limit'])*]
+  </div>
+  <hr />
+
+  [<a href="/?[*=SID*]">Ha глaвную</a>]
+
+</div>
+
+[*=$this->Parse('footer.tmpl')*]

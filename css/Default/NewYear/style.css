@@ -1,0 +1,67 @@
+body {
+	margin: 0 auto; padding: 14px 0 14px 0;
+	color: #333;
+	background: #f6f6f6 url(snow.gif);
+	max-width: 320px
+}
+
+a:link, a:visited {
+	color: #C00000;
+	font: small arial;
+	text-decoration: underline
+}
+
+a:active, a:hover {
+	color: #008000;
+	font: small arial;
+	text-decoration: none
+}
+
+img { vertical-align: middle }
+
+.alt { color: #550 }
+
+small { font: small arial }
+
+div {
+	margin: 1;
+	font: small arial
+}
+
+div.base {
+	margin: 5px 0 5px 0;
+	padding: 2px;
+	background: #FFF;
+	border: 1px solid #808080;
+}
+
+div.title {
+	margin: 0;
+	padding: 2px;
+	color: #000000;
+	font: small arial;
+	text-align: center;
+	background: #AACCFF url(gradient.gif) repeat-x;
+}
+div.frame {
+	margin: 0 0 0 0;
+	padding: 7px 0 7px 0;
+	font: small arial
+}
+
+div.misc {
+	text-align: center;
+	font-size: smaller;
+}
+
+input[type="text"], input[type="password"], textarea {
+	max-width: 100px;
+}
+
+hr {
+	margin: 4px 0 4px 0;
+	color: #ccc;
+	background: #ccc;
+	border: 1px; border-bottom: 1px solid #fff;
+	height: 1px;
+}

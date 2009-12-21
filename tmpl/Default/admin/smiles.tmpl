@@ -1,0 +1,27 @@
+[*=$this->Parse('header.tmpl')*]
+
+<div>
+
+  [<a href="admin.php?[*=SID*]">B aдминку</a>]<hr />
+  [*FOREACH($SMILES as $SMILE):*]
+    <div class="base">
+    [<a href="admin.php?mod=smiles&amp;d=[*=$SMILE['delurl']*]&amp;[*=SID*]">x</a>]
+    [*=$SMILE['img']*] - [*=$SMILE['code']*]
+    </div><hr />
+  [*ENDFOREACH*]
+  <div class="title">Добавить смайл</div>
+  <form action="admin.php?mod=smiles&amp;[*=SID*]" method="post"><fieldset>
+   <span class="alt">URL смайла:</span><br />
+   <input type="text" name="url" value="/sm/" /><br />
+   <span class="alt">Код смайла:</span><br />
+   <input type="text" name="code" /><br />
+   <span class="alt">Название:</span><br />
+   <input type="text" name="alt" /><br />
+   <input type="submit" value="Добавить" />
+  </fieldset></form><hr />
+  [<a href="admin.php?[*=SID*]">B aдминку</a>]<br />
+  [<a href="/?[*=SID*]">Ha глaвную</a>]
+
+</div>
+
+[*=$this->Parse('footer.tmpl')*]

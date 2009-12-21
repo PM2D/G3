@@ -1,0 +1,29 @@
+body {
+	background-color: #F5F5F5;
+	color: #000000;
+	max-width: 320px;
+	margin: 1px auto;
+}
+a:link, a:visited {
+	color: #0000CD;
+}
+a:active, a:hover {
+	color: #FFFFFF;
+	background-color: #00008B;
+}
+.title {
+	text-align: center;
+}
+div.base {
+	padding: 1px;
+	background-color: #EAEAEA;
+}
+.misc {
+	text-align: center;
+	font-size: smaller;
+}
+.alt {
+	color: #650000;
+}
+hr { visibility: hidden }
+img { vertical-align: middle }

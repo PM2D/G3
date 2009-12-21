@@ -1,0 +1,23 @@
+[*=$this->Parse('header.tmpl')*]
+
+<div>
+
+  <div class="title">[*=$TITLE*]</div>
+  <form action="edit.php?mod=[*=$MOD*]&amp;uid=[*=$UID*]&amp;[*=SID*]" method="post">
+  <fieldset>
+   [*IF($MOD=='pass'):*]
+     <input type="password" name="data" /><br />
+     <i>Еще раз:</i><br />
+     <input type="password" name="data2" /><br />
+   [*ELSE:*]
+     <input type="text" name="data" value="[*=$VALUE*]" /><br />
+   [*ENDIF*]
+   <input type="submit" value="Измeнить" />
+  </fieldset>
+  </form>
+
+  <hr />[<a href="/?[*=SID*]">Ha глaвную</a>]
+
+</div>
+
+[*=$this->Parse('footer.tmpl')*]

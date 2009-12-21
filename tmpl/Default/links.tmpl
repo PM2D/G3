@@ -1,0 +1,27 @@
+[*=$this->Parse('header.tmpl')*]
+
+<div>
+
+[*IF(1<$USER['state']):*]
+  [<a href="add.php?[*=SID*]">Добавить</a>]<hr />
+[*ENDIF*]
+
+[*FOREACH($LINKS as $LINK):*]
+  <img src="/ico/[*=$USER['icons']*]/link.gif" alt="&gt;" />
+  <a href="[*=$LINK['url']*]">[*=$LINK['name']*]</a>
+  [*IF(1<$USER['state']):*]
+    <small>[<a href="del.php?n=[*=$LINK['id']*]">X</a>]</small>
+  [*ENDIF*]
+  <br />
+[*ENDFOREACH*]
+
+[*IF(!$LINKS):*]
+  Пусто
+[*ENDIF*]
+
+<hr />
+[<a href="/?[*=SID*]">Ha глaвную</a>]
+
+</div>
+
+[*=$this->Parse('footer.tmpl')*]

@@ -1,0 +1,34 @@
+[*=$this->Parse('header.tmpl')*]
+
+<div>
+
+  <div class="base">Сегодня день рождения у:</div>
+
+  [*FOREACH($TODAY as $ITEM):*]
+    <img src="ico/[*=$USER['icons']*]/user.gif" alt=" " />
+    <a href="info.php?uid=[*=$ITEM['id']*]&amp;[*=SID*]">[*=$ITEM['login']*]</a>
+    <small>[*=$ITEM['bday']*].[*=$ITEM['bmonth']*].[*=$ITEM['byear']*]</small><br />
+  [*ENDFOREACH*]
+
+  [*IF(!$TODAY):*]
+    Нет.
+  [*ENDIF*]
+
+  <hr />
+  <div class="base">В этом месяце день рождения у:</div>
+
+  [*FOREACH($MONTH as $ITEM):*]
+    <img src="ico/[*=$USER['icons']*]/user.gif" alt=" " />
+    <a href="info.php?uid=[*=$ITEM['id']*]&amp;[*=SID*]">[*=$ITEM['login']*]</a>
+    <small>[*=$ITEM['bday']*].[*=$ITEM['bmonth']*].[*=$ITEM['byear']*]</small><br />
+  [*ENDFOREACH*]
+
+  [*IF(!$MONTH):*]
+    Нет.
+  [*ENDIF*]
+
+  <hr />[<a href="index.php?[*=SID*]">Ha глaвную</a>]
+
+</div>
+
+[*=$this->Parse('footer.tmpl')*]
