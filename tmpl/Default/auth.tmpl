@@ -59,9 +59,9 @@
     <a href="filex/?[*=SID*]">в обменнике</a> нoвыx файлов не было
    [*ENDIF*]
   [*ENDIF*]
-  [*IF($NEW['letters']):*]
+  [*IF($USER['newl']):*]
     <br />
-    <img src="/ico/[*=$USER['icons']*]/info.gif" alt="i" /> <a href="letters/?[*=SID*]">У вас есть непрочитанные записки: [*=$NEW['letters']*]</a>
+    <img src="/ico/[*=$USER['icons']*]/info.gif" alt="i" /> <a href="letters/?[*=SID*]">У вас есть непрочитанные записки: [*=$USER['newl']*]</a>
   [*ENDIF*]
   [*IF($NEW['bdays']):*]
     <br />

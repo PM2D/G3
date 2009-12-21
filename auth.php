@@ -112,7 +112,10 @@ if(3!=$USER['id']) {
     $tmpl->Vars['NEW']['filex'] = $mysql->GetField('COUNT(*)', 'filex_cats', '`time`>'.$USER['last']);
   }
   $tmpl->Vars['NEW']['bdays'] = $mysql->GetField('COUNT(*)', 'users', '`bmonth`='.date('m', $TIME).' AND `bday`='.date('d', $TIME));
-  $tmpl->Vars['NEW']['letters'] = $mysql->GetField('COUNT(*)', 'letters', '`to`='.$USER['id'].' AND `new`=1');
+  // есть ли новые записки
+  if($tmpl->Vars['LETTERS'] = IsModInstalled('letters')) {
+    $USER['newl'] = $mysql->GetField('COUNT(*)', 'letters', '`to`='.$USER['id'].' AND `new`=1');
+  }
   // получаем ip и ua с которых пользователь был в последний раз
   $arr = $mysql->GetRow('`br`,`ip`', 'users', '`id`='.$USER['id']);
   $tmpl->Vars['UA'] = $arr['br'];
