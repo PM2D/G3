@@ -8,7 +8,7 @@ class rating extends mysql {
     $USER['ratekey'] = abs(crc32($key));
     $USER['ratescale'] = intval($scale);
   }
-  // получение массива с данными оценки как есть
+  // получение массива содержащего среднюю оценку и количество оценок
   public function Get() {
     global $USER;
     if(!isset($USER['ratekey'])) throw new Exception('/lib/ratings: ключ не был задан');
@@ -18,6 +18,12 @@ class rating extends mysql {
   public function GetAverage() {
     $arr = $this->Get();
     return $arr['avg'];
+  }
+  // получение количества оценок по значению оценки
+  public function GetByValue($value) {
+    global $USER;
+    if(!isset($USER['ratekey'])) throw new Exception('/lib/ratings: ключ не был задан');
+    return $this->GetField('COUNT(*) as `cnt`', 'ratings', '`key`='.$USER['ratekey'].' AND `value`='.$value);
   }
   // есть ли возможность оценки
   public function IsRateable() {
