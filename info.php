@@ -9,7 +9,7 @@ $tmpl = new template;
 $tmpl->SendHeaders();
 $compress->Enable();
 
-if(!isset($_GET['edit'])){
+if(!isset($_GET['edit'])) {
 
   $UD = $mysql->GetRow('*', 'users', '`id`='.$uid);
   if(!$UD) raise_error('Heт тaкoгo пoльзoвaтeля');
@@ -18,16 +18,16 @@ if(!isset($_GET['edit'])){
   $tmpl->Vars['EDIT'] = FALSE;
   $tmpl->Vars['UD'] = $UD;
   $tmpl->Vars['UD']['references'] = $mysql->GetField('COUNT(*)', 'references','`uid`='.$uid);
-  switch($tmpl->Vars['UD']['sex']){
+  switch($tmpl->Vars['UD']['sex']) {
    case 0: $tmpl->Vars['UD']['sex'] = 'Неизвестен'; break;
    case 1: $tmpl->Vars['UD']['sex'] = 'Мужской'; break;
    case 2: $tmpl->Vars['UD']['sex'] = 'Женский'; break;
    case 3: $tmpl->Vars['UD']['sex'] = 'Средний'; break;
    default: break;
   }
-  if($UD['bday'] && $UD['bmonth']){
+  if($UD['bday'] && $UD['bmonth']) {
     // расчет возраста (некорректно работает если возраст более 100. долгожители есть?)
-    $now = explode('|', date('j|n|Y'));
+    $now = explode('|', date('j|n|Y', $TIME));
     $tmpl->Vars['UD']['age'] = date('y', mktime(0, 0, 0, $now[1]-$UD['bmonth'], $now[0]-$UD['bday'], $now[2]-$UD['byear']));
     // расчет знака зодиака (скелет алгоритма был найден на просторах рунета)
     $sign = array('Козерог', 'Водолей', 'Рыбы', 'Овен', 'Телец', 'Близнецы', 'Рак', 'Лев', 'Дева', 'Весы', 'Скорпион', 'Стрелец');
@@ -38,12 +38,14 @@ if(!isset($_GET['edit'])){
     $tmpl->Vars['UD']['zodiac'] = 'N/A';
   }
   $tmpl->Vars['UD']['site'] = $UD['site'] ? explode(' ', $UD['site']) : FALSE;
-  $tmpl->Vars['UD']['regdat'] = date('d.m.y в G:i',$UD['regdat']);
-  $tmpl->Vars['UD']['last'] = date('d.m.y в G:i',$UD['last']);
+  $tmpl->Vars['UD']['score'] = $UD['posts'] + round(($TIME-$UD['regdat'])/86400);
+  $tmpl->Vars['UD']['regdat'] = format_date($UD['regdat']);
+  $tmpl->Vars['UD']['last'] = format_date($UD['last']);
   include($_SERVER['DOCUMENT_ROOT'].'/etc/opsos.php');
   $tmpl->Vars['UD']['op'] = GetOperator($UD['ip']);
   $tmpl->Vars['HAVEALBUM'] = IsModInstalled('gallery') ? file_exists($_SERVER['DOCUMENT_ROOT'].'/gallery/files/'.$UD['id']) : FALSE;
   $tmpl->Vars['HAVEBLOG'] = IsModInstalled('blogs') ? $mysql->IsExists('blogs', '`owner`='.$UD['id']) : FALSE;
+  $tmpl->Vars['HAVEFILES'] = IsModInstalled('filex');
   $tmpl->Vars['STATUS'] = $online->GetStatus($UD['id']);
   $tmpl->Vars['SDESCR'] = $online->GetSDescr($UD['id']);
 
@@ -51,7 +53,7 @@ if(!isset($_GET['edit'])){
 
 } else {
 
-  if(isset($_POST['name']) && 3!=$USER['id']){
+  if(isset($_POST['name']) && 3!=$USER['id']) {
 
     $upd['name'] = $mysql->EscapeString(stripslashes(htmlspecialchars($_POST['name'])));
     $upd['from'] = $mysql->EscapeString(stripslashes(htmlspecialchars($_POST['from'])));
@@ -65,13 +67,13 @@ if(!isset($_GET['edit'])){
     $upd['byear'] = intval($_POST['byear']);
     $upd['about'] = $mysql->EscapeString(nl2br(stripslashes(htmlspecialchars($_POST['about']))));
 
-    if($mysql->Update('users', $upd, '`id`='.$USER['id'].' LIMIT 1')){
+    if($mysql->Update('users', $upd, '`id`='.$USER['id'].' LIMIT 1')) {
       $tmpl->Vars['TITLE'] = 'Обновление профиля';
       $tmpl->Vars['MESSAGE'] = 'Профиль обновлен.<br />[<a href="info.php?'.SID.'">посмотреть</a>]';
       $tmpl->Vars['BACK'] = 'info.php?uid='.$USER['id'].'&amp;edit&amp;'.SID;
       echo $tmpl->Parse('notice.tmpl');
       exit;
-    };
+    }
 
   } else {
 

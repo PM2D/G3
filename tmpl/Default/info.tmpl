@@ -24,6 +24,8 @@
   [*=$UD['status']*]<hr />
   <span class="alt">Постов:</span><br />
   [*=$UD['posts']*]<hr />
+  <span class="alt">Очков:</span><br />
+  [*=$UD['score']*]<hr />
   <span class="alt">Отзывы:</span><br />
   [*=$UD['references']*]&nbsp;
   [*IF($UD['id']!=$USER['id'] AND 3!=$USER['id']):*]
@@ -91,19 +93,25 @@
     [*=$UD['op']*]<hr />
   [*ENDIF*]
 
-  [*IF(3!=$USER['id']):*]
-   <div class="base">
-   <small><div class="title">Меню</div></small>
-  
-   [*IF($USER['id']!==$UD['id']):*]
-    [*IF($HAVEALBUM):*]
-      [<a href="/gallery/view.php?a=[*=$UD['id']*]&amp;[*=SID*]">Aльбoм пoльзoвaтeля</a>]<br />
-    [*ENDIF*]
-    [*IF($HAVEBLOG):*]
-      [<a href="/blogs/view.php?b=[*=$UD['id']*]&amp;[*=SID*]">Блог пoльзoвaтeля</a>]<br />
-    [*ENDIF*]
-    [<a href="letters/write.php?to=[*=$UD['login']*]&amp;[*=SID*]">Haпиcaть зaпиcку</a>]<br />
+  <div class="base">
+  <small><div class="title">Меню</div></small>
+
+  [*IF($USER['id']!==$UD['id']):*]
+   [*IF($HAVEALBUM):*]
+     [<a href="/gallery/view.php?a=[*=$UD['id']*]&amp;[*=SID*]">Aльбoм пoльзoвaтeля</a>]<br />
    [*ENDIF*]
+   [*IF($HAVEBLOG):*]
+     [<a href="/blogs/view.php?b=[*=$UD['id']*]&amp;[*=SID*]">Блог пoльзoвaтeля</a>]<br />
+   [*ENDIF*]
+   [*IF($HAVEFILES):*]
+     [<a href="/filex/userfiles.php?uid=[*=$UD['id']*]&amp;[*=SID*]">Файлы пoльзoвaтeля</a>]<br />
+   [*ENDIF*]
+   [*IF(3!=$USER['id']):*]
+     [<a href="letters/write.php?to=[*=$UD['login']*]&amp;[*=SID*]">Haпиcaть зaпиcку</a>]<br />
+   [*ENDIF*]
+  [*ENDIF*]
+
+  [*IF(3!=$USER['id']):*]
 
    [*IF(0<$USER['state']):*]
     [*IF($USER['id']!==$UD['id']):*]
@@ -133,8 +141,9 @@
     [*ENDIF*]
    [*ENDIF*]
 
-   </div>
   [*ENDIF*]
+
+  </div>
 
 [*ELSE:*]
 
