@@ -1,0 +1,42 @@
+[*=$this->Parse('header.tmpl')*]
+
+<div>
+
+<div class="title">
+  Гостевая книга
+</div>
+<div class="misc">[*=date('d.m.y G:i')*]</div>
+[<a href="say.php?[*=SID*]">Haпиcaть</a>]<br />
+[<a href="index.php?r=[*=$GLOBALS['TIME']*]&amp;[*=SID*]">Oбнoвить</a>]<hr />
+
+[*FOREACH($POSTS as $POST):*]
+  <img src="/ico/_status/[*=$POST['online']*].gif" alt="" />
+  <b><a href="say.php?uid=[*=$POST['uid']*]&amp;[*=SID*]">[*=$POST['login']*]</a></b>
+  <small>[[*=$POST['time']*]]</small>
+  <div class="base">[*=$POST['msg']*]</div>
+  <small>[*=$POST['sign']*]
+   [*IF($POST['editable']):*]
+     [<a href="pe.php?p=[*=$POST['id']*]&amp;[*=SID*]">edit</a>]
+   [*ENDIF;*]
+   [*IF(0<$USER['state']):*]
+     &nbsp;[<a href="del.php?p=[*=$POST['id']*]&amp;[*=SID*]">del</a>]
+   [*ENDIF;*]
+  </small><hr />
+[*ENDFOREACH*]
+
+<div style="text-align: center">
+  [*NAV('index.php', $NAV['pos'], $NAV['total'], $NAV['limit'])*]<br />
+  [*PAGES('index.php', $NAV['pos'], $NAV['total'], $NAV['limit'])*]
+</div><hr />
+
+[<a href="say.php?[*=SID*]">Haпиcaть</a>]<br />
+<div class="misc">
+  OnLine: <a href="/who.php?[*=SID*]">[*=$ONLINE*]</a><br />
+  Cжaтиe: [*=$GZIP*]<br />
+  [*=perf()*] ceк
+</div>
+[<a href="/?[*=SID*]">Ha глaвную</a>]
+
+</div>
+
+[*=$this->Parse('footer.tmpl')*]

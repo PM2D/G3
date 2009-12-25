@@ -1,0 +1,21 @@
+[*=$this->Parse('header.tmpl')*]
+
+<div>
+
+  <form action="edit.php?nid=[*=$NEW['id']*]&amp;[*=SID*]" method="post">
+   <div class="base">
+   Загаловок:<br />
+   <input type="text" name="title" value="[*=$NEW['title']*]" /><br />
+   Текст:<br />
+   <textarea name="text" rows="5" cols="32">[*=$NEW['text']*]</textarea><br />
+   Метки:<br />
+   <input type="text" name="tags" value="[*=$NEW['tags']*]" /><br />
+   <input type="submit" value="Изменить" />
+   </div>
+  </form>
+
+&lt;&lt;<a href="index.php?[*=SID*]">Вернуться</a>
+
+</div>
+
+[*=$this->Parse('footer.tmpl')*]

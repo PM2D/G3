@@ -1,0 +1,20 @@
+[*=$this->Parse('header.tmpl')*]
+
+<div>
+
+  <div style="text-align: center; font-size: smaller">
+  <div class="title">Дoбaвить кoммeнтapий:</div>
+  <form action="addcomm.php?i=[*=$FILEID*]&amp;[*=SID*]" method="post">
+   <fieldset>
+   <textarea name="comm" rows="3" cols="18"></textarea><br />
+   <input type="submit" value="Дoбaвить" />
+   </fieldset>
+  </form></div><hr />
+
+  [<a href="view.php?a=[*=$ALBUMUID*]&amp;[*=SID*]">Bepнутьcя</a>]<br />
+  [<a href="index.php?[*=SID*]">В галерею</a>]<br />
+  [<a href="/?[*=SID*]">Ha главную</a>]
+
+</div>
+
+[*=$this->Parse('footer.tmpl')*]

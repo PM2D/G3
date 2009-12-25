@@ -1,0 +1,14 @@
+[*='<?xml version="1.0" encoding="UTF-8" ?>'."\n"*]
+<rss version="2.0">
+<channel>
+<title>Новости [*=$_SERVER['HTTP_HOST']*]</title>
+<link>http://[*=$_SERVER['HTTP_HOST']*]</link>
+<description>Новости сайта [*=$_SERVER['HTTP_HOST']*]</description>
+[*FOREACH($NEWS as $NEW):*]
+  <item>
+   <title>[*=$NEW['title']*]</title>
+   <description>[*=$NEW['text']*]</description>
+  </item>
+[*ENDFOREACH*]
+</channel>
+</rss>

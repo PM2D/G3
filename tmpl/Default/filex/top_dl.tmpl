@@ -1,0 +1,48 @@
+[*=$this->Parse('header.tmpl')*]
+
+<div>
+
+<div class="title">
+  Файлы по количеству скачиваний
+</div><hr />
+
+[*FOREACH($FILES as $FILE):*]  
+  <div class="base">
+   <div class="title">
+    <a href="view.php?c=[*=$FILE['cid']*]&amp;f=[*=$FILE['id']*]&amp;[*=SID*]"><img src="/ico/[*=$USER['icons']*]/[*=$FILE['type']*].gif" alt=" " /> [*=$FILE['title']*]</a>
+   </div>
+   <div class="frame">
+   <small>
+    [*=$FILE['about']*]<br />
+    Загрузил(а) <a href="/info.php?uid=[*=$FILE['uid']*]&amp;[*=SID*]">[*=$FILE['login']*]</a><br />
+    [*=$FILE['time']*]<br />
+    [*IF($FILE['uid']==$USER['id']):*]
+     [<a href="del.php?i=[*=$FILE['id']*]&amp;[*=SID*]">удалить</a>-<a href="edit.php?f=[*=$FILE['id']*]&amp;[*=SID*]">изменить</a>]<br />
+    [*ENDIF*]
+    <img src="/ico/[*=$USER['icons']*]/comms.gif" alt="&gt;" />
+    <a href="comms.php?f=[*=$FILE['id']*]&amp;[*=SID*]">Комментарии [[*=$FILE['comms']*]]</a>
+   </small>
+   </div>
+  </div><hr />
+[*ENDFOREACH*]
+
+[*IF(!$FILES):*]
+  <div class="base">Файлов нeт</div><hr />
+[*ENDIF*]
+
+<div style="text-align: center">
+ [*NAV('top_dl.php', $NAV['pos'], $NAV['total'], $NAV['limit'])*]<br />
+ [*PAGES('top_dl.php', $NAV['pos'], $NAV['total'], $NAV['limit'])*]
+</div><hr />
+
+<div class="misc">
+  Cжaтиe: [*=$GZIP*]<br />
+  [*=perf()*] ceк
+</div>
+
+[<a href="index.php?[*=SID*]">К категориям</a>]<br />
+[<a href="/?[*=SID*]">Ha глaвную</a>]
+
+</div>
+
+[*=$this->Parse('footer.tmpl')*]

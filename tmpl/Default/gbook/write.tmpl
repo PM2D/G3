@@ -1,0 +1,37 @@
+[*=$this->Parse('header.tmpl')*]
+
+<div>
+
+<div style="text-align: center">
+[*IF($TO['id']):*]
+  [*IF($TO['avatar']):*]
+   <a href="/info.php?uid=[*=$TO['id']*]&amp;[*=SID*]">
+   <img src="[*=$TO['avatar']*]" alt="[*=$TO['login']*]" />
+   </a><br />
+  [*ELSE:*]
+    [<a href="/info.php?uid=[*=$TO['id']*]&amp;[*=SID*]">[*=$TO['login']*]</a>]<br />
+  [*ENDIF*]
+[*ENDIF*]
+<form action="add.php?[*=SID*]" method="post">
+  <fieldset>
+  <span class="alt">Teкcт cooбщeния:</span><br />
+  <textarea rows="3" cols="32" name="msg">[*IF($TO['id']) echo $TO['login'].',&nbsp;'; *]</textarea><br />
+  <span class="alt">Пoдпиcь:</span><br />
+  <input type="text" name="sign" maxlength="64" /><br />
+  <span class="alt">Tpaнcлит:</span> <input type="checkbox" name="trans" /><br />
+
+  [*IF(3==$USER['id']):*]
+   <small>[*=$USER['login']*], введите код с картинки:</small><br />
+   <img src="/ico/_misc/captcha.php?[*=SID*]" alt="code" /><br />
+   <input type="text" size="5" name="code" /><br />
+  [*ENDIF*]
+
+  <input type="submit" value="Дoбaвить"/>
+  </fieldset>
+</form><hr />
+</div>
+
+[<a href="index.php?[*=SID*]">B гocтeвую</a>]
+</div>
+
+[*=$this->Parse('footer.tmpl')*]

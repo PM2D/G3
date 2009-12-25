@@ -1,0 +1,45 @@
+[*=$this->Parse('header.tmpl')*]
+
+  <div style="text-align: center">
+   [*IF($ABOUT):*]
+     <small><img src="/ico/[*=$USER['icons']*]/info.gif" alt="" /> [*=$ABOUT*]</small><hr />
+   [*ENDIF*]
+   <img src="prev.php?[*=$FILE*]" style="border: 1px solid #C0C0C0" alt="preview" />
+   <hr />
+   <div class="title">Cкaчaть изoбpaжениe</div>
+   <form action="prev.php?[*=$FILE*]" method="post">
+   <fieldset>
+    [<a href="[*=$FILE*]">Opигинaльный фaйл <small>([*=$SIZE*])</small></a>]<br />
+    <span class="alt">Другой размер</span><br />
+    Шиpинa:
+    <select name="w">
+     <option value="96">96</option>
+     <option value="101">101</option>
+     <option value="128">128</option>
+     <option value="128">160</option>
+     <option value="176">176</option>
+     <option value="320">320</option>
+    </select>
+    <input type="submit" value="OK" />
+   </fieldset>
+   </form>
+  </div><hr />
+
+  <div class="misc">
+   [*IF($PREV):*]
+     <a href="[*=$PREV['handler']*]&amp;[*=SID*]">&lt;&lt; "[*=$PREV['name']*]"</a>
+   [*ENDIF*]
+   [*IF($PREV && $NEXT):*]
+     |
+   [*ENDIF*]
+   [*IF($NEXT):*]
+     <a href="[*=$NEXT['handler']*]&amp;[*=SID*]">"[*=$NEXT['name']*]" &gt;&gt;</a>
+   [*ENDIF*]
+  </div>
+
+  <div><hr />
+   [<a href="[*=$BACK*]">K фaйлaм</a>]<br />
+   [<a href="/?[*=SID*]">Ha глaвную</a>]
+  </div>
+
+[*=$this->Parse('footer.tmpl')*]

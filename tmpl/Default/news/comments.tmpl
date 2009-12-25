@@ -1,0 +1,44 @@
+[*=$this->Parse('header.tmpl')*]
+
+<div>
+
+  <div class="title">[*=$NEW['title']*]</div>
+  [<a href="index.php?nid=[*=$NEW['id']*]&amp;[*=SID*]">К новости</a>]<hr />
+
+  [*FOREACH($COMMS as $COMM):*]
+    <a href="/info.php?uid=[*=$COMM['uid']*]&amp;[*=SID*]">[*=$COMM['login']*]</a>
+    <small>[[*=$COMM['time']*]]</small>
+    <div class="base">[*=$COMM['msg']*]</div>
+    [*IF(1<$USER['state']):*]
+      <small>[<a href="delcomm.php?cid=[*=$COMM['id']*]&amp;[*=SID*]">удалить</a>]</small>
+    [*ENDIF*]
+    <hr />
+  [*ENDFOREACH*]
+
+  [*IF(!$COMMS):*]
+    <div class="base">Нeт кoммeнтapиев</div><hr />
+  [*ENDIF*]
+
+  [*IF(3!=$USER['id'] OR $ALLOWGUESTS):*]
+    <form action="addcomm.php?[*=SID*]" method="post">
+    <fieldset style="text-align: center">
+     <small class="alt">Комментировать:</small><br />
+     <input type="text" name="comm" /><br />
+     [*IF(3==$USER['id']):*]
+       <small>[*=$USER['login']*], введите код с картинки:</small><br />
+       <img src="/ico/_misc/captcha.php?[*=SID*]" alt="code" /><br />
+       <input type="text" size="5" name="code" /><br />
+     [*ENDIF*]
+     <input type="hidden" name="nid" value="[*=$NEW['id']*]" />
+     <input type="submit" value="Добавить" />
+    </fieldset>
+    </form>
+  [*ENDIF*]
+
+  [<a href="index.php?[*=SID*]">К новостям</a>]<br />
+  [<a href="/?[*=SID*]">На главную</a>]
+  
+
+</div>
+
+[*=$this->Parse('footer.tmpl')*]

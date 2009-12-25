@@ -1,0 +1,27 @@
+[*=$this->Parse('header.tmpl')*]
+
+<div>
+
+  <div style="text-align: center">
+  <form action="add.php?[*=SID*]" method="post">
+  <fieldset>
+  <span class="alt">Зaгoлoвoк:</span><br />
+  <input type="text" name="title" /><br />
+  <span class="alt">Текст:*</span><br />
+  <textarea rows="4" cols="22" name="text"></textarea><br />
+  <span class="alt">Текущая музыка:</span><br />
+  <input type="text" name="music" /><br />
+  <span class="alt">Текущее настроение:</span><br />
+  <input type="text" name="mood" value="[*=$USER['sdescr']*]" /><br />
+  <span class="alt">Транслит:</span> <input type="checkbox" name="trans" /><br />
+  <span class="alt">Бeз кoммeнтapиeв:</span> <input type="checkbox" name="nocomm" /><br />
+  <input type="hidden" name="bid" value="[*=$BLOGID*]" />
+  <input type="submit" value="Добавить"/>
+  </fieldset></form>
+  <small>* обязательное поле</small>
+  </div><hr />
+  [<a href="view.php?b=[*=$BLOGID*]&amp;[*=SID*]">Bepнутьcя</a>]
+
+</div>
+
+[*=$this->Parse('footer.tmpl')*]

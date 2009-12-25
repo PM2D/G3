@@ -1,0 +1,33 @@
+[*=$this->Parse('header.tmpl')*]
+
+<div style="text-align: center">
+
+  [*IF($ABOUT):*]
+   <div class="base">
+    <div class="title"><img src="/ico/[*=$USER['icons']*]/info.gif" alt="i" /></div>
+    [*=$ABOUT*]
+   </div><hr />
+  [*ENDIF*]
+
+  <div class="title">Загрузка файла</div>
+  <form enctype="multipart/form-data" action="upload.php?c=[*=$CATID*]&amp;[*=SID*]" method="post">
+   <fieldset>
+   <span class="alt">Выберите файл:</span><br />
+   <input type="hidden" name="MAX_FILE_SIZE" value="[*=$MAXBYTES*]" />
+   <input name="userfile" type="file" /><br />
+   <span class="alt">Описание:</span><br />
+   <textarea name="about" rows="3" cols="22"></textarea><br />
+   [*IF($FROM):*]
+     <input type="hidden" name="from" value="[*=$FROM*]" />
+   [*ENDIF*]
+   <input type="submit" value="Зaгpузить" />
+   </fieldset>
+  </form><hr />
+  <small class="alt">Примечание:</small><small><br />
+  Размер файла не должен превышать [*=$MAXKB*],<br />
+  разрешено загружать только файлы с расширением [*=$ALLOWED*]</small><hr />
+  [<a href="/?[*=SID*]">Ha глaвную</a>]
+
+</div>
+
+[*=$this->Parse('footer.tmpl')*]

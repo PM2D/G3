@@ -1,0 +1,22 @@
+[*=$this->Parse('header.tmpl')*]
+
+<div>
+
+  <div class="title">Настройки новостей</div>
+  
+  <form action="admin.php?mod=newsopts&amp;[*=SID*]" method="post">
+  <fieldset>
+
+  Разрешить гостям комментировать новости:
+  <input type="checkbox" name="guests" [* if($GUESTS) echo('checked="checked"') *] /><br />
+
+  <input type="submit" name="do" value="Сохранить" />
+  </fieldset>
+  </form>
+  
+  [<a href="admin.php?[*=SID*]">B aдминку</a>]<br />
+  [<a href="/?[*=SID*]">Ha глaвную</a>]
+
+</div>
+
+[*=$this->Parse('footer.tmpl')*]

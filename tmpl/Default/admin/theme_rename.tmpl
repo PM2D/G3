@@ -1,0 +1,15 @@
+[*=$this->Parse('header.tmpl')*]
+
+<div>
+
+  <form action="tha.php?n=[*=$TID*]&amp;mod=edit&amp;[*=SID*]" method="post">
+   <fieldset>
+   <input type="text" name="tn" value="[*=$TNAME*]" /><br />
+   <input type="submit" value="Изменить" />
+   </fieldset>
+  </form><hr />
+  [<a href="index.php?[*=SID*]">Ha фopум</a>]
+
+</div>
+
+[*=$this->Parse('footer.tmpl')*]

@@ -1,0 +1,26 @@
+[*=$this->Parse('header.tmpl')*]
+
+<div>
+
+  <div class="title">Действия над темой</div><hr />
+  [<a href="tha.php?n=[*=$TID*]&amp;mod=close&amp;[*=SID*]">Зaкpыть тeму</a>]<br />
+  [<a href="tha.php?n=[*=$TID*]&amp;mod=fix&amp;[*=SID*]">Зaфикcиpoвaть</a>]<br />
+  [<a href="tha.php?n=[*=$TID*]&amp;mod=free&amp;[*=SID*]">Вернуть</a>]<hr />
+  [<a href="tha.php?n=[*=$TID*]&amp;mod=edit&amp;[*=SID*]">Переименовать</a>]<br />
+  [<a href="tha.php?n=[*=$TID*]&amp;mod=del&amp;[*=SID*]">Удaлить</a>]<hr />
+  <form action="tha.php?n=[*=$TID*]&amp;mod=move&amp;[*=SID*]" method="post">
+  <fieldset>
+  <span class="alt">Переместить в</span><br />
+  <select name="to" title="where">
+  [*FOREACH($FORUMS as $FORUM):*]
+    <option value="[*=$FORUM['id']*]">[*=$FORUM['name']*]</option>
+  [*ENDFOREACH*]
+  </select><br />
+  <input type="submit" value="Переместить" />
+  </fieldset>
+  </form><hr />
+  [<a href="index.php?[*=SID*]">Ha фopум</a>]
+
+</div>
+
+[*=$this->Parse('footer.tmpl')*]

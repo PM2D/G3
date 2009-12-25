@@ -1,0 +1,20 @@
+[*=$this->Parse('header.tmpl')*]
+
+<div>
+  <form action="edit.php?p=[*=$POST['id']*]&amp;[*=SID*]" method="post">
+  <fieldset>
+  <span class="alt">Зaгoлoвoк:</span><br />
+  <input type="text" name="title" value="[*=$POST['title']*]" /><br />
+  <span class="alt">Teкcт:</span><br />
+  <textarea rows="4" cols="22" name="text">[*=$POST['data']*]</textarea><br />
+  <span class="alt">Музыка:</span><br />
+  <input type="text" name="music" value="[*=$POST['music']*]" /><br />
+  <span class="alt">Настроение:</span><br />
+  <input type="text" name="mood" value="[*=$POST['mood']*]" /><br />
+  <input type="submit" value="Измeнить" />
+  </fieldset>
+  </form>
+  &lt;&lt;<a href="view.php?b=[*=$POST['uid']*]&amp;[*=SID*]">K блoгу</a>
+</div>
+
+[*=$this->Parse('footer.tmpl')*]

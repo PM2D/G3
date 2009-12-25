@@ -1,0 +1,51 @@
+[*=$this->Parse('header.tmpl')*]
+
+<div>
+
+<img src="/ico/[*=$USER['icons']*]/news.gif" alt="&gt;" />
+
+[*=$NEW['time']*] <small class="alt">(added by [*=$NEW['login']*])</small>
+<div class="base">
+<div class="title">[*=$NEW['title']*]</div>
+[*=$NEW['text']*]
+<div class="frame" style="text-align: center">
+<small>
+[*IF(1<$USER['state']):*]
+  [<a href="edit.php?nid=[*=$NEW['id']*]&amp;[*=SID*]">изменить</a> -
+  <a href="del.php?nid=[*=$NEW['id']*]&amp;[*=SID*]">удалить</a>]<br />
+[*ENDIF*]
+[*IF($NEW['tags']):*]
+  <span class="alt">Метки:</span>
+  [*FOREACH($NEW['tags'] as $TAG):*]
+    <a href="index.php?t=[*=$TAG*]&amp;[*=SID*]">[*=$TAG*]</a>
+  [*ENDFOREACH*]
+  <br />
+[*ENDIF*]
+<span class="alt">Оценка:</span>
+<img src="/ico/[*=$USER['icons']*]/rating[*=$NEW['rating']['avg']*].gif" alt="[*=$NEW['rating']['avg']*]" /><br />
+[*IF($NEW['rating']['rateable']):*]
+  <form action="/rate.php?[*=SID*]" method="post">
+   <select name="rate">
+    <option value="5">отлично</option>
+    <option value="4">хорошо</option>
+    <option value="3">средне</option>
+    <option value="2">плохо</option>
+    <option value="1">ужасно</option>
+   </select>
+   <input type="hidden" name="key" value="[*=$USER['ratekey']*]" />
+   <input type="hidden" name="back" value="/news/index.php?nid=[*=$NEW['id']*]&amp;[*=SID*]" />
+   <input type="submit" value="оценить" />
+  </form>
+[*ENDIF*]
+<hr /><a href="comments.php?nid=[*=$NEW['id']*]&amp;[*=SID*]">Комментарии ([*=$NEW['comms']*])</a>
+</small>
+</div>
+</div>
+
+<hr />
+[<a href="index.php?[*=SID*]">К новостям</a>]<br />
+[<a href="/?[*=SID*]">На главную</a>]
+
+</div>
+
+[*=$this->Parse('footer.tmpl')*]

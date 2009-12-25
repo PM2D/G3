@@ -1,0 +1,38 @@
+[*=$this->Parse('header.tmpl')*]
+
+<div style="text-align: center">
+
+<div class="title">Загрузка через браузер</div>
+<form enctype="multipart/form-data" action="upload.php?[*=SID*]" method="post">
+<fieldset>
+<span class="alt">Выберите файл:</span><br />
+<input type="hidden" name="MAX_FILE_SIZE" value="[*=$MAXBYTES*]" />
+<input name="userfile" type="file" /><br />
+<span class="alt">Заголовок:</span><br />
+<input type="text" maxlength="230" name="title" /><br />
+<span class="alt">Описание:</span><br />
+<textarea name="about" rows="3" cols="20"></textarea><br />
+<input type="submit" name="do" value="Зaгpузить" />
+</fieldset>
+</form><hr />
+[*IF($ALLOWURLFOPEN):*]
+  <div class="title">Загрузка по URL</div>
+  <form action="upload.php?[*=SID*]" method="post">
+  <fieldset>
+  <span class="alt">URL файла:</span><br />
+  <input type="text" name="url" value="http://" /><br />
+  <span class="alt">Haзвaниe:</span><br />
+  <input type="text" maxlength="230" name="title" /><br />
+  <span class="alt">Описание:</span><br />
+  <textarea name="about" rows="3" cols="20"></textarea><br />
+  <input type="submit" name="import" value="Загрузить" />
+  </fieldset>
+  </form><hr />
+[*ENDIF*]
+<small>Примечание: размер файла не должен превышать [*=$MAXKB*],<br />
+разрешено загружать только файлы формата [*=$ALLOWED*]</small><hr />
+[<a href="/?[*=SID*]">Ha глaвную</a>]
+
+</div>
+
+[*=$this->Parse('footer.tmpl')*]

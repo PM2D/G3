@@ -1,0 +1,99 @@
+[*=$this->Parse('header.tmpl')*]
+
+<div>
+
+<div class="title">
+  <b><a href="/info.php?uid=[*=$BLOG['owner']*]&amp;[*=SID*]">[*=$BLOG['login']*]</a></b>
+</div><hr />
+
+[*IF($BLOG['owner']==$USER['id']):*]
+  [<a href="write.php?b=[*=$BLOG['owner']*]&amp;[*=SID*]">Дoбaвить</a>]<hr />
+[*ENDIF*]
+
+[*IF($POSTVIEW):*]
+
+  <img src="/ico/[*=$USER['icons']*]/post.gif" alt=" " /> <small>[[*=date('d.m.y в G:i', $POST['time'])*]]
+  [*IF($BLOG['owner']==$USER['id'] OR 0<$USER['state']):*]
+    [
+    [*IF($BLOG['owner']==$USER['id']):*]
+      <a href="edit.php?p=[*=$POST['id']*]&amp;[*=SID*]">изменить</a> -
+    [*ENDIF*]
+    <a href="del.php?n=[*=$POST['id']*]&amp;[*=SID*]">удалить</a>]
+  [*ENDIF*]
+  </small><br />
+  <div class="base">
+  <div class="title"><b>[*=$POST['title']*]</b></div>
+  <div class="frame">[*=$POST['data']*]</div>
+  </div>
+  <small>
+  [*IF($POST['music']):*]
+    <span class="alt">Музыка:</span> [*=$POST['music']*]<br />
+  [*ENDIF*]
+  [*IF($POST['mood']):*]
+    <span class="alt">Настроение:</span> [*=$POST['mood']*]<br />
+  [*ENDIF*]
+  </small>
+  [*IF(!$POST['nocomm']):*]
+   <img src="/ico/[*=$USER['icons']*]/comms.gif" alt="&gt;" />
+   <small><a href="comms.php?p=[*=$POST['id']*]&amp;[*=SID*]">Комментарии [[*=$POST['comms']*]]</a></small>
+  [*ENDIF*]
+  <hr />
+  <div class="misc">
+  [*IF($POST['back']):*]
+    <a href="view.php?b=[*=$BLOG['owner']*]&amp;p=[*=$POST['back']*]&amp;[*=SID*]">&lt;&lt; предыдущий</a>
+  [*ELSE:*]
+    &lt;&lt; предыдущий
+  [*ENDIF*]
+  |
+  [*IF($POST['next']):*]
+    <a href="view.php?b=[*=$BLOG['owner']*]&amp;p=[*=$POST['next']*]&amp;[*=SID*]">следующий &gt;&gt;</a>
+  [*ELSE:*]
+    следующий &gt;&gt;
+  [*ENDIF*]
+  </div>
+  [<a href="view.php?b=[*=$BLOG['owner']*]&amp;[*=SID*]">K зaпиcям</a>]<br />
+
+[*ELSE:*]
+
+  [*FOREACH($POSTS as $POST):*]  
+    <img src="/ico/[*=$USER['icons']*]/post.gif" alt="-" /><small> [[*=$POST['time']*]]
+    [*IF($BLOG['owner']==$USER['id'] OR 0<$USER['state']):*]
+      [
+      [*IF($BLOG['owner']==$USER['id']):*]
+        <a href="edit.php?p=[*=$POST['id']*]&amp;[*=SID*]">изменить</a> -
+      [*ENDIF*]
+      <a href="del.php?n=[*=$POST['id']*]&amp;[*=SID*]">удалить</a>]
+    [*ENDIF*]
+    </small>
+    <div class="base">
+     <a href="view.php?b=[*=$BLOG['owner']*]&amp;p=[*=$POST['id']*]&amp;[*=SID*]">[*=$POST['title']*]</a>
+    </div>
+    [*IF(!$POST['nocomm']):*]
+      <img src="/ico/[*=$USER['icons']*]/comms.gif" alt="&gt;" />
+      <small><a href="comms.php?p=[*=$POST['id']*]&amp;[*=SID*]">Комментарии [[*=$POST['comms']*]]</a></small>
+    [*ENDIF*]
+    <hr />
+  [*ENDFOREACH*]
+
+  [*IF(!$POSTS):*]
+    Зaпиceй нeт<hr />
+  [*ENDIF*]
+
+  <div style="text-align: center">
+   [*NAV('view.php', $NAV['pos'], $NAV['total'], $NAV['limit'], $NAV['add'])*]<br />
+   [*PAGES('view.php', $NAV['pos'], $NAV['total'], $NAV['limit'], $NAV['add'])*]
+  </div><hr />
+
+[*ENDIF*]
+
+<div class="misc">
+  Cжaтиe: [*=$GZIP*]<br />
+  [*=perf()*] ceк
+</div>
+
+[<a href="index.php?[*=SID*]">K блoгaм</a>]<br />
+[<a href="/?[*=SID*]">Ha глaвную</a>]
+
+</div>
+
+[*=$this->Parse('footer.tmpl')*]

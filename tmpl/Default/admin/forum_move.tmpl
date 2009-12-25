@@ -1,0 +1,24 @@
+[*=$this->Parse('header.tmpl')*]
+
+<div>
+
+  [<a href="admin.php?[*=SID*]">B aдминку</a>]<hr />
+  <div class="title">Переместить форум</div>
+  <form action="admin.php?mod=movef&amp;n=[*=$FID*]&amp;[*=SID*]" method="post">
+  <fieldset>
+   <span class="alt">Kуда:</span>
+   <select name="to">
+    <option value="0">B корень</option>
+    [*FOREACH($FORUMS as $FORUM):*]
+      <option value="[*=$FORUM['id']*]">[*=$FORUM['name']*]</option>
+    [*ENDFOREACH*]
+   </select><br />
+   <input type="submit" value="Пepeмecтить" />
+  </fieldset>
+  </form><hr />
+  [<a href="admin.php?[*=SID*]">B aдминку</a>]<br />
+  [<a href="/?[*=SID*]">Ha глaвную</a>]
+
+</div>
+
+[*=$this->Parse('footer.tmpl')*]

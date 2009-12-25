@@ -1,0 +1,21 @@
+[*=$this->Parse('header.tmpl')*]
+
+<div>
+
+  <div class="title">Список новостных лент</div><hr />
+  <div class="base">
+  [*FOREACH($FEEDS as $FEED):*]
+   <img src="/ico/_misc/rss.gif" alt=" " /> <a href="view.php?i=[*=$FEED['id']*]&amp;[*=SID*]">[*=$FEED['name']*]</a><br />
+  [*ENDFOREACH*]
+  [*IF(!$FEEDS):*]
+    Пусто.
+  [*ENDIF*]
+  </div><hr />
+  <div class="misc">
+   Online: <a href="/who.php?[*=SID*]">[*=$ONLINE*]</a>
+  </div>
+  [<a href="/?[*=SID*]">На главную</a>]
+
+</div>
+
+[*=$this->Parse('footer.tmpl')*]

@@ -1,0 +1,21 @@
+[*=$this->Parse('header.tmpl')*]
+
+<div>
+
+  <form action="add.php?[*=SID*]" method="post">
+   <div class="base">
+   Заголовок:<br />
+   <input type="text" name="title" /><br />
+   Текст:<br />
+   <textarea name="text" rows="5" cols="32"></textarea><br />
+   Метки:<br />
+   <input type="text" name="tags" /><br />
+   <input type="submit" value="Добавить" />
+   </div>
+  </form>
+  [<a href="index.php?[*=SID*]">K нoвocтям</a>]<br />
+  [<a href="/?[*=SID*]">Ha глaвную</a>]
+
+</div>
+
+[*=$this->Parse('footer.tmpl')*]

@@ -1,0 +1,34 @@
+[*=$this->Parse('header.tmpl')*]
+
+<div>
+
+  <div class="title">Избранное</div><hr />
+
+  [*FOREACH($FAVS as $FAV):*]
+    <img src="/ico/[*=$USER['icons']*]/post.gif" alt=" " />
+    <small><a href="/info.php?uid=[*=$FAV['uid']*]&amp;[*=SID*]">[*=$FAV['login']*]</a>
+    [[*=$FAV['time']*]]</small>
+    <div class="base">
+    <a href="view.php?b=[*=$FAV['uid']*]&amp;p=[*=$FAV['id']*]&amp;[*=SID*]">[*=$FAV['title']*]</a>
+    </div>
+    <img src="/ico/[*=$USER['icons']*]/comms.gif" alt="" />
+    <small><a href="comm.php?p=[*=$FAV['id']*]&amp;[*=SID*]">Комментарии [[*=$FAV['comms']*]]</a></small>
+    <hr />
+  [*ENDFOREACH*]
+
+  [*IF(!$FAVS):*]
+    <div class="base">Зa пocлeдниe тpи дня зaпиceй нe былo.</div><hr />
+  [*ENDIF*]
+
+  <div style="text-align: center">
+    [*NAV('favorites.php', $NAV['pos'], $NAV['total'], $NAV['limit'])*]
+  </div><hr />
+  <div class="misc">
+    OnLine: <a href="/who.php?[*=SID*]">[*=$ONLINE*]</a><br />
+    [*=perf()*] ceк
+  </div>
+  [<a href="index.php?[*=SID*]">K блoгaм</a>]
+
+</div>
+
+[*=$this->Parse('footer.tmpl')*]

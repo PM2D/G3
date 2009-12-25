@@ -1,0 +1,13 @@
+[*=$this->Parse('header.tmpl')*]
+
+<div>
+
+  <form action="admin.php?mod=editroom&amp;r=[*=$ROOM['id']*]&amp;[*=SID*]" method="post">
+   <input type="text" name="nr" value="[*=$ROOM['name']*]" /><br />
+   <input type="submit" value="Изменить" />
+  </form><hr />
+  [<a href="/chat/index.php?[*=SID*]">В чат</a>]
+
+</div>
+
+[*=$this->Parse('footer.tmpl')*]

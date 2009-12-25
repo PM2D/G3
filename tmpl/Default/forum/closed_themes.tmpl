@@ -1,0 +1,46 @@
+[*=$this->Parse('header.tmpl')*]
+
+<div>
+
+[*FOREACH($THEMES as $THEME):*]
+
+  <div class="base">
+   <div class="title">
+    <img src="/ico/[*=$USER['icons']*]/closed.gif" alt="x" />
+    <a href="view.php?t=[*=$THEME['id']*]&amp;[*=SID*]">[*=$THEME['name']*]</a> [[*=$THEME['count']*]]
+    <a href="view.php?t=[*=$THEME['id']*]&amp;getlast&amp;[*=SID*]">&raquo;</a>
+    [*IF(0<$USER['state']):*]
+     <a href="tha.php?n=[*=$THEME['id']*]&amp;[*=SID*]">*</a>
+    [*ENDIF*]
+   </div>
+   <div class="frame"><small>
+    <i>Последнее сообщение от<br />
+    <a href="/info.php?uid=[*=$THEME['lastuid']*]&amp;[*=SID*]">[*=$THEME['lastuser']*]</a><br />
+   [*=$THEME['time']*]</i>
+   </small></div>
+  </div><br />
+
+[*ENDFOREACH*]
+
+[*IF(!$THEMES):*]
+  <div style="text-align: center">Пусто.</div>
+[*ENDIF*]
+
+<hr />
+<div style="text-align: center">
+  [*NAV('closed.php', $NAV['pos'], $NAV['total'], $NAV['limit'])*]<br />
+  [*PAGES('closed.php', $NAV['pos'], $NAV['total'], $NAV['limit'])*]
+</div><hr />
+
+[<a href="index.php?[*=SID*]">K фopумaм</a>]<br />
+
+<div class="misc">
+  OnLine: <a href="/who.php?[*=SID*]">[*=$ONLINE*]</a><br />
+  [*=perf()*] ceк
+</div>
+
+[<a href="/?[*=SID*]">Ha глaвную</a>]
+
+</div>
+
+[*=$this->Parse('footer.tmpl')*]

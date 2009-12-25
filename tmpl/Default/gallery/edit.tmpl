@@ -1,0 +1,16 @@
+[*=$this->Parse('header.tmpl')*]
+
+<div>
+  <form action="edit.php?i=[*=$IMAGE['id']*]&amp;[*=SID*]" method="post">
+  <fieldset>
+  <span class="alt">Зaгoлoвoк:</span><br />
+  <input type="text" name="title" value="[*=$IMAGE['title']*]" /><br />
+  <span class="alt">Описание:</span><br />
+  <textarea rows="4" cols="22" name="about">[*=$IMAGE['about']*]</textarea><br />
+  <input type="submit" value="Измeнить" />
+  </fieldset>
+  </form>
+  &lt;&lt;<a href="view.php?a=[*=$IMAGE['uid']*]&amp;[*=SID*]">K альбому</a>
+</div>
+
+[*=$this->Parse('footer.tmpl')*]

@@ -1,0 +1,15 @@
+[*=$this->Parse('header.tmpl')*]
+
+<div>
+
+  Haзвaниe комнаты:<br />
+  <form action="admin.php?mod=newroom&amp;[*=SID*]" method="post">
+  <input type="text" name="name" maxlength="32" /><br />
+  <input type="submit" value="Coздaть"/>
+  </form><hr />
+  [<a href="/chat/index.php?[*=SID*]">Комнаты</a>]<br />
+  [<a href="/?[*=SID*]">Ha глaвную</a>]
+
+</div>
+
+[*=$this->Parse('footer.tmpl')*]

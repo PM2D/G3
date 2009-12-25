@@ -1,0 +1,22 @@
+[*=$this->Parse('header.tmpl')*]
+
+<div>
+
+  <div class="title">Настройки чата</div>
+  
+  <form action="admin.php?mod=chatopts&amp;[*=SID*]" method="post">
+  <fieldset>
+
+  Разрешить гостям писать в чате:
+  <input type="checkbox" name="guests" [* if($GUESTS) echo('checked="checked"') *] /><br />
+
+  <input type="submit" name="do" value="Сохранить" />
+  </fieldset>
+  </form>
+  
+  [<a href="admin.php?[*=SID*]">B aдминку</a>]<br />
+  [<a href="/?[*=SID*]">Ha глaвную</a>]
+
+</div>
+
+[*=$this->Parse('footer.tmpl')*]

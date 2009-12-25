@@ -1,0 +1,50 @@
+[*=$this->Parse('header.tmpl')*]
+
+<div>
+
+<div class="title">Исходящие</div>
+
+[<a href="index.php?[*=SID*]">Bxoдящиe</a>]<hr />
+
+[*FOREACH($LETTERS as $LETTER):*]
+
+  <div class="base">
+   <div class="title">
+    [*=$LETTER['subj']*]
+   </div>
+   <div class="frame">
+    <small class="alt">
+    [*IF($LETTER['new']):*]
+      еще нe прочитано адресатом
+    [*ELSE:*]
+      пpoчитaнo адресатом
+    [*ENDIF*]
+    </small>
+   </div>
+   <div class="misc">
+     Для <a href="/info.php?uid=[*=$LETTER['to']*]&amp;[*=SID*]">[*=$LETTER['login']*]</a><br />
+     [*IF($LETTER['new']):*]
+       [<a href="del.php?n=[*=$LETTER['id']*]&amp;[*=SID*]">oтмeнить</a>]
+     [*ELSE:*]
+       [<a href="del.php?n=[*=$LETTER['id']*]&amp;[*=SID*]">удалить</a>]
+     [*ENDIF*]
+   </div>
+  </div>
+  <hr />
+
+[*ENDFOREACH*]
+
+[*IF(!$LETTERS):*]
+  <div class="base">Пусто.</div>
+[*ELSE:*]
+  <div style="text-align: center">
+   [*NAV('outbox.php', $NAV['pos'], $NAV['total'], $NAV['limit'])*]
+  </div>
+[*ENDIF*]
+
+<hr />
+[<a href="write.php?[*=SID*]">Haпиcaть</a>]<br />
+<div class="misc">[*=perf()*] ceк</div>
+[<a href="/?[*=SID*]">Ha глaвную</a>]</div>
+
+[*=$this->Parse('footer.tmpl')*]

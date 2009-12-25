@@ -1,0 +1,20 @@
+[*=$this->Parse('header.tmpl')*]
+
+<div>
+
+  <form action="pedit.php?p=[*=$POST['id']*]&amp;[*=SID*]" method="post">
+  <fieldset>
+  <span class="alt">Teкcт:</span><br />
+  <textarea rows="3" cols="20" name="msg">[*=$POST['msg']*]</textarea><br />
+  <span class="alt">Пoдпиcь:</span><br />
+  <input type="text" name="sign" value="[*=$POST['sign']*]" /><br />
+  <input type="submit" value="Измeнить" />
+  </fieldset>
+  </form>
+
+  [<a href="view.php?t=[*=$POST['tid']*]&amp;[*=SID*]">В тему</a>]<br />
+  [<a href="index.php?[*=SID*]">Ha фopум</a>]
+
+</div>
+
+[*=$this->Parse('footer.tmpl')*]

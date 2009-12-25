@@ -1,0 +1,65 @@
+[*=$this->Parse('header.tmpl')*]
+
+<div>
+
+<div style="text-align: center;font-size: smaller">[*=date('d.m.y G:i')*]</div>
+
+[*IF(3!=$USER['id'] AND $NEWCOMMS):*]
+  <hr /><span class="alt">Hoвыe кoммeнтapии:</span><br />
+  [*FOREACH($NEWCOMMS as $COMM):*]
+   <img src="/ico/[*=$USER['icons']*]/comm.gif" alt="+" />
+   <a href="comms.php?f=[*=$COMM['fid']*]&amp;[*=SID*]">[*=$COMM['title']*]</a> [*=$COMM['count']*]<br />
+  [*ENDFOREACH*]
+  <hr />
+[*ENDIF*]
+
+
+[*IF(1<$USER['state']):*]
+
+  [<a href="new.php?[*=SID*]">Coздaть категорию</a>]<br />
+
+[*ENDIF*]
+
+  [<a href="search.php?[*=SID*]">Поиск файлов</a>]<br />
+  [<a href="top_comms.php?[*=SID*]">Самые комментируемые</a>]<br />
+  [<a href="top_dl.php?[*=SID*]">Самые скачиваемые</a>]
+  [*IF(3!=$USER['id']):*]
+    <br />[<a href="userfiles.php?[*=SID*]">Мои файлы</a>]
+  [*ENDIF*]
+  <hr />
+
+[*FOREACH($CATS as $CAT):*]
+
+  <div class="base">
+   <div class="title">
+    <img src="/ico/[*=$USER['icons']*]/dir.gif" alt="&gt;" />
+    <a href="view.php?c=[*=$CAT['id']*]&amp;[*=SID*]">[*=$CAT['title']*]</a>
+   </div>
+   <div class="frame"><small>
+    Типы файлов: [*=$CAT['types']*]<br />
+    Последнее обновление [*=$CAT['time']*]
+   </small></div>
+  </div>
+  [*IF(1<$USER['state']):*]
+    <small>[<a href="destroy.php?c=[*=$CAT['id']*]&amp;[*=SID*]">удалить</a> -
+    <a href="catedit.php?c=[*=$CAT['id']*]&amp;[*=SID*]">изменить</a>]</small>
+  [*ENDIF*]
+  <hr />
+
+[*ENDFOREACH*]
+
+[*IF(!$CATS):*]
+  <div class="base">Нет категорий.</div><hr />
+[*ENDIF*]
+
+<div class="misc">
+  OnLine: <a href="/who.php?[*=SID*]">[*=$ONLINE*]</a><br />
+  Cжaтиe: [*=$GZIP*]<br />
+  [*=perf()*] ceк
+</div>
+
+[<a href="/?[*=SID*]">Ha глaвную</a>]
+
+</div>
+
+[*=$this->Parse('footer.tmpl')*]

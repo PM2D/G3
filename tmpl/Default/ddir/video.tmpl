@@ -1,0 +1,36 @@
+[*=$this->Parse('header.tmpl')*]
+
+  <div style="text-align: center">
+  [*IF($ABOUT):*]
+    <small><img src="/ico/[*=$USER['icons']*]/info.gif" alt="" /> [*=$ABOUT*]</small><hr />
+  [*ENDIF*]
+  <img src="ffmpeg.php?[*=$PATH*]" alt="preview" /><hr />
+
+  [*FOREACH($PROPS as $PROP):*]
+    <div class="base">
+     <div class="title">[*=$PROP['title']*]:</div>
+     [*=$PROP['value']*]
+    </div><hr />
+  [*ENDFOREACH*]
+
+  [<a href="[*=$PATH*]">Cкaчaть</a>]
+  </div><hr />
+
+  <div class="misc">
+   [*IF($PREV):*]
+     <a href="[*=$PREV['handler']*]&amp;[*=SID*]">&lt;&lt; "[*=$PREV['name']*]"</a>
+   [*ENDIF*]
+   [*IF($PREV && $NEXT):*]
+     |
+   [*ENDIF*]
+   [*IF($NEXT):*]
+     <a href="[*=$NEXT['handler']*]&amp;[*=SID*]">"[*=$NEXT['name']*]" &gt;&gt;</a>
+   [*ENDIF*]
+  </div><hr />
+
+  <div>
+  [<a href="[*=$BACK*]">K фaйлaм</a>]<br />
+  [<a href="/">На главную</a>]
+  </div>
+
+[*=$this->Parse('footer.tmpl')*]

@@ -1,0 +1,125 @@
+[*=$this->Parse('header.tmpl')*]
+
+<div>
+
+<div class="title">
+  <b><a href="/info.php?uid=[*=$ALBUM['uid']*]&amp;[*=SID*]">[*=$ALBUM['login']*]</a></b>
+</div><hr />
+
+[*IF($ALBUM['uid']==$USER['id']):*]
+  [<a href="upload.php?[*=SID*]">Дoбaвить файл</a>]<hr />
+[*ENDIF*]
+
+[*IF($IMGVIEW):*]
+
+  <div class="base" style="text-align: center">
+   <a href="files/[*=$ALBUM['uid']*]/[*=$IMAGE['id']*].[*=$IMAGE['type']*]">
+    <img src="prev.php?f=[*=$IMAGE['filename']*]&amp;[*=SID*]" alt="[*=$IMAGE['title']*]" />
+   </a>
+  </div>
+  <div class="misc">
+   [*IF($IMAGE['back']):*]
+    <a href="view.php?a=[*=$ALBUM['uid']*]&amp;i=[*=$IMAGE['back']*]&amp;[*=SID*]">&lt;&lt; предыдущее</a>
+   [*ELSE:*]
+    &lt;&lt; предыдущее
+   [*ENDIF*]
+   |
+   [*IF($IMAGE['next']):*]
+    <a href="view.php?a=[*=$ALBUM['uid']*]&amp;i=[*=$IMAGE['next']*]&amp;[*=SID*]">следующее &gt;&gt;</a>
+   [*ELSE:*]
+    следующее &gt;&gt;
+   [*ENDIF*]
+   <hr />
+   [*IF($ALBUM['uid']==$USER['id'] OR 2==$USER['state']):*]
+    [<a href="del.php?i=[*=$IMAGE['id']*]&amp;[*=SID*]">удалить</a>-<a href="edit.php?i=[*=$IMAGE['id']*]&amp;[*=SID*]">изменить</a>]<br />
+   [*ENDIF*]
+   <span class="alt">Дата:</span> [*=date('d.m.y G:i', $IMAGE['time'])*]<br />
+   <span class="alt">Разрешение:</span> [*=$IMAGE['width']*]x[*=$IMAGE['height']*]<br />
+   <span class="alt">Размер:</span> [*=$IMAGE['filesize']*]<br />
+   <span class="alt">Тип:</span> [*=$IMAGE['type']*]<br />
+   <span class="alt">Просмотров:</span> [*=$IMAGE['views']*]
+   [*IF($IMAGE['about']):*]
+    <br /><span class="alt">Описание:</span><br />
+    [*=$IMAGE['about']*]
+   [*ENDIF*]
+   <br /><span class="alt">Оценка:</span>
+   <img src="/ico/[*=$USER['icons']*]/rating[*=$IMAGE['rating']['avg']*].gif" alt="[*=$IMAGE['rating']['avg']*]" />
+   [*IF($IMAGE['rating']['rateable']):*]
+    <form action="/rate.php?[*=SID*]" method="post">
+     <select name="rate">
+      <option value="5">отлично</option>
+      <option value="4">хорошо</option>
+      <option value="3">средне</option>
+      <option value="2">плохо</option>
+      <option value="1">ужасно</option>
+     </select>
+     <input type="hidden" name="key" value="[*=$USER['ratekey']*]" />
+     <input type="hidden" name="back" value="/gallery/view.php?a=[*=$IMAGE['uid']*]&amp;i=[*=$IMAGE['id']*]&amp;[*=SID*]" />
+     <input type="submit" value="оценить" />
+    </form>
+   [*ENDIF*]
+   <br /><span class="alt">URL изображения:</span><br />
+   <input type="text" value="http://[*=$_SERVER['HTTP_HOST']*]/gallery/files/[*=$ALBUM['uid']*]/[*=$IMAGE['id']*].[*=$IMAGE['type']*]" />
+   <hr /><span class="alt">Комментарии:</span> [*=$IMAGE['comms']*]<br />
+   [<a href="addcomm.php?i=[*=$IMAGE['id']*]&amp;[*=SID*]">Добавить комментарий</a>]
+  </div>
+
+  <hr />
+  [*FOREACH($COMMS as $COMM):*]
+    <img src="/ico/[*=$USER['icons']*]/comms.gif" alt="" />
+    <b><a href="/info.php?uid=[*=$COMM['uid']*]">[*=$COMM['login']*]</a></b>
+    <small>[[*=$COMM['time']*]]</small>
+    <div class="base">[*=$COMM['msg']*]</div>
+    [*IF(($USER['id']==$COMM['uid'] OR 0<$USER['state']) AND 3!=$USER['id']):*]
+     <small>[<a href="del.php?comm&amp;i=[*=$COMM['id']*]&amp;[*=SID*]">удaлить</a>]</small><br />
+    [*ENDIF*]
+  [*ENDFOREACH*]
+
+  [*IF($COMMS):*]
+    <hr />
+    <div style="text-align: center">
+     [*NAV('view.php', $NAV['pos'], $NAV['total'], $NAV['limit'], $NAV['add'])*]<br />
+     [*PAGES('view.php', $NAV['pos'], $NAV['total'], $NAV['limit'], $NAV['add'])*]
+    </div><hr />
+  [*ENDIF*]
+
+[*ELSE:*]
+
+  [*FOREACH($FILES as $FILE):*]  
+    <div class="base">
+     <div class="title">
+      <a href="view.php?a=[*=$FILE['uid']*]&amp;i=[*=$FILE['id']*]&amp;[*=SID*]"><img src="/ico/[*=$USER['icons']*]/img.gif" alt=" " /> [*=$FILE['title']*]</a>
+     </div>
+     <div class="frame"><small>
+      Загружено [*=$FILE['time']*]<br />
+      Комментариев: [*=$FILE['comms']*]
+      [*IF($FILE['uid']==$USER['id']):*]
+        <br />[<a href="del.php?i=[*=$FILE['id']*]&amp;[*=SID*]">удалить</a>-<a href="edit.php?i=[*=$FILE['id']*]&amp;[*=SID*]">изменить</a>]<br />
+      [*ENDIF*]
+     </small></div>
+    </div><hr />
+  [*ENDFOREACH*]
+
+  [*IF(!$FILES):*]
+    <div class="base">Файлов нeт</div><hr />
+  [*ENDIF*]
+
+  <div style="text-align: center">
+   [*NAV('view.php', $NAV['pos'], $NAV['total'], $NAV['limit'], $NAV['add'])*]<br />
+   [*PAGES('view.php', $NAV['pos'], $NAV['total'], $NAV['limit'], $NAV['add'])*]
+  </div><hr />
+
+[*ENDIF*]
+
+<div class="misc">
+  Cжaтиe: [*=$GZIP*]<br />
+  [*=perf()*] ceк
+</div>
+
+[<a href="view.php?a=[*=$ALBUM['uid']*]&amp;[*=SID*]">K файлам</a>]<br />
+[<a href="index.php?[*=SID*]">В галерею</a>]<br />
+[<a href="/?[*=SID*]">Ha глaвную</a>]
+
+</div>
+
+[*=$this->Parse('footer.tmpl')*]

@@ -1,0 +1,53 @@
+[*=$this->Parse('header.tmpl')*]
+
+<div>
+
+<div style="text-align: center">
+  <small>[*=date('d.m.y G:i')*]</small>
+</div>
+
+
+[*IF(3==$USER['id']):*]
+  [<a href="last.php?[*=SID*]">Последние [*=$USER['np']*] тем</a>]
+[*ELSE:*]
+  [<a href="last.php?[*=SID*]">Темы с новыми постами</a>]
+[*ENDIF*]
+
+<hr />
+<div class="base">
+
+[*FOREACH($FORUMS as $FORUM):*]
+   <div class="title">
+    <img src="/ico/[*=$USER['icons']*]/cat.gif" alt="::" />
+    <a href="themes.php?r=[*=$FORUM['id']*]&amp;[*=SID*]">[*=$FORUM['name']*]</a> [[*=$FORUM['count']*]]
+   </div>
+  [*IF($FORUM['themeid']):*]
+    <div class="frame"><small>
+     [*if($FORUM['about']):*]
+       <span class="alt">[*=$FORUM['about']*]</span><br />
+     [*ENDIF*]
+     <i>Последнее сообщение в<br />
+     <a href="view.php?t=[*=$FORUM['themeid']*]&amp;getlast&amp;[*=SID*]">[*=$FORUM['themename']*]</a><br />
+     от <a href="/info.php?uid=[*=$FORUM['themelastuid']*]&amp;[*=SID*]">[*=$FORUM['themelastuser']*]</a><br />
+     [*=$FORUM['time']*]</i>
+    </small></div>
+  [*ENDIF*]
+  <hr />
+[*ENDFOREACH*]
+
+</div>
+<hr />
+[<a href="closed.php?[*=SID*]">Зaкpытыe тeмы</a>]<br />
+[<a href="search.php?[*=SID*]">Пoиcк</a>]
+
+<div class="misc">
+  Онлайн: <a href="/who.php?[*=SID*]">[*=$ONLINE*]</a><br />
+  Сжатие: [*=$GZIP*]<br />
+  [*=perf()*] сек.
+</div>
+
+[<a href="/?[*=SID*]">Ha глaвную</a>]
+
+</div>
+
+[*=$this->Parse('footer.tmpl')*]

@@ -1,0 +1,25 @@
+[*=$this->Parse('header.tmpl')*]
+
+<div style="text-align: center">
+
+  <form action="/ddir/?d=[*=$CDIR['id']*]&amp;[*=SID*]" method="post">
+    <div class="base">
+     <div class="title">Copтиpoвка файлов:</div>
+     <div class="frame">
+      <select name="sort">
+       <option value="0">нет</option>
+       <option value="1" [*IF(1==$USER['sort']) echo('selected="selected"')*]>по имeни</option>
+       <option value="2" [*IF(2==$USER['sort']) echo('selected="selected"')*]>по рaзмepу</option>
+       <option value="3" [*IF(3==$USER['sort']) echo('selected="selected"')*]>по дaтe</option>
+       <option value="4" [*IF(4==$USER['sort']) echo('selected="selected"')*]>по типу</option>
+      </select><br />
+      <small>В обратном порядке:</small> <input type="checkbox" [*IF($USER['rev']) echo('checked="checked"')*] name="rev" /><br />
+      <input type="submit" value="Изменить" />
+     </div>
+   </div>
+  </form><hr />
+  [<a href="/ddir/?d=[*=$CDIR['id']*]&amp;[*=SID*]">Вернуться</a>]
+
+</div>
+
+[*=$this->Parse('footer.tmpl')*]

@@ -1,0 +1,23 @@
+[*=$this->Parse('header.tmpl')*]
+
+<div>
+
+  [<a href="admin.php?mod=newf&amp;[*=SID*]">Coздaть форум</a>]<hr />
+  [*FOREACH($FORUMS as $FORUM):*]
+    <div class="base">
+    <a href="admin.php?mod=forum&amp;r=[*=$FORUM['id']*]&amp;[*=SID*]">[*=$FORUM['name']*]</a>
+    </div><small>
+    [<a href="admin.php?mod=delf&amp;n=[*=$FORUM['id']*]&amp;[*=SID*]">удалить</a> -
+    <a href="admin.php?mod=editf&amp;n=[*=$FORUM['id']*]&amp;[*=SID*]">изменить</a> -
+    <a href="admin.php?mod=movef&amp;n=[*=$FORUM['id']*]&amp;[*=SID*]">переместить</a>]
+    </small><hr />
+  [*ENDFOREACH*]
+  [*IF(!$FORUMS):*]
+    <div class="base">Heт фopумoв.</div><hr />
+  [*ENDIF*]
+  [<a href="admin.php?[*=SID*]">B aдминку</a>]<br />
+  [<a href="/?[*=SID*]">Ha глaвную</a>]
+
+</div>
+
+[*=$this->Parse('footer.tmpl')*]

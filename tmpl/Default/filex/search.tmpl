@@ -1,0 +1,50 @@
+[*=$this->Parse('header.tmpl')*]
+
+<div>
+
+[*IF($VIEWRES):*]
+
+  <div class="title">Результаты поиска</div><hr />
+
+  [*FOREACH($FILES as $FILE):*]
+    <div class="base">
+     <div class="title">
+      <img src="/ico/[*=$USER['icons']*]/[*=$FILE['type']*].gif" alt=" " />
+      <a href="view.php?c=[*=$FILE['cid']*]&amp;f=[*=$FILE['id']*]&amp;[*=SID*]">[*=$FILE['title']*]</a>
+     </div>
+     <div class="frame"><small>
+      [*=$FILE['about']*]
+     </small></div>
+    </div><hr />
+  [*ENDFOREACH*]
+
+  [*IF(!$FILES):*]
+    <div class="base">Ничeгo не нaйдeнo</div><hr />
+  [*ENDIF*]
+
+  <small>[*=perf()*]</small><br />
+  [<a href="index.php?[*=SID*]">К категориям</a>]<br />
+  [<a href="/?[*=SID*]">На главную</a>]
+
+[*ELSE:*]
+
+  <form action="search.php?[*=SID*]" method="get">
+  <div class="base">
+  Bвeдитe слово для поиска:<br />
+  <input type="text" name="s" maxlength="100" /><br />
+  Тип файла:
+  <select name="type">
+   <option value="any">любой</option>
+   [*FOREACH($TYPES as $TYPE):*]
+    <option value="[*=$TYPE*]">[*=$TYPE*]</option>
+   [*ENDFOREACH*]
+  </select><br />
+  <input type="submit" value="Haйти"/>
+  </div></form><hr />
+  [<a href="index.php?[*=SID*]">Вернуться</a>]
+
+[*ENDIF*]
+
+</div>
+
+[*=$this->Parse('footer.tmpl')*]

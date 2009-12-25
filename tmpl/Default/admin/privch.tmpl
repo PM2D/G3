@@ -1,0 +1,25 @@
+[*=$this->Parse('header.tmpl')*]
+
+<div>
+
+  [<a href="admin.php?[*=SID*]">B aдминку</a>]<hr />
+
+  [*FOREACH($POSTS as $POST):*]
+    <b>[*=$POST['login']*]</b><small>[*=$POST['time']*]</small>
+    <div class="base">[*=$POST['msg']*]</div><hr />
+  [*ENDFOREACH*]
+
+  [*IF(!$POSTS):*]
+    <div class="base">Приват пуст.</div><hr />
+  [*ENDIF*]
+
+  <div style="text-align: center">
+   [*NAV('admin.php', $NAV['pos'], $NAV['total'], $NAV['limit'], $NAV['add'])*]
+  </div><hr />
+
+  [<a href="admin.php?[*=SID*]">B aдминку</a>]<br />
+  [<a href="/?[*=SID*]">Ha глaвную</a>]
+
+</div>
+
+[*=$this->Parse('footer.tmpl')*]

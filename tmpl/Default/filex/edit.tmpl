@@ -1,0 +1,16 @@
+[*=$this->Parse('header.tmpl')*]
+
+<div>
+  <form action="edit.php?f=[*=$FILE['id']*]&amp;[*=SID*]" method="post">
+  <fieldset>
+  <span class="alt">Зaгoлoвoк:</span><br />
+  <input type="text" name="title" value="[*=$FILE['title']*]" /><br />
+  <span class="alt">Описание:</span><br />
+  <textarea rows="4" cols="22" name="about">[*=$FILE['about']*]</textarea><br />
+  <input type="submit" value="Измeнить" />
+  </fieldset>
+  </form>
+  &lt;&lt;<a href="view.php?c=[*=$FILE['cid']*]&amp;[*=SID*]">В категорию</a>
+</div>
+
+[*=$this->Parse('footer.tmpl')*]

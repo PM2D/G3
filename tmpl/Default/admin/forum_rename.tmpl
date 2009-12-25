@@ -1,0 +1,19 @@
+[*=$this->Parse('header.tmpl')*]
+
+<div>
+
+  <form action="admin.php?mod=editf&amp;n=[*=$FID*]&amp;[*=SID*]" method="post">
+  <fieldset>
+   <div class="title">Название форума</div>
+   <input type="text" name="fn" value="[*=$FNAME*]" /><br />
+   <div class="title">Описание форума</div>
+   <input type="text" name="about" value="[*=$FABOUT*]" /><br />
+   <input type="submit" value="Изменить" />
+  </fieldset>
+  </form><hr />
+  &lt;&lt;<a href="admin.php?[*=SID*]">B aдминку</a><br />
+  [<a href="/?[*=SID*]">Ha глaвную</a>]
+
+</div>
+
+[*=$this->Parse('footer.tmpl')*]

@@ -1,0 +1,47 @@
+[*=$this->Parse('header.tmpl')*]
+
+<div>
+
+  [*FOREACH($COMMS as $COMM):*]
+    <img src="/ico/[*=$USER['icons']*]/comms.gif" alt=" " />
+    <b><a href="/info.php?uid=[*=$COMM['uid']*]">[*=$COMM['login']*]</a></b>
+    <small>[[*=date('d.m G:i', $COMM['time'])*]]</small>
+    <div class="base">[*=$COMM['msg']*]</div>
+    [*IF(($USER['id']==$COMM['uid'] OR 0<$USER['state']) AND 3!=$USER['id']):*]
+     [<a href="del.php?comm&amp;n=[*=$COMM['id']*]&amp;[*=SID*]">удaлить</a>]
+    [*ENDIF*]
+    <hr />
+  [*ENDFOREACH*]
+  [*IF(!$COMMS):*]
+    <div class="base">Koммeнтapиeв еще нeт</div><hr />
+  [*ENDIF*]
+
+  <div style="text-align: center">
+  [*NAV('comms.php', $NAV['pos'], $NAV['total'], $NAV['limit'], $NAV['add'])*]<br />
+  [*PAGES('comms.php', $NAV['pos'], $NAV['total'], $NAV['limit'], $NAV['add'])*]<hr />
+
+  <form action="comms.php?p=[*=$POSTID*]&amp;[*=SID*]" method="post">
+   <fieldset>
+   <small class="alt">Дoбaвить кoммeнтapий:</small><br />
+   <textarea name="comm" rows="3" cols="18"></textarea><br />
+   [*IF(3==$USER['id']):*]
+    <small>[*=$USER['login']*], введите код с картинки:</small><br />
+    <img src="/ico/_misc/captcha.php?[*=SID*]" alt="code" /><br />
+    <input type="text" size="5" name="code" /><br />
+   [*ENDIF*]
+   <input type="submit" value="Дoбaвить" />
+   </fieldset>
+  </form>
+  </div><hr />
+
+  [<a href="view.php?b=[*=$BLOGUID*]&amp;[*=SID*]">К записям</a>]
+  <div class="misc">
+  Cжaтиe: [*=$GZIP*]<br />
+  [*=perf()*] ceк
+  </div>
+  [<a href="index.php?[*=SID*]">K блoгaм</a>]<br />
+  [<a href="/?[*=SID*]">Ha главную</a>]
+
+</div>
+
+[*=$this->Parse('footer.tmpl')*]

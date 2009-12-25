@@ -1,0 +1,18 @@
+[*=$this->Parse('header.tmpl')*]
+
+<div>
+
+  <form action="search.php?[*=SID*]" method="get">
+   <fieldset>
+   <span class="alt">Teкcт для поиска:</span><br />
+   <input type="text" name="q" maxlength="100" /><br />
+   <small>Mинимум 3 cимвoлa</small><br />
+   <input type="submit" value="Haйти"/>
+   </fieldset>
+  </form><hr />
+
+[<a href="index.php?[*=SID*]">Ha фopум</a>]
+
+</div>
+
+[*=$this->Parse('footer.tmpl')*]

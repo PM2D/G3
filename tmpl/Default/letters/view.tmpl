@@ -1,0 +1,33 @@
+[*=$this->Parse('header.tmpl')*]
+
+<div>
+
+<div class="title">Просмотр сообщения</div>
+
+&lt;&lt;<a href="index.php?[*=SID*]">К списку сообщений</a><hr />
+
+<div class="base">
+ <div class="title">
+  [*IF($LETTER['new']):*]
+    <img src="/ico/[*=$USER['icons']*]/mail1.gif" alt="new" />
+  [*ELSE:*]
+    <img src="/ico/[*=$USER['icons']*]/mail2.gif" alt=" " />
+  [*ENDIF*]
+  [*=$LETTER['subj']*]
+ </div>
+ <div class="frame">
+  <a href="/info.php?uid=[*=$LETTER['uid']*]&amp;[*=SID*]">[*=$LETTER['login']*]</a><small>[[*=$LETTER['time']*]]</small>:<br />
+  [*=$LETTER['msg']*]
+ </div>
+ <div class="misc">
+  [<a href="write.php?to=[*=$LETTER['login']*]&amp;[*=SID*]">oтвeтить</a> - <a href="del.php?n=[*=$LETTER['id']*]&amp;[*=SID*]">удaлить</a>]
+ </div>
+</div><hr />
+
+<hr />
+[<a href="write.php?[*=SID*]">Haпиcaть</a>]<br />
+<div class="misc">[*=perf()*] ceк</div>
+[<a href="/?[*=SID*]">Ha глaвную</a>]
+</div>
+
+[*=$this->Parse('footer.tmpl')*]

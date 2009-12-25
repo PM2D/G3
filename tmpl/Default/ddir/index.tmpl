@@ -1,0 +1,60 @@
+[*=$this->Parse('header.tmpl')*]
+
+<div>
+
+  <div class="title" style="text-align: center">
+   <small>
+   [*FOREACH($UPDIRS as $UPDIR):*]
+     <a href="index.php?d=[*=$UPDIR['id']*]&amp;[*=SID*]">[*=$UPDIR['name']*]</a> &gt;&gt;
+   [*ENDFOREACH*]
+   <b>[*=$CDIR['name']*]</b></small>
+  </div><hr />
+
+  [*IF(0<$CDIR['did']):*]
+    <img src="/ico/[*=$USER['icons']*]/up.gif" alt=" " />
+    <b><a href="?d=[*=$CDIR['did']*]&amp;[*=SID*]">. .</a></b><hr />
+  [*ENDIF*]
+
+  [*IF($ABOUT):*]
+    <div style="text-align: center">
+     <small><img src="/ico/[*=$USER['icons']*]/info.gif" alt="" /> [*=$ABOUT*]</small>
+    </div><hr />
+  [*ENDIF*]
+
+  [*IF(1<$USER['state'] AND !$UPDIRS):*]
+    <small>[<a href="index.php?d=[*=$CDIR['id']*]&amp;rcnt&amp;[*=SID*]">обновить все счетчики</a>]</small><hr />
+  [*ENDIF*]
+
+  [*FOREACH($DIRS as $DIR):*]
+    <img src="/ico/[*=$USER['icons']*]/dir.gif" alt="dir" />
+    <a href="?d=[*=$DIR['id']*]">[*=$DIR['name']*]</a> <small>[[*=$DIR['count']*]]</small><br />
+  [*ENDFOREACH*]
+
+  [*FOREACH($FILES as $FILE):*]
+    <a href="/ddir[*=$FILE['path']*]">
+    <img src="/ico/[*=$USER['icons']*]/[*=$FILE['type']*].gif" alt="[*=$FILE['type']*]" />
+    </a>
+    <a href="[*=$FILE['handler']*]">[*=$FILE['name']*]</a> <small>[[*=$FILE['size']*]]</small><br />
+  [*ENDFOREACH*]
+
+  [*IF(!$FILES AND !$DIRS):*]
+    B дaннoй пaпкe пoкa чтo ничeгo нeт
+  [*ENDIF*]
+
+  <hr />
+
+  <div class="base" style="font-size: smaller; font-weight: bolder; text-align: center">
+    [*NAV('index.php', $NAV['pos'], $NAV['total'], $NAV['limit'], $NAV['add'])*]<br />
+    [*PAGES('index.php', $NAV['pos'], $NAV['total'], $NAV['limit'], $NAV['add'])*]
+  </div>
+
+  <div class="misc">
+    [<a href="index.php?d=[*=$CDIR['id']*]&amp;sort&amp;[*=SID*]">изменить сортировку</a>]<br />
+    Cжaтиe: [*=$GZIP*]<br />
+    [*=perf()*] cek
+  </div>
+  [<a href="/?[*=SID*]">На главную</a>]
+
+</div>
+
+[*=$this->Parse('footer.tmpl')*]

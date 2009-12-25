@@ -1,0 +1,20 @@
+[*=$this->Parse('header.tmpl')*]
+
+<div>
+
+  <div class="title">Добавление ссылки</div>
+  <form action="add.php?[*=SID*]" method="post">
+  <fieldset>
+   <span class="alt">Название</span><br />
+   <input type="text" name="name" /><br />
+   <span class="alt">URL:</span><br />
+   <input type="text" name="url" value="http://" /><br />
+   <input type="submit" value="Добавить" />
+  </fieldset>
+  </form><hr />
+
+[<a href="index.php?[*=SID*]">Haзaд</a>]
+
+</div>
+
+[*=$this->Parse('footer.tmpl')*]

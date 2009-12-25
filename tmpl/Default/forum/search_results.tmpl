@@ -1,0 +1,27 @@
+[*=$this->Parse('header.tmpl')*]
+
+<div>
+
+[*FOREACH($RESULTS as $RESULT):*]
+  Teмa: <a href="view.php?t=[*=$RESULT['tid']*]&amp;[*=SID*]">[*=$RESULT['theme']*]</a>
+  <div class="base">[*=$RESULT['msg']*]</div>
+  <hr />
+[*ENDFOREACH*]
+
+<div style="text-align: center">
+
+  [*IF(!$RESULTS):*]
+    Ничего не было найдено.<hr />
+  [*ENDIF*]
+
+  [*NAV('search.php', $NAV['pos'], $NAV['total'], $NAV['limit'], $NAV['add'])*]<br />
+  [*PAGES('search.php', $NAV['pos'], $NAV['total'], $NAV['limit'], $NAV['add'])*]
+</div><hr />
+
+[<a href="index.php?[*=SID*]">Ha фopум</a>]<br />
+[*=perf()*]<br />
+[<a href="/?[*=SID*]">Ha главную</a>]
+
+</div>
+
+[*=$this->Parse('footer.tmpl')*]

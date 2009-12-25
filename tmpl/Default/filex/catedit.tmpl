@@ -1,0 +1,22 @@
+[*=$this->Parse('header.tmpl')*]
+
+<div>
+  <form action="catedit.php?c=[*=$CAT['id']*]&amp;[*=SID*]" method="post">
+  <fieldset>
+  <span class="alt">Зaгoлoвoк:</span><br />
+  <input type="text" name="title" value="[*=$CAT['title']*]" /><br />
+  <span class="alt">Типы файлов <small>(через пробел)</small>:</span><br />
+  <input type="text" name="types" value="[*=$CAT['types']*]" /><br />
+  <span class="alt">Max размер файла <small>(байт)</small>:</span><br />
+  <input type="text" name="max" value="[*=$CAT['max']*]" /><br />
+  <span class="alt">Максимум файлов от пользователя:</span><br />
+  <input type="text" name="limit" value="[*=$CAT['limit']*]" /><br />
+  <span class="alt">Дополнительно:</span><br />
+  <input type="text" name="about" value="[*=$CAT['about']*]" /><br />
+  <input type="submit" value="Измeнить" />
+  </fieldset>
+  </form>
+  [<a href="index.php?[*=SID*]">Вернуться</a>]
+</div>
+
+[*=$this->Parse('footer.tmpl')*]

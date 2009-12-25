@@ -1,0 +1,50 @@
+[*=$this->Parse('header.tmpl')*]
+
+  <div style="text-align: center">
+
+   [*IF($TO['id']):*]
+     [*IF($TO['avatar']):*]
+       <a href="/info.php?uid=[*=$TO['id']*]&amp;[*=SID*]">
+       <img src="[*=$TO['avatar']*]" alt="[*=$TO['login']*]" />
+       </a><br />
+     [*ELSE:*]
+       [<a href="/info.php?uid=[*=$TO['id']*]&amp;[*=SID*]">[*=$TO['login']*]</a>]<br />
+     [*ENDIF*]
+   [*ENDIF*]
+
+   [*IF($ATTACH_CATID && !$ATTACHED):*]
+     <small>[<a href="/filex/upload.php?c=[*=$ATTACH_CATID*]&amp;from=/forum/write.php?t=[*=$TID*]&amp;[*=SID*]">прикрепить файл</a>]</small>
+   [*ELSEIF($ATTACHED):*]
+     <div class="frame">
+      <small class="alt">Прикрепленный файл:</small><br />
+      <small><img src="/ico/[*=$USER['icons']*]/[*=$ATTACHED['type']*].gif" alt=" " /> [*=$ATTACHED['title']*] ([*=$ATTACHED['size']*])</small>
+     </div><br />
+   [*ENDIF*]
+
+   <form action="add.php?[*=SID*]" method="post">
+    <fieldset>
+    <span class="alt">Текст сообщения:</span><br />
+    <textarea rows="3" cols="32" name="text">[*IF($TO['id']) echo $TO['login'].',&nbsp;'; *]</textarea><br />
+    <span class="alt">Подпись:</span><br />
+    <input type="text" name="sign" maxlength="127" /><br />
+    <span class="alt">Транслит:</span> <input type="checkbox" name="trans" /><br />
+    [*IF(3==$USER['id']):*]
+     <small>[*=$USER['login']*], введите код с картинки:</small><br />
+     <img src="/ico/_misc/captcha.php?[*=SID*]" alt="code" /><br />
+     <input type="text" size="5" name="code" /><br />
+    [*ENDIF*]
+    [*IF($ATTACHED):*]
+      <input type="hidden" name="attid" value="[*=$ATTACHED['id']*]" />
+    [*ENDIF*]
+    <input type="hidden" name="tid" value="[*=$TID*]" />
+    <input type="submit" value="Добавить"/>
+    </fieldset>
+   </form>
+
+  </div>
+
+  <div><hr />
+  [<a href="view.php?t=[*=$TID*]&amp;[*=SID*]">Bepнутьcя</a>]
+  </div>
+
+[*=$this->Parse('footer.tmpl')*]

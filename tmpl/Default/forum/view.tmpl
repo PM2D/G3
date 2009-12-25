@@ -1,0 +1,82 @@
+[*=$this->Parse('header.tmpl')*]
+
+<div>
+
+<div class="title">
+  <a href="index.php?[*=SID*]">Форум</a> &gt;
+  [*IF($SUBFORUM):*]
+   <a href="themes.php?r=[*=$SUBFORUM['id']*]&amp;[*=SID*]">[*=$SUBFORUM['name']*]</a> &gt;
+  [*ENDIF*]
+  <a href="themes.php?r=[*=$FORUM['id']*]&amp;[*=SID*]">[*=$FORUM['name']*]</a> &gt;
+  [*=$THEME['name']*]
+</div><hr />
+
+[*IF($DESC):*]
+  [<a href="view.php?t=[*=$THEME['id']*]&amp;[*=SID*]">C нaчaлa</a>]
+[*ELSE:*]
+  [<a href="view.php?t=[*=$THEME['id']*]&amp;m=1&amp;[*SID*]">C кoнцa</a>]
+[*ENDIF*]
+
+[*IF(!$THEME['closed']):*]
+  <br />[<a href="write.php?t=[*=$THEME['id']*]&amp;[*=SID*]">Oтвeтить</a>]
+[*ENDIF*]
+
+<hr />
+
+[*FOREACH($POSTS as $POST):*]
+
+  <small>
+  <img src="/ico/_status/[*=$POST['online']*].gif" alt="" />[*=$POST['num']*].
+  [<b><a href="/info.php?uid=[*=$POST['uid']*]&amp;[*=SID*]">[*=$POST['login']*]</a></b>]
+  [<a href="/letters/write.php?to=[*=$POST['login']*]&amp;[*=SID*]">@</a>]
+  [<a href="write.php?uid=[*=$POST['uid']*]&amp;t=[*=$THEME['id']*]&amp;[*=SID*]">»</a>]
+  [[*=$POST['time']*]]
+  </small>
+  <div class="base">
+   [*=$POST['msg']*]
+   [*IF($POST['attid']):*]
+     <div class="frame">
+      <small class="alt">Прикрепленный файл:</small><br />
+      <small><img src="/ico/[*=$USER['icons']*]/[*=$POST['attach']['type']*].gif" alt="[*=$POST['attach']['type']*]" />
+      <a href="/filex/dl.php?f=[*=$POST['attid']*]">[*=$POST['attach']['title']*] ([*=$POST['attach']['size']*])</a></small>
+     </div>
+   [*ENDIF*]
+  </div>
+  <small class="alt">[*=$POST['sign']*]
+  [*IF($POST['editable']):*]
+    &nbsp;[<a href="pedit.php?p=[*=$POST['id']*]&amp;[*=SID*]">изменить</a>]
+  [*ENDIF*]
+  [*IF(0<$USER['state']):*]
+    &nbsp;[<a href="del.php?p=[*=$POST['id']*]&amp;[*=SID*]">удалить</a>]
+  [*ENDIF*]
+  </small>
+  <hr />
+
+[*ENDFOREACH*]
+
+<div class="misc">
+  [*NAV('view.php', $NAV['pos'], $NAV['total'], $NAV['limit'], $NAV['add'])*]<br />
+  [*PAGES('view.php', $NAV['pos'], $NAV['total'], $NAV['limit'], $NAV['add'])*]
+</div><hr />
+
+[*IF(!$THEME['closed']):*]
+  [<a href="write.php?t=[*=$THEME['id']*]&amp;[*=SID*]">Oтвeтить</a>]<br />
+  [*IF(3!=$USER['id']):*]
+   <form action="add.php?[*=SID*]" method="post">
+    <fieldset style="text-align: center">
+    <small>Быстрый ответ:</small><br />
+    <textarea name="text" rows="2" cols="32"></textarea><br />
+    <input type="hidden" name="tid" value="[*=$THEME['id']*]" />
+    <input type="submit" value="Ответить" />
+    </fieldset>
+   </form>
+  [*ENDIF*]
+[*ENDIF*]
+
+[<a href="themes.php?r=[*=$THEME['rid']*]&amp;[*=SID*]">K тeмaм</a>]<br />
+[<a href="index.php?[*=SID*]">К фopумам</a>]<br />
+[<a href="/?[*=SID*]">На главную</a>]
+
+</div>
+
+[*=$this->Parse('footer.tmpl')*]

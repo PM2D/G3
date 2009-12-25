@@ -1,0 +1,28 @@
+[*=$this->Parse('header.tmpl')*]
+
+<div>
+
+  <div style="text-align: center">
+   <img src="thm2jpg.php?f=[*=$PATH*]" style="border: 1px solid #C0C0C0" alt="preview" /><hr />
+   [<a href="[*=$URL*]">Скачать <small>([*=$SIZE*])</small></a>]
+  </div><hr />
+
+  <div class="misc">
+   [*IF($PREV):*]
+     <a href="[*=$PREV['handler']*]&amp;[*=SID*]">&lt;&lt; "[*=$PREV['name']*]"</a>
+   [*ENDIF*]
+   [*IF($PREV && $NEXT):*]
+     |
+   [*ENDIF*]
+   [*IF($NEXT):*]
+     <a href="[*=$NEXT['handler']*]&amp;[*=SID*]">"[*=$NEXT['name']*]" &gt;&gt;</a>
+   [*ENDIF*]
+  </div>
+
+  <hr />
+  [<a href="[*=$BACK*]">K фaйлaм</a>]<br />
+  [<a href="/?[*=SID*]">Ha глaвную</a>]
+
+</div>
+
+[*=$this->Parse('footer.tmpl')*]

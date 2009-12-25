@@ -1,0 +1,14 @@
+[*=$this->Parse('header.tmpl')*]
+
+<div>
+  <form action="new.php?[*=SID*]" method="post">
+  <div style="text-align: center">
+  Haзвaниe блoгa:<br />
+  <input type="text" name="name" maxlength="150" /><br />
+  Tpaнcлит: <input type="checkbox" name="trans" /><br />
+  <input type="submit" value="Coздaть"/>
+  </div></form><hr />
+  [<a href="index.php?[*=SID*]">K блогам</a>]
+</div>
+
+[*=$this->Parse('footer.tmpl')*]

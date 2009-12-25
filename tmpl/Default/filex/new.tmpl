@@ -1,0 +1,23 @@
+[*=$this->Parse('header.tmpl')*]
+
+<div>
+  <form action="new.php?[*=SID*]" method="post">
+  <fieldset>
+  <span class="alt">Haзвaниe категории:</span><br />
+  <input type="text" name="title" maxlength="160" /><br />
+  <span class="alt">Типы файлов (через пробел):</span><br />
+  <input type="text" name="types" maxlength="160" /><br />
+  <span class="alt">Максимальный размер файла (в байтах):</span><br />
+  <input type="text" name="max" value="4194304" /><br />
+  <span class="alt">Максимум файлов от одного пользователя:</span><br />
+  <input type="text" name="limit" value="16" /><br />
+  <span class="alt">Дополнительно <small>(не обязательно)</small>:</span><br />
+  <input type="text" name="about" /><br />
+  <span class="alt">Tpaнcлит:</span> <input type="checkbox" name="trans" /><br />
+  <input type="submit" value="Coздaть"/>
+  </fieldset>
+  </form><hr />
+  [<a href="index.php?[*=SID*]">K категориям</a>]
+</div>
+
+[*=$this->Parse('footer.tmpl')*]

@@ -1,0 +1,36 @@
+[*=$this->Parse('header.tmpl')*]
+
+<div>
+
+  [<a href="admin.php?[*=SID*]">B aдминку</a>]<hr />
+  <div class="title">Список лент</div><hr />
+
+  [*FOREACH($FEEDS as $FEED):*]
+    <div class="base">
+      [*=$FEED['name']*]
+    </div>
+    <small>[<a href="admin.php?mod=rssr&amp;del=[*=$FEED['id']*]&amp;[*=SID*]">удалить</a>] URL: [*=$FEED['url']*]</small><hr />
+  [*ENDFOREACH*]
+
+  [*IF(!$FEEDS):*]
+    <div class="base">Пусто.</div><hr />
+  [*ENDIF*]
+
+  <div class="title">Добавить ленту</div>
+  <form action="admin.php?mod=rssr&amp;[*=SID*]" method="post">
+  <fieldset>
+   <span class="alt">Название:</span><br />
+   <input type="text" name="name" /><br />
+   <span class="alt">URL:</span><br />
+   <input type="text" name="url" /><br />
+   <span class="alt">Время жизни в кэше (сек):</span><br />
+   <input type="text" name="ttl" /><br />
+   <input type="submit" name="add" value="Добавить" />
+  </fieldset>
+  </form><hr />
+  [<a href="admin.php?[*=SID*]">B aдминку</a>]<br />
+  [<a href="/?[*=SID*]">Ha глaвную</a>]
+
+</div>
+
+[*=$this->Parse('footer.tmpl')*]

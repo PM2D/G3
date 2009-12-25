@@ -1,0 +1,93 @@
+[*=$this->Parse('header.tmpl')*]
+
+<div>
+
+<div class="title">
+  <a href="index.php?[*=SID*]">Форум</a> &gt;
+  [*IF($FORUM['rid']):*]
+   <a href="themes.php?r=[*=$FORUM['rid']*]&amp;[*=SID*]">[*=$FORUM['pname']*]</a> &gt;
+  [*ENDIF*]
+  [*=$FORUM['name']*]
+</div><hr />
+
+[*IF(3!=$USER['id']):*]
+  [<a href="new.php?r=[*=$FORUM['id']*]&amp;[*=SID*]">Hoвая тема</a>]
+[*ELSE:*]
+  [Hoвaя тeмa]
+[*ENDIF*]
+
+[*IF($SUBFORUMS):*]
+  <hr /><div class="base">
+
+  [*FOREACH($SUBFORUMS as $SUBFORUM):*]
+
+   <div class="title">
+    <img src="/ico/[*=$USER['icons']*]/cat.gif" alt="" />
+    <a href="themes.php?r=[*=$SUBFORUM['id']*]&amp;[*=SID*]">[*=$SUBFORUM['name']*]</a>
+    [[*=$SUBFORUM['count']*]]
+   </div>
+   [*IF($SUBFORUM['themeid']):*]
+    <div class="frame"><small>
+     [*IF($SUBFORUM['about']):*]
+       <span class="alt">[*=$SUBFORUM['about']*]</span><br />
+     [*ENDIF*]
+     <i>Последнее сообщение в<br />
+     <a href="view.php?t=[*=$SUBFORUM['themeid']*]&amp;getlast&amp;[*=SID*]">[*=$SUBFORUM['themename']*]</a><br />
+     от <a href="/info.php?uid=[*=$SUBFORUM['themelastuid']*]">[*=$SUBFORUM['themelastuser']*]</a></i>
+    </small></div>
+   [*ENDIF*]
+   <hr />
+
+  [*ENDFOREACH*]
+
+  </div>
+[*ENDIF*]
+
+[*IF($THEMES):*]
+  <hr /><div class="base">
+
+  [*FOREACH($THEMES as $THEME):*]
+
+   <div class="title">
+    [*IF($THEME['fixed']):*]
+     <img src="/ico/[*=$USER['icons']*]/fixed.gif" alt="!" />
+    [*ELSEIF($THEME['closed']):*]
+     <img src="/ico/[*=$USER['icons']*]/closed.gif" alt="x" />
+    [*ELSE:*]
+     <img src="/ico/[*=$USER['icons']*]/theme.gif" alt="::" />
+    [*ENDIF*]
+    <a href="view.php?t=[*=$THEME['id']*]&amp;[*=SID*]">[*=$THEME['name']*]</a> [[*=$THEME['count']*]]
+    <a href="view.php?t=[*=$THEME['id']*]&amp;getlast&amp;[*=SID*]">&raquo;</a>
+    [*IF(0<$USER['state']):*]
+     <a href="tha.php?n=[*=$THEME['id']*]&amp;[*=SID*]">*</a>
+    [*ENDIF*]
+   </div>
+   <div class="frame"><small>
+    <i>Последнее сообщение от<br />
+    <a href="/info.php?uid=[*=$THEME['lastuid']*]&amp;[*=SID*]">[*=$THEME['lastuser']*]</a><br />
+    [*=$THEME['time']*]</i>
+   </small></div>
+   <hr />
+
+  [*ENDFOREACH*]
+
+ </div>
+[*ENDIF*]
+
+<div class="misc">
+  [*NAV('themes.php', $NAV['pos'], $NAV['total'], $NAV['limit'], $NAV['add'])*]<br />
+  [*PAGES('themes.php', $NAV['pos'], $NAV['total'], $NAV['limit'], $NAV['add'])*]<hr />
+  OnLine: <a href="/who.php?[*=SID*]">[*=$ONLINE*]</a><br />
+  [*=perf()*] ceк
+</div>
+
+[*IF($FORUM['rid']):*]
+  [<a href="themes.php?r=[*=$FORUM['rid']*]&amp;[*=SID*]">K paздeлу</a>]<br />
+[*ENDIF*]
+
+[<a href="index.php?[*=SID*]">K фopумaм</a>]<br />
+[<a href="/?[*=SID*]">Ha глaвную</a>]
+
+</div>
+
+[*=$this->Parse('footer.tmpl')*]

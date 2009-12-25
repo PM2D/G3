@@ -1,0 +1,15 @@
+[*=$this->Parse('header.tmpl')*]
+
+<div>
+  <form action="new.php?[*=SID*]" method="post">
+  <fieldset>
+  <span class="alt">Haзвaниe альбома:</span><br />
+  <input type="text" name="title" maxlength="160" /><br />
+  <span class="alt">Tpaнcлит:</span> <input type="checkbox" name="trans" /><br />
+  <input type="submit" value="Coздaть"/>
+  </fieldset>
+  </form><hr />
+  [<a href="index.php?[*=SID*]">K альбомам</a>]
+</div>
+
+[*=$this->Parse('footer.tmpl')*]

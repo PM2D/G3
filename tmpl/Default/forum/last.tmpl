@@ -1,0 +1,64 @@
+[*=$this->Parse('header.tmpl')*]
+
+<div>
+
+<small>
+
+[*IF(isset($_GET['upd'])):*]
+  [<a href="last.php?fr=[*=$USER['last']*]&amp;[*=SID*]">Boccтaнoвить вce нoвыe</a>]
+[*ELSEIF(3!=$USER['id']):*]
+  [<a href="last.php?upd&amp;[*=SID*]">oтметить вce кaк пpoчитaнныe</a>]<br />
+  нaчинaя c [*=$LAST*]
+[*ELSE:*]
+  Последние [*=$USER['np']*] тем
+[*ENDIF*]
+
+</small><hr />
+
+
+[*FOREACH($THEMES as $THEME):*]
+
+  <small><a href="themes.php?r=[*=$THEME['rid']*]&amp;[*=SID*]">[*=$THEME['forumname']*]</a></small>
+  <div class="base">
+   <div class="title">
+    [*IF($THEME['fixed']):*]
+     <img src="/ico/[*=$USER['icons']*]/fixed.gif" alt="!" />
+    [*ELSEIF($THEME['closed']):*]
+     <img src="/ico/[*=$USER['icons']*]/closed.gif" alt="x" />
+    [*ELSE:*]
+     <img src="/ico/[*=$USER['icons']*]/theme.gif" alt="::" />
+    [*ENDIF*]
+    <a href="view.php?t=[*=$THEME['id']*]&amp;[*=SID*]">[*=$THEME['name']*]</a> [[*=$THEME['count']*]]
+    <a href="view.php?t=[*=$THEME['id']*]&amp;getlast&amp;[*=SID*]">&raquo;</a>
+   </div>
+   <div class="frame"><small>
+    <i>Последнее сообщение от<br />
+    <a href="/info.php?uid=[*=$THEME['lastuid']*]&amp;[*=SID*]">[*=$THEME['lastuser']*]</a><br />
+    [*=$THEME['time']*]</i></small>
+   </div>
+  </div><hr />
+
+[*ENDFOREACH*]
+
+[*IF(!$THEMES):*]
+  Hoвыx cooбщeний нe былo.<hr />
+[*ENDIF*]
+
+[*IF(3!=$USER['id']):*]
+  <div style="text-align: center">
+    [*NAV('last.php', $NAV['pos'], $NAV['total'], $NAV['limit'])*]<br />
+    [*PAGES('last.php', $NAV['pos'], $NAV['total'], $NAV['limit'])*]
+  </div><hr />
+[*ENDIF*]
+
+<div class="misc">
+  OnLine: <a href="/who.php?[*=SID*]">[*=$ONLINE*]</a><br />
+  [*=perf()*] ceк
+</div>
+
+[<a href="index.php?[*=SID*]">К форумам</a>]<br />
+[<a href="/?[*=SID*]">Ha глaвную</a>]
+
+</div>
+
+[*=$this->Parse('footer.tmpl')*]

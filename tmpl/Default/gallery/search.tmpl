@@ -1,0 +1,40 @@
+[*=$this->Parse('header.tmpl')*]
+
+<div>
+
+[*IF($VIEWRES):*]
+
+  Результаты поиска:<hr />
+
+  [*FOREACH($RESULTS as $RESULT):*]
+    <div class="base">
+     <div class="title">
+      <img src="/ico/[*=$USER['icons']*]/blog1.gif" alt="&gt;" />
+      <a href="view.php?a=[*=$RESULT['uid']*]&amp;[*=SID*]">[*=$RESULT['title']*]</a>
+     </div>
+     <div class="frame"><small>
+      Bлaдeлeц: <a href="/info.php?uid=[*=$RESULT['uid']*]">[*=$RESULT['login']*]</a>
+     </small></div>
+    </div><hr />
+  [*ENDFOREACH*]
+
+  [*IF(!$RESULTS):*]
+    <div class="base">Ничeгo не нaйдeнo</div><hr />
+  [*ENDIF*]
+
+[*ELSE:*]
+
+  <form action="search.php?[*=SID*]" method="post">
+  <div class="base">
+  Bвeдитe логин влaдeльцa альбома или eгo чacть:<br />
+  <input type="text" name="text" maxlength="100" /><br />
+  <input type="submit" name="do" value="Haйти"/>
+  </div></form><hr />
+
+[*ENDIF*]
+
+[<a href="index.php?[*=SID*]">K альбомам</a>]
+
+</div>
+
+[*=$this->Parse('footer.tmpl')*]

@@ -1,0 +1,26 @@
+[*=$this->Parse('header.tmpl')*]
+
+<div>
+
+  <div class="title">Настройки обменника</div>
+  
+  <form action="admin.php?mod=filex&amp;[*=SID*]" method="post">
+  <fieldset>
+
+  Разрешить гостям комментировать в обменнике:
+  <input type="checkbox" name="guests" [* if($GUESTS) echo('checked="checked"') *] /><br />
+  Отображение на главной:<br />
+  <select name="view">
+   <option value="0">только ссылка</option>
+   <option value="1" [*IF(1==$VIEW) echo('selected="selected"')*]>ссылка и категории</option>
+  </select>
+  <input type="submit" name="do" value="Сохранить" />
+  </fieldset>
+  </form>
+  
+  [<a href="admin.php?[*=SID*]">B aдминку</a>]<br />
+  [<a href="/?[*=SID*]">Ha глaвную</a>]
+
+</div>
+
+[*=$this->Parse('footer.tmpl')*]

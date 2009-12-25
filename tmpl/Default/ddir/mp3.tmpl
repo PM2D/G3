@@ -1,0 +1,52 @@
+[*=$this->Parse('header.tmpl')*]
+
+  <div style="text-align: center">
+  <div class="base">
+
+  [*FOREACH($PROPS as $PROP):*]
+
+    <div class="frame">
+     <div class="title">[*=$PROP['title']*]:</div>
+     [*=$PROP['value']*]
+    </div><hr />
+
+  [*ENDFOREACH*]
+
+  [<a href="/ddir[*=$PATH*]">Cкaчaть файл</a>]
+  </div>
+
+  <hr />
+
+  <div class="misc">
+   [*IF($PREV):*]
+     <a href="[*=$PREV['handler']*]&amp;[*=SID*]">&lt;&lt; "[*=$PREV['name']*]"</a>
+   [*ENDIF*]
+   [*IF($PREV && $NEXT):*]
+     |
+   [*ENDIF*]
+   [*IF($NEXT):*]
+     <a href="[*=$NEXT['handler']*]&amp;[*=SID*]">"[*=$NEXT['name']*]" &gt;&gt;</a>
+   [*ENDIF*]
+  </div>
+
+  <hr />
+
+  <form action="mp3.php?[*=SID*]" method="get">
+   <fieldset>
+   <div class="title">Обрезать MP3</div>
+   <small>Начало:</small>
+   <input type="text" name="start" size="3" maxlength="5" value="0" />сек<br />
+   <small>Конец:</small>
+   <input type="text" name="end" size="3" maxlength="5" value="[*=$MAXSEC*]" />сек<br />
+   <input type="hidden" name="f" value="[*=$PATH*]" />
+   <input type="submit" value="Скачать" />
+   </fieldset>
+  </form>
+  </div>
+
+  <div><hr />
+  [<a href="[*=$BACK*]&amp;[*=SID*]">K фaйлaм</a>]<br />
+  [<a href="/?[*=SID*]">На главную</a>]
+  </div>
+
+[*=$this->Parse('footer.tmpl')*]

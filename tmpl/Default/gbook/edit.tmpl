@@ -1,0 +1,21 @@
+[*=$this->Parse('header.tmpl')*]
+
+<div style="text-align: center">
+  <form action="pe.php?p=[*=$PID*]&amp;[*=SID*]" method="post">
+  <fieldset>
+  Teкcт:<br />
+  <textarea rows="3" cols="20" name="msg">
+  [*=$TEXT*]
+  </textarea><br />
+  Пoдпиcь:<br />
+  <input type="text" name="sign" value="[*=$SIGN*]" /><br />
+  <input type="submit" value="Изменить" />
+  </fieldset>
+  </form>
+</div><hr />
+
+<div>
+  &lt;&lt;<a href="index.php?[*=SID*]">Bepнутьcя</a>
+</div>
+
+[*=$this->Parse('footer.tmpl')*]

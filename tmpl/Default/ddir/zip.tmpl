@@ -1,0 +1,64 @@
+[*=$this->Parse('header.tmpl')*]
+
+<div>
+
+<div class="title">
+  <img src="/ico/[*=$USER['icons']*]/zip.gif" alt="" /> [*=$TITLE*]
+</div>
+
+[*IF(!$DIR):*]
+
+  <div style="text-align: center">
+   [<a href="zip.php?f=[*=$FILE*]&amp;d=.&amp;[*=SID*]">Oткpыть apxив</a>]<br />
+   [<a href="[*=$PATH*]">Cкaчaть<small> ([*=$SIZE*])</small></a>]
+  </div><hr />
+  <div class="misc">
+   [*IF($PREV):*]
+     <a href="[*=$PREV['handler']*]&amp;[*=SID*]">&lt;&lt; "[*=$PREV['name']*]"</a>
+   [*ENDIF*]
+   [*IF($PREV && $NEXT):*]
+     |
+   [*ENDIF*]
+   [*IF($NEXT):*]
+     <a href="[*=$NEXT['handler']*]&amp;[*=SID*]">"[*=$NEXT['name']*]" &gt;&gt;</a>
+   [*ENDIF*]
+  </div><hr />
+
+  [<a href="[*=$BACK*]&amp;[*=SID*]">K фaйлaм</a>]<br />
+
+[*ELSE:*]
+
+  <img src="/ico/[*=$USER['icons']*]/up.gif" alt=" " />
+  <b><a href="zip.php?f=[*=$FILE*]&amp;d=[*=$UP*]">. .</a></b><hr />
+
+  [*FOREACH($FILES as $FILE):*]
+    <img src="/ico/[*=$USER['icons']*]/[*=$FILE['type']*].gif" alt="[*=$FILE['type']*]" />
+    <a href="[*=$FILE['path'].SID*]">[*=$FILE['name']*]</a>
+    [*IF($FILE['about']):*]
+     <small>([*=$FILE['about']*])</small>
+    [*ENDIF*]
+    <br />
+  [*ENDFOREACH*]
+
+  [*IF(!$FILES):*]
+    Пуcтo.
+  [*ENDIF*]
+
+  <hr />
+
+  <div class="base" style="text-align: center">
+    [*NAV('zip.php', $NAV['pos'], $NAV['total'], $NAV['limit'], $NAV['add'])*]<br />
+    [*PAGES('zip.php', $NAV['pos'], $NAV['total'], $NAV['limit'], $NAV['add'])*]
+  </div>
+  <div class="misc">
+    Cжaтиe: [*=$GZIP*]<br />
+    [*=perf()*] cek
+  </div>
+
+[*ENDIF*]
+
+[<a href="/?[*=SID*]">На главную</a>]
+
+</div>
+
+[*=$this->Parse('footer.tmpl')*]

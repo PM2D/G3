@@ -1,0 +1,63 @@
+[*=$this->Parse('header.tmpl')*]
+
+<div>
+
+[<a href="rss.php">RSS</a>]
+
+[*IF(1<$USER['state']):*]
+  <br />[<a href="write.php?[*=SID*]">Добавить новость</a>]<br />
+[*ENDIF*]
+
+<hr />
+
+[*IF($NEWUSERS):*]
+  <small>Hoвыe пoльзoвaтeли зa пocл. 24 чaca<br />
+  [*FOREACH($NEWUSERS as $NEWUSER):*]
+    <a href="/info.php?uid=[*=$NEWUSER['id']*]&amp;[*=SID*]">[*=$NEWUSER['login']*]</a><br />
+  [*ENDFOREACH*]
+  </small><hr />
+[*ENDIF*]
+
+[*FOREACH($NEWS as $NEW):*]
+
+  <img src="/ico/[*=$USER['icons']*]/news.gif" alt="&gt;" />
+  [*=$NEW['time']*] <small class="alt">(added by [*=$NEW['login']*])</small>
+  <div class="base">
+   <div class="title">[*=$NEW['title']*]</div>
+   [*=$NEW['text']*]
+   <div class="frame" style="text-align: center">
+   <small>
+   [*IF(1<$USER['state']):*]
+    [<a href="edit.php?nid=[*=$NEW['id']*]&amp;[*=SID*]">изменить</a> -
+    <a href="del.php?nid=[*=$NEW['id']*]&amp;[*=SID*]">удалить</a>]<br />
+   [*ENDIF*]
+   [*IF($NEW['tags']):*]
+    Метки:
+    [*FOREACH($NEW['tags'] as $TAG):*]
+     <a href="index.php?t=[*=$TAG*]&amp;[*=SID*]">[*=$TAG*]</a>
+    [*ENDFOREACH*]
+    <br />
+   [*ENDIF*]
+   <a href="index.php?nid=[*=$NEW['id']*]&amp;[*=SID*]">Прочесть</a> |
+   <a href="comments.php?nid=[*=$NEW['id']*]&amp;[*=SID*]">Мнения</a> ([*=$NEW['comms']*])
+   </small>
+   </div>
+  </div>
+
+[*ENDFOREACH*]
+
+[*IF(!$NEWS):*]
+  Пусто.
+[*ENDIF*]
+
+<hr />
+<div style="text-align: center">
+  [*NAV('index.php', $NAV['pos'], $NAV['total'], $NAV['limit'], $NAV['add'])*]<br />
+  [*PAGES('index.php', $NAV['pos'], $NAV['total'], $NAV['limit'], $NAV['add'])*]
+</div>
+
+<hr />[<a href="/?[*=SID*]">На главную</a>]
+
+</div>
+
+[*=$this->Parse('footer.tmpl')*]

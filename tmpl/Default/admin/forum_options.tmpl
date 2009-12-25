@@ -1,0 +1,36 @@
+[*=$this->Parse('header.tmpl')*]
+
+<div>
+
+  <div class="title">Настройки форума</div>
+  
+  <form action="admin.php?mod=forumopts&amp;[*=SID*]" method="post">
+  <fieldset>
+
+  Разрешить гостям писать на форуме:
+  <input type="checkbox" name="guests" [* if($GUESTS) echo('checked="checked"') *] /><br />
+
+  [*IF($FCATS):*]
+    Категория обменника для сохранения вложений:<br />
+    <select name="attcid">
+     <option value="0">Без вложений</option>
+     [*FOREACH($FCATS AS $FCAT):*]
+       [*IF($FCAT['selected']):*]
+         <option value="[*=$FCAT['id']*]" selected="selected">[*=$FCAT['title']*]</option>
+       [*ELSE:*]
+         <option value="[*=$FCAT['id']*]">[*=$FCAT['title']*]</option>
+       [*ENDIF*]
+     [*ENDFOREACH*]
+    </select><br />
+  [*ENDIF*]
+
+  <input type="submit" name="do" value="Сохранить" />
+  </fieldset>
+  </form>
+  
+  [<a href="admin.php?[*=SID*]">B aдминку</a>]<br />
+  [<a href="/?[*=SID*]">Ha глaвную</a>]
+
+</div>
+
+[*=$this->Parse('footer.tmpl')*]

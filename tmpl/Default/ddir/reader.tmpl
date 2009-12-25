@@ -1,0 +1,40 @@
+[*=$this->Parse('header.tmpl')*]
+
+<div>
+
+[*IF($TEXT):*]
+
+  <div class="base">[*=$TEXT*]</div><hr />
+  <div style="text-align: center">
+   [*NAV('reader.php', $NAV['pos'], $NAV['total'], $NAV['limit'], $NAV['add'])*]<br />
+   [*PAGES('reader.php', $NAV['pos'], $NAV['total'], $NAV['limit'], $NAV['add'])*]
+  </div><hr />
+
+[*ELSE:*]
+
+  <div class="title">[*=$TITLE*]</div>
+  <div style="text-align: center">
+  [<a href="reader.php?f=[*=$FILE*]&amp;n=0&amp;[*=SID*]">Читaть фaйл</a>]<br />
+  [<a href="[*=$URL*]">Cкaчaть фaйл</a>]<br />
+  <span class="alt">Размер: [*=$SIZE*]</span><br />
+  [<a href="txt2jar.php?f=[*=$FILE*]&amp;[*=SID*]">Скачать в jar</a>]</div><hr />
+  <div class="misc">
+   [*IF($PREV):*]
+     <a href="[*=$PREV['handler']*]&amp;[*=SID*]">&lt;&lt; "[*=$PREV['name']*]"</a>
+   [*ENDIF*]
+   [*IF($PREV && $NEXT):*]
+     |
+   [*ENDIF*]
+   [*IF($NEXT):*]
+     <a href="[*=$NEXT['handler']*]&amp;[*=SID*]">"[*=$NEXT['name']*]" &gt;&gt;</a>
+   [*ENDIF*]
+  </div><hr />
+
+[*ENDIF*]
+
+[<a href="[*=$BACK*]&amp;[*=SID*]">K фaйлaм</a>]<br />
+[<a href="/?[*=SID*]">На главную</a>]
+
+</div>
+
+[*=$this->Parse('footer.tmpl')*]

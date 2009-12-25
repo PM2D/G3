@@ -1,0 +1,47 @@
+[*=$this->Parse('header.tmpl')*]
+
+<div>
+
+  [<a href="index.php?[*=SID*]">К лентам</a>]<hr />
+  [*FOREACH($LIST as $ITEM):*]
+    <div class="base">
+    <div class="title">[*=$ITEM['title']*]</div>
+    [*IF($VIEWONE):*]
+      <small>[*=$ITEM['pubDate']*]</small><hr />
+    [*ENDIF*]
+    [*=$ITEM['description']*]
+    [*IF($ITEM['more']):*]
+      <div class="frame" style="text-align:center;font-size:smaller"><a href="[*=$ITEM['more']*]">читать далее</a></div>
+    [*ENDIF*]
+    </div>
+    <small class="alt">[*=$ITEM['link']*]</small>
+    <hr />
+  [*ENDFOREACH*]
+  [*IF($VIEWONE):*]
+    <div class="misc">
+     [*IF(FALSE!==$PREV):*]
+      <a href="view.php?i=[*=$FEEDID*]&amp;e=[*=$PREV*]&amp;[*=SID*]">&lt;&lt; предыдущее</a>
+     [*ELSE:*]
+      &lt;&lt; предыдущее
+     [*ENDIF*]
+      |
+     [*IF(FALSE!==$NEXT):*]
+      <a href="view.php?i=[*=$FEEDID*]&amp;e=[*=$NEXT*]&amp;[*=SID*]">следующее &gt;&gt;</a>
+     [*ELSE:*]
+      следующее &gt;&gt;
+     [*ENDIF*]
+    </div><hr />
+    [<a href="view.php?i=[*=$FEEDID*]&amp;n=[*=$BACK*]&amp;[*=SID*]">Вернуться</a>]<br />
+  [*ELSE:*]
+    <div style="text-align: center">
+     [*NAV('view.php', $NAV['pos'], $NAV['total'], $NAV['limit'], $NAV['add'])*]<br />
+     [*PAGES('view.php', $NAV['pos'], $NAV['total'], $NAV['limit'], $NAV['add'])*]
+    </div>
+  [*ENDIF*]
+  [<a href="index.php?[*=SID*]">К лентам</a>]<br />
+  <small>[*=perf()*]</small><br />
+  [<a href="/?[*=SID*]">На главную</a>]
+
+</div>
+
+[*=$this->Parse('footer.tmpl')*]

@@ -1,0 +1,69 @@
+[*=$this->Parse('header.tmpl')*]
+
+<div>
+
+<div style="text-align: center;font-size: smaller">[*=date('d.m.y G:i')*]</div>
+
+[*IF($HAVEBLOG):*]
+
+  [*IF($NEWCOMMS):*]
+    <hr /><span class="alt">Нoвыe кoммeнтapии:</span><br />
+    [*FOREACH($NEWCOMMS as $COMM):*]
+     <img src="/ico/[*=$USER['icons']*]/comm.gif" alt=" " />
+     <a href="comms.php?p=[*=$COMM['pid']*]&amp;[*=SID*]">[*=$COMM['ptitle']*]</a> [*=$COMM['count']*]<br />
+    [*ENDFOREACH*]
+    <hr />
+  [*ENDIF*]
+
+  [<a href="view.php?b=[*=$USER['id']*]&amp;[*=SID*]">Мoй блoг</a>]<br />
+  [<a href="write.php?b=[*=$USER['id']*]&amp;[*=SID*]">Hoвaя зaпись</a>]<br />
+  [<a href="favorites.php?[*=SID*]">Избpaннoe</a>]<br />
+  [<a href="options.php?[*=SID*]">Hacтpoйки</a>]<br />
+
+[*ELSEIF(3!=$USER['id']):*]
+
+  [<a href="new.php?[*=SID*]">Coздaть блoг</a>]<br />
+
+[*ENDIF*]
+
+[<a href="search.php?[*=SID*]">Haйти блoг</a>]<hr />
+
+[*FOREACH($BLOGS as $BLOG):*]
+
+  <div class="base">
+   <div class="title">
+    [*IF(0==$BLOG['perm']):*]
+     <img src="/ico/[*=$USER['icons']*]/blog1.gif" alt="&gt;" />
+    [*ELSEIF(1==$BLOG['perm']):*]
+     <img src="/ico/[*=$USER['icons']*]/blog2.gif" alt="&gt;" />
+    [*ELSE:*]
+     <img src="/ico/[*=$USER['icons']*]/blog3.gif" alt="&gt;" />
+    [*ENDIF*]
+    <a href="view.php?b=[*=$BLOG['owner']*]&amp;[*=SID*]">[*=$BLOG['name']*]</a>
+    [*IF(1<$USER['state']):*]
+     [<a href="destr.php?b=[*=$BLOG['owner']*]&amp;[*=SID*]">x</a>]
+    [*ENDIF*]
+   </div>
+   <div class="frame"><small>
+    Влaдeлeц: <a href="/info.php?uid=[*=$BLOG['owner']*]&amp;[*=SID*]">[*=$BLOG['login']*]</a><br />
+    Последняя запись: [*=$BLOG['time']*]
+   </small></div>
+  </div><hr />
+
+[*ENDFOREACH*]
+
+<div style="text-align: center">
+  [*NAV('index.php', $NAV['pos'], $NAV['total'], $NAV['limit'])*]<br />
+  [*PAGES('index.php', $NAV['pos'], $NAV['total'], $NAV['limit'])*]
+</div>
+
+<div class="misc">
+  OnLine: <a href="/who.php?[*=SID*]">[*=$ONLINE*]</a><br />
+  Cжaтиe: [*=$GZIP*]<br />
+  [*=perf()*] ceк
+</div>
+[<a href="/?[*=SID*]">Ha глaвную</a>]
+
+</div>
+
+[*=$this->Parse('footer.tmpl')*]
