@@ -113,6 +113,37 @@ final class fstools {
     fclose($f);
   }
 
+  static public function save_ini($path, array $data) {
+    $f = fopen($path, 'w');
+    if(FALSE===$f) throw new Exception('Невозможно открыть для записи файл '.$path);
+    foreach($data as $key1=>$value1) {
+      if(is_array($value1)) {
+        fwrite($f, '['.$key1."]\n");
+        foreach($value as $key2 => $value2) {
+          if(!$value2) {
+            $value2 = 'false';
+          } elseif(is_bool($value2)) {
+            $value2 = 'true';
+          } elseif(!is_numeric($value2)) {
+            $value2 = '"'.$value2.'"';
+          }
+          fwrite($f, $key2.'='.$value2."\n");
+        }
+        fwrite($f, "\n");
+      } else {
+        if(!$value1) {
+          $value1 = 'false';
+        } elseif(is_bool($value1)) {
+          $value1 = 'true';
+        } elseif(!is_numeric($value1)) {
+          $value1 = '"'.$value1.'"';
+        }
+        fwrite($f, $key1.'='.$value1."\n");
+      }
+    }
+    fclose($f);
+  }
+
   static private function _dir2size($dir){
     $size = 0;
     $d = dir($dir);

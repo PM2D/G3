@@ -6,6 +6,9 @@
   <div class="base">
   <img src="/ico/[*=$USER['icons']*]/style.gif" alt=" "/>
   <a href="set.php?f=[*=$THEME['file']*]&amp;[*=SID*]">[*=$THEME['name']*]</a>
+  [*IF(1<$USER['state']):*]
+    <small>[<a href="index.php?edit=[*=$THEME['file']*]">редактировать</a>]</small>
+  [*ENDIF*]
   </div>
   <div class="frame">
   <small><span class="alt">Описание:</span> [*=$THEME['about']*]<br />

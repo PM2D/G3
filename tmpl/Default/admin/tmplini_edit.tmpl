@@ -1,0 +1,29 @@
+[*=$this->Parse('header.tmpl')*]
+
+<div>
+<div class="title">Данные темы:</div><hr />
+<form action="index.php?edit=[*=$FILE*]&amp;[*=SID*]" method="post">
+<fieldset>
+  Название темы:<br />
+  <input type="text" name="name" value="[*=$THEME['name']*]" /><br />
+  Описание темы:<br />
+  <input type="text" name="about" value="[*=$THEME['about']*]" /><br />
+  Сообщение при выборе:<br />
+  <input type="text" name="setnotice" value="[*=$THEME['setnotice']*]" /><br />
+  Стиль по умолчанию:
+  <select name="defstyle">
+  [*FOREACH($STYLES as $STYLE):*]
+    <option value="[*=$STYLE*]">[*=$STYLE*]</option>
+  [*ENDFOREACH*]
+  </select><br />
+  <input type="submit" value="Изменить" />
+</fieldset>
+</form>
+<hr />
+
+[<a href="index.php?[*=SID*]">К темам</a>]<br />
+[<a href="/?[*=SID*]">Ha глaвную</a>]
+
+</div>
+
+[*=$this->Parse('footer.tmpl')*]

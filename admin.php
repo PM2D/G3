@@ -11,23 +11,7 @@ if(2>$USER['state']) raise_error('Доступ запрещён.');
 $mod =& getvar('mod');
 
 function save_cfg() {
-  $f = fopen($_SERVER['DOCUMENT_ROOT'].'/etc/globals.conf', 'w');
-  if(FALSE===$f) throw new Exception('Невозможно открыть для записи файл /etc/globals.conf');
-  foreach($GLOBALS['CFG'] as $section=>$array) {
-    fwrite($f, '['.$section."]\n");
-    foreach($array as $key => $value){
-      if(!$value) {
-        $value = 'false';
-      } elseif(is_bool($value)) {
-        $value = 'true';
-      } elseif(!is_numeric($value)) {
-        $value = '"'.$value.'"';
-      }
-      fwrite($f, $key.' = '.$value."\n");
-    }
-    fwrite($f, "\n");
-  }
-  fclose($f);
+  fstools::save_ini($_SERVER['DOCUMENT_ROOT'].'/etc/globals.conf', $GLOBALS['CFG']);
 }
 
 switch($mod) {
@@ -180,7 +164,7 @@ switch($mod) {
  case 'cleargb':
   $tmpl->Vars['TITLE'] = 'Очистка гостевой';
   $mysql = new mysql;
-  $mysql->Delete('book');
+  $mysql->Delete('gbook');
   $tmpl->Vars['MESSAGE'] = 'Гостевая очищена.';
   $tmpl->Vars['BACK'] = FALSE;
   echo $tmpl->Parse('notice.tmpl');
