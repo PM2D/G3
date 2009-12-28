@@ -1,0 +1,29 @@
+[*=$this->Parse('header.tmpl')*]
+
+<div>
+
+  [<a href="admin.php?do=new&amp;[*=SID*]">Добавить</a>]<hr />
+
+  [*FOREACH($VOTES as $POS=>$VOTE):*]
+    [<a href="admin.php?do=del&amp;n=[*=$POS*]&amp;[*=SID*]">удалить</a> -
+    <a href="admin.php?do=edit&amp;n=[*=$POS*]&amp;[*=SID*]">изменить</a>]<br />
+    <div class="base">
+    [*=$VOTE['title']*]<br />
+    <small><span class="alt">Варианты:</span><br />
+    [*FOREACH($VOTE['variants'] AS $VARIANT):*]
+      [*=$VARIANT*]<br />
+    [*ENDFOREACH*]
+    </small>
+    </div><hr />
+  [*ENDFOREACH*]
+
+  [*IF(!$VOTES):*]
+    Пусто.<hr />
+  [*ENDIF*]
+
+  [<a href="index.php?[*=SID*]">К опросам</a>]<br />
+  [<a href="/?[*=SID*]">На главную</a>]
+
+</div>
+
+[*=$this->Parse('footer.tmpl')*]

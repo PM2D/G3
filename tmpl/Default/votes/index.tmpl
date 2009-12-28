@@ -1,0 +1,30 @@
+[*=$this->Parse('header.tmpl')*]
+
+<div>
+
+[*IF(1<$USER['state']):*]
+  [<a href="admin.php?[*=SID*]">Управление</a>]<hr />
+[*ENDIF*]
+
+[*FOREACH($VOTES as $VOTE):*]
+
+  <div class="base">
+   <div class="title">[*=$VOTE['title']*]</div>
+   <small>
+    <span class="alt">Вариантов:</span> [*=$VOTE['variants']*]<br />
+    <span class="alt">Топ:</span> [*=$VOTE['most']*]<br />
+    <span class="alt">Голосов:</span> [*=$VOTE['total']*]
+    <div class="frame" style="text-align: center">
+     <a href="index.php?v=[*=$VOTE['id']*]&amp;[*=SID*]">подробнее</a>
+    </div>
+   </small>
+  </div><hr />
+
+[*ENDFOREACH*]
+
+[*=perf()*]<br />
+[<a href="/?[*=SID*]">На главную</a>]
+
+</div>
+
+[*=$this->Parse('footer.tmpl')*]

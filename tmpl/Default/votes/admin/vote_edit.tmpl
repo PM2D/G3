@@ -1,0 +1,30 @@
+[*=$this->Parse('header.tmpl')*]
+
+<div>
+
+  <form action="admin.php?do=update&amp;n=[*=$QID*]&amp;[*=SID*]" method="post">
+  <fieldset>
+   <span class="alt">Вопрос:</span><br />
+   <input type="text" name="ques" value="[*=$QUESTION*]" /><br />
+   <span class="alt">Варианты:</span><br />
+   <input type="text" name="v1" value="[*=$VARIANTS[1]*]" /><br />
+   <input type="text" name="v2" value="[*=$VARIANTS[2]*]" /><br />
+   <input type="text" name="v3" value="[*=$VARIANTS[3]*]" /><br />
+   <input type="text" name="v4" value="[*=$VARIANTS[4]*]" /><br />
+   <input type="text" name="v5" value="[*=$VARIANTS[5]*]" /><br />
+   <input type="text" name="v6" value="[*=$VARIANTS[6]*]" /><br />
+   <input type="text" name="v7" value="[*=$VARIANTS[7]*]" /><br />
+   <input type="text" name="v8" value="[*=$VARIANTS[8]*]" /><br />
+   <input type="text" name="v9" value="[*=$VARIANTS[9]*]" /><br />
+   <input type="text" name="v10" value="[*=$VARIANTS[10]*]" /><br />
+   <input type="text" name="v11" value="[*=$VARIANTS[11]*]" /><br />
+   <input type="text" name="v12" value="[*=$VARIANTS[12]*]" /><br />
+   <input type="submit" value="Изменить" />
+  </fieldset>
+  </form>
+  [<a href="admin.php?[*=SID*]">Вернуться</a>]<hr />
+  [<a href="/?[*=SID*]">На главную</a>]
+
+</div>
+
+[*=$this->Parse('footer.tmpl')*]

@@ -1,0 +1,32 @@
+[*=$this->Parse('header.tmpl')*]
+
+<div>
+
+  <div class="title">Создание опроса</div>
+  <form action="admin.php?do=add&amp;[*=SID*]" method="post">
+  <fieldset>
+   <span class="alt">Вопрос:</span><br />
+   <input type="text" name="ques" /><br />
+   <span class="alt">Варианты:</span><br />
+   <small>(не нужные оставить пустыми)</small><br />
+   1.<input type="text" name="v1" /><br />
+   2.<input type="text" name="v2" /><br />
+   3.<input type="text" name="v3" /><br />
+   4.<input type="text" name="v4" /><br />
+   5.<input type="text" name="v5" /><br />
+   6.<input type="text" name="v6" /><br />
+   7.<input type="text" name="v7" /><br />
+   8.<input type="text" name="v8" /><br />
+   9.<input type="text" name="v9" /><br />
+   10.<input type="text" name="v10" /><br />
+   11.<input type="text" name="v11" /><br />
+   12.<input type="text" name="v12" /><br />
+   <input type="submit" value="Дoбaвить" />
+  </fieldset>
+  </form>
+  [<a href="admin.php?[*=SID*]">Вернуться</a>]<hr />
+  [<a href="/?[*=SID*]">На главную</a>]
+
+</div>
+
+[*=$this->Parse('footer.tmpl')*]

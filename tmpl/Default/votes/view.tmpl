@@ -1,0 +1,40 @@
+[*=$this->Parse('header.tmpl')*]
+
+<div>
+
+<div class="base">
+  <div class="title">[*=$VOTE['title']*]</div>
+  <form action="/rate.php?[*=SID*]" method="post">
+  <fieldset><small>
+   [*FOREACH($VARIANTS as $VARIANT):*]
+     <img src="color.php?[*=$VARIANT['percent']*]" alt="&gt;" />
+     <label><input type="radio" name="rate" value="[*=$VARIANT['id']*]" /> [*=$VARIANT['title']*]</label>
+     ([*=$VARIANT['percent']*]%)<br />
+   [*ENDFOREACH*]
+   <input type="hidden" name="back" value="/votes/index.php?v=[*=$VOTE['id']*]&amp;[*=SID*]" />
+   <input type="submit" value="Проголосовать" />
+  </small></fieldset>
+  </form>
+</div>
+
+<small class="alt">Bceгo пpoгoлocoвaлo: [*=$VOTE['total']*]</small><hr /> 
+<div class="misc">
+  [*IF(FALSE!==$PREV):*]
+    <a href="index.php?v=[*=$PREV*]&amp;[*=SID*]">&lt;&lt; предыдущий</a>
+  [*ELSE:*]
+    &lt;&lt; предыдущий
+  [*ENDIF*]
+  |
+  [*IF(FALSE!==$NEXT):*]
+    <a href="index.php?v=[*=$NEXT*]&amp;[*=SID*]">следующий &gt;&gt;</a>
+  [*ELSE:*]
+    следующий &gt;&gt;
+  [*ENDIF*]
+</div>
+
+[<a href="/votes/?[*=SID*]">К опросам</a>]<br />
+[<a href="/?[*=SID*]">На главную</a>]
+
+</div>
+
+[*=$this->Parse('footer.tmpl')*]
