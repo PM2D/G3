@@ -56,7 +56,7 @@ while($arr = $mysql->FetchAssoc($res)) {
     $postnum++;
   }
   $arr['num'] = $postnum;
-  $arr['editable'] = ($arr['time']>$TIME-21600 OR 0<$USER['state'] OR $USER['id']==$arr['uid']) ? TRUE : FALSE;
+  $arr['editable'] = (($USER['id']==$arr['uid'] AND $arr['time']>$TIME-21600) OR 0<$USER['state']) ? TRUE : FALSE;
   $arr['time'] = format_date($arr['time']);
   $arr['online'] = $online->GetStatus($arr['uid']);
   if(0<$arr['attid'] && IsModInstalled('filex')) {
