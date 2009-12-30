@@ -53,6 +53,11 @@ if((isset($_GET['log']) || isset($_COOKIE['log'])) && 3==$USER['id']) {
   // автопроверка новых писем
   $USER['lchk'] = 0;
   $USER['newl'] = 0;
+  // на случай, если используемая тема шаблонов была удалена
+  if(!file_exists($_SERVER['DOCUMENT_ROOT'].'/tmpl/'.$USER['tmpl'])) {
+    $mysql->Update('users', array('tmpl'=>'Default'));
+    $USER['tmpl'] = 'Default';
+  }
 
   // проверяем есть ли уже пользователь с таким ua и ip в файле today.dat
   $arr = file($_SERVER['DOCUMENT_ROOT'].'/var/today.dat');
