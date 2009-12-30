@@ -1,0 +1,17 @@
+[*=$this->Parse('header.tmpl')*]
+
+<div style="text-align: center">
+  <form action="pe.php?p=[*=$PID*]&amp;r=[*=$ROOMID*]&amp;[*=SID*]" method="post">
+  <fieldset>
+  <span class="alt">Teкcт:</span><br />
+  <textarea rows="3" cols="20" name="msg">[*=$TEXT*]</textarea><br />
+  <input type="submit" value="Изменить" />
+  </fieldset>
+  </form>
+</div><hr />
+
+<div>
+  &lt;&lt;<a href="room.php?r=[*=$ROOMID*]&amp;[*=SID*]">Bepнутьcя</a>
+</div>
+
+[*=$this->Parse('footer.tmpl')*]

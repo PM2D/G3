@@ -1,0 +1,54 @@
+[*='<?xml version="1.0" encoding="UTF-8"?>'."\n"*]
+<!DOCTYPE html PUBLIC "-//WAPFORUM//DTD XHTML Mobile 1.0//EN" "http://www.wapforum.org/DTD/xhtml-mobile10.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="ru">
+
+<head>
+  <title>[*=$TITLE*]</title>
+  <link rel="stylesheet" type="text/css" href="/css/[*=$USER['tmpl']*]/[*=$USER['style']*]/style.css" />
+  <meta http-equiv="refresh" content="90; url=room.php?r=[*=$ROOM['id']*]&amp;[*=SID*]" />
+</head>
+
+<body><div>
+
+  [<a href="say.php?r=[*=$ROOM['id']*]&amp;[*=SID*]">Oтвeтить</a>]<br />
+  [<a href="room.php?r=[*=$ROOM['id']*]&amp;[*=$GLOBALS['TIME']*]&amp;[*=SID*]">Oбнoвить</a>]<hr />
+
+  [*FOREACH($POSTS as $POST):*]
+   <small>
+   [<b><a href="/info.php?uid=[*=$POST['uid']*]&amp;[*=SID*]">[*=$POST['login']*]</a></b>]
+   [<a href="say.php?uid=[*=$POST['uid']*]&amp;r=[*=$ROOM['id']*]&amp;[*=SID*]">»</a>]
+   [[*=$POST['time']*]]</small>
+   <div class="base">[*=$POST['msg']*]</div>
+   [*IF($USER['id']==$POST['uid'] AND 3!=$USER['id']):*]
+     <small>[<a href="pe.php?p=[*=$POST['id']*]&amp;r=[*=$ROOM['id']*]&amp;[*=SID*]">edit</a>]</small>
+   [*ENDIF*]
+   [*IF(0<$USER['state']):*]
+     <small>[<a href="del.php?p=[*=$POST['id']*]&amp;r=[*=$ROOM['id']*]&amp;[*=SID*]">del</a>]</small>
+   [*ENDIF*]
+   <hr />
+  [*ENDFOREACH*]
+
+  [*IF(!$POSTS):*]
+   <div class="base">Пусто.</div><hr />
+  [*ENDIF*]
+
+  <form action="room.php?r=[*=$ROOM['id']*]&amp;[*=$GLOBALS['TIME']*]&amp;[*=SID*]" method="post">
+  <fieldset style="text-align: center">
+   <input name="msg" type="text" /><input type="submit" value="Oтпpaвить" />
+  </fieldset>
+  </form><hr />
+
+  <div style="text-align: center">
+   [*NAV('room.php', $NAV['pos'], $NAV['total'], $NAV['limit'], $NAV['add'])*]
+  </div><hr />
+
+  <div class="misc">
+   OnLine: <a href="/who.php?[*=SID*]">[*=$ONLINE*]</a><br />
+   [*=perf()*] ceк
+  </div>
+
+  [<a href="index.php?[*=SID*]">K комнатам</a>]<br />
+  [<a href="/?[*=SID*]">На главную</a>]
+
+</div></body>
+</html>

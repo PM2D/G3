@@ -1,0 +1,34 @@
+[*=$this->Parse('header.tmpl')*]
+
+<div>
+
+  [*IF(1<$USER['state']):*]
+     <small><img src="/ico/[*=$USER['icons']*]/pic1.gif" alt="&gt;" />[<a href="/admin.php?mod=newroom&amp;[*=SID*]">Новая комната</a>]</small>
+  [*ENDIF*]
+
+  <div class="base">
+  <div class="title">Комнаты</div>
+  <div class="frame">
+  [*FOREACH($ROOMS as $ROOM):*]
+    <img src="/ico/[*=$USER['icons']*]/pic1.gif" alt="&gt;" />
+    <a href="room.php?r=[*=$ROOM['id']*]&amp;[*=SID*]">[*=$ROOM['name']*]</a> [[*=$ROOM['online']*]]
+    [*IF(2==$USER['state']):*]
+      <small>[<a href="/admin.php?mod=delroom&amp;d=[*=$ROOM['id']*]&amp;[*=SID*]">удалить</a> -
+      <a href="/admin.php?mod=editroom&amp;r=[*=$ROOM['id']*]&amp;[*=SID*]">изменить</a>]</small>
+    [*ENDIF*]
+    <br />
+  [*ENDFOREACH*]
+  </div>
+  </div>
+
+ <hr />
+ <div class="misc">
+  Онлайн: <a href="/who.php?[*=SID*]">[*=$ONLINE*]</a><br />
+  [*=perf()*] ceк
+ </div>
+
+[<a href="/?[*=SID*]">На главную</a>]
+
+</div>
+
+[*=$this->Parse('footer.tmpl')*]

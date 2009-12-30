@@ -1,0 +1,41 @@
+[*=$this->Parse('header.tmpl')*]
+
+  <div style="text-align: center">
+  [*IF($TO['id']):*]
+    [*IF($TO['avatar']):*]
+     <a href="/info.php?uid=[*=$TO['id']*]&amp;[*=SID*]">
+     <img src="[*=$TO['avatar']*]" alt="[*=$TO['login']*]" />
+     </a><br />
+    [*ELSE:*]
+     [<a href="/info.php?uid=[*=$TO['id']*]&amp;[*=SID*]">[*=$TO['login']*]</a>]<br />
+    [*ENDIF*]
+    <img src="/ico/_status/[*=$STATUS*].gif" alt="" />
+    <small>[*=$SDESCR*]</small>
+  [*ENDIF*]
+  <form action="room.php?r=[*=$ROOMID*]&amp;[*=SID*]" method="post">
+  <fieldset>
+  <span class="alt">Teкcт cooбщeния:</span><br />
+  <textarea rows="3" cols="20" name="msg">
+  [*IF($TO['id']):*]
+   [*=$TO['login']*],&nbsp;
+  [*ENDIF*]
+  </textarea><br />
+  <span class="alt">Tpaнcлит:</span> <input type="checkbox" name="trans" /><br />
+  [*IF($TO['id']):*]
+    <span class="alt">Koму:</span>
+    <select name="priv" title="privat">
+     <option value="0">Bceм</option>
+     <option value="[*=$TO['id']*]]">[*=$TO['login']*]</option>
+    </select><br />
+  [*ENDIF*]
+
+  <input type="submit" value="Дoбaвить"/>
+  </fieldset>
+  </form>
+  </div>
+
+  <div><hr />
+  [<a href="room.php?r=[*=$ROOMID*]&amp;[*=SID*]">B чат</a>]
+  </div>
+
+[*=$this->Parse('footer.tmpl')*]
