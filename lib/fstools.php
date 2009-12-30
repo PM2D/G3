@@ -119,7 +119,7 @@ final class fstools {
     foreach($data as $key1=>$value1) {
       if(is_array($value1)) {
         fwrite($f, '['.$key1."]\n");
-        foreach($value as $key2 => $value2) {
+        foreach($value1 as $key2 => $value2) {
           if(!$value2) {
             $value2 = 'false';
           } elseif(is_bool($value2)) {
