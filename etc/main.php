@@ -1,6 +1,6 @@
 <?php
 // This file is a part of GIII (g3.steelwap.org)
-define('CMS_VERSION', '3.2.0_rc3');
+define('CMS_VERSION', '3.2.0');
 
 // функция подсчета времени генерации
 function perf() {
@@ -23,7 +23,7 @@ function exception_handler($e) {
 set_exception_handler('exception_handler');
 
 // класс онлайн
-final class online {
+class online {
 
   static public $count = 0;
   public $arr;
@@ -98,7 +98,7 @@ final class online {
 }
 
 // класс для сжатия выводимого контента
-final class compress {
+class compress {
 
   static public $mode = 'off';
   static public $level = 0;
