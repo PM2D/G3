@@ -42,7 +42,7 @@ if(isset($_POST['name'])){
   $name = htmlspecialchars($name);
   $name = $mysql->EscapeString(stripslashes($name));
 
-  $text = '[b]'.$name."[/b]:\n".$text;
+  $text = '[b]'.$name."[/b] :\n".$text;
 
   if('on'==$trans){
     $obj = new translit;

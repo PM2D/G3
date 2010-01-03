@@ -66,7 +66,6 @@ if(isset($_GET['v'])) {
     $tmpl->Vars['VOTES'][$i]['title'] = $arr[0];
     $tmpl->Vars['VOTES'][$i]['total'] = $rarr['cnt'];
     $tmpl->Vars['VOTES'][$i]['variants'] = $vcnt-1;
-    $tmpl->Vars['VOTES'][$i]['most'] = ($rarr['avg']) ? $arr[round($rarr['avg'])] : 'Нет';
 
     // расчет одного процента
     if(0 == $rarr['cnt']) {

@@ -1,6 +1,8 @@
 [*=$this->Parse('header.tmpl')*]
 
-<div>
+<div class="title">Ссылки</div>
+
+<div class="frame">
 
 [*IF(1<$USER['state']):*]
   [<a href="add.php?[*=SID*]">Добавить</a>]<hr />
@@ -10,20 +12,24 @@
   <img src="[*=$LINK['icon']*]" alt="&gt;" />
   <a href="[*=$LINK['url']*]">[*=$LINK['name']*]</a>
   [*IF(1<$USER['state']):*]
-    <br />
+    <div class="frame">
     <small>[<a href="del.php?n=[*=$LINK['id']*]&amp;[*=SID*]">удалить</a>]
     [<a href="fetchicon.php?n=[*=$LINK['id']*]]&amp;[*=SID*]">обновить иконку</a>]</small>
+    </div>
   [*ENDIF*]
   <br />
 [*ENDFOREACH*]
 
 [*IF(!$LINKS):*]
-  Пусто
+  Пусто.
 [*ENDIF*]
 
-<hr />
-[<a href="/?[*=SID*]">Ha глaвную</a>]
+</div>
 
+<hr />
+
+<div>
+  [<a href="/?[*=SID*]">Ha глaвную</a>]
 </div>
 
 [*=$this->Parse('footer.tmpl')*]
