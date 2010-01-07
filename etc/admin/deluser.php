@@ -17,6 +17,8 @@ if(isset($_GET['sure'])) {
   }
 
   $mysql = new mysql;
+  // информация о пользователе для костылей
+  $user = $mysql->GetRow('`id`,`login`,`pass`', 'users', '`id`='.$n);
   // удаление из таблицы пользователей, записок и отзывов
   $mysql->Query('DELETE LOW_PRIORITY FROM `users` WHERE `id`='.$n.' LIMIT 1');
   $mysql->Query('DELETE LOW_PRIORITY FROM `letters` WHERE `to`='.$n.' OR `uid`='.$n);
