@@ -47,7 +47,7 @@
        <option value="2">плохо</option>
        <option value="1">ужасно</option>
       </select>
-      <input type="hidden" name="key" value="[*=$USER['ratekey']*]" />
+      <input type="hidden" name="key" value="/filex/[*=$FILE['id']*]" />
       <input type="hidden" name="back" value="/filex/view.php?c=[*=$FILE['cid']*]&amp;f=[*=$FILE['id']*]&amp;[*=SID*]" />
       <input type="submit" value="оценить" />
      </form>
