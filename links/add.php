@@ -17,6 +17,9 @@ if(isset($_POST['name']) && isset($_POST['url'])) {
   $uri = substr($url, $slpos);
 
   if(ini_get('allow_url_fopen')) {
+
+    include($_SERVER['DOCUMENT_ROOT'].'/links/class.ico.php');
+
     $http = new httpquery($host, $uri);
     $http->sendHeaders['User-Agent'] = 'Mozilla/5.0 (X11; U; Linux x86_64; en-US; rv:1.9.2b5) Gecko/20091222 Gentoo Firefox/3.6b5';
     $http->SendQuery();
@@ -47,12 +50,15 @@ if(isset($_POST['name']) && isset($_POST['url'])) {
        break;
 
        case 'ico':
-        include($_SERVER['DOCUMENT_ROOT'].'/links/class.ico.php');
         $ico = new Ico($match[1]);
         $ico->SetBackgroundTransparent();
         $img = $ico->GetIcon(0);
-        imagegif($img, $_SERVER['DOCUMENT_ROOT'].'/links/favicons/'.$host.'.gif');
-        $icon = 'favicons/'.$host.'.gif';
+        if($img) {
+          imagegif($img, $_SERVER['DOCUMENT_ROOT'].'/links/favicons/'.$host.'.gif');
+          $icon = 'favicons/'.$host.'.gif';
+        } else {
+          $icon = NULL;
+        }
        break;
 
        default:
@@ -75,8 +81,12 @@ if(isset($_POST['name']) && isset($_POST['url'])) {
         $ico = new Ico($match[1]);
         $ico->SetBackgroundTransparent();
         $img = $ico->GetIcon(0);
-        imagegif($img, $_SERVER['DOCUMENT_ROOT'].'/links/favicons/'.$host.'.gif');
-        $icon = 'favicons/'.$host.'.gif';
+        if($img) {
+          imagegif($img, $_SERVER['DOCUMENT_ROOT'].'/links/favicons/'.$host.'.gif');
+          $icon = 'favicons/'.$host.'.gif';
+        } else {
+          $icon = NULL;
+        }
       } else {
         $icon = NULL;
       }
