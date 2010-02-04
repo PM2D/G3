@@ -9,11 +9,19 @@ $id =& getvar('i');
 $id = intval($id) - 1;
 
 $arr = file($_SERVER['DOCUMENT_ROOT'].'/var/rssr.dat');
-if(!isset($arr[$id])) raise_error('No feed?');
+if (!isset($arr[$id])) raise_error('No feed?');
 $arr = explode('|', $arr[$id]);
 $file = $_SERVER['DOCUMENT_ROOT'].'/var/cache/rss/'.abs(crc32($arr[0])).'.dat';
 
-if(@filemtime($file) < $TIME-$arr[2]) {
+if (file_exists($file)) {
+  $mtime = filemtime($file);
+} else {
+  $mtime = 0;
+}
+
+$ttl = $arr[2];
+
+if ($mtime < $TIME-$ttl) {
   $url = $arr[0];
   $slpos = strpos($url, '/');
   $host = substr($url, 0, $slpos);
@@ -28,10 +36,10 @@ if(@filemtime($file) < $TIME-$arr[2]) {
   // закрываем подключение
   $http->Close();
   $data = $http->responseData;
-  if(strpos($data, 'g="windows-1251"')) {
+  if (strpos($data, 'g="windows-1251"')) {
     $data = strtr($data, array('g="windows-1251"'=>'g="UTF-8"'));
     $data = iconv('Windows-1251', 'UTF-8', $data);
-  };
+  }
 
   // Известно 2 способа записи html кода в текст новости без нарушений правил xml:
   // 1. через замену тегов на коды символов вроде &gt;
@@ -68,11 +76,11 @@ if(@filemtime($file) < $TIME-$arr[2]) {
   $xml->XML($data);
   $arr = array();
   $i = 0;
-  while($xml->read()){
-    if($xml->name == 'item' && $xml->nodeType == XMLReader::ELEMENT){
-      while($xml->read() && $xml->name != 'item'){
-        if($xml->name[0]!='#') $name = $xml->name;
-        if($xml->nodeType == XMLReader::TEXT || $xml->nodeType == XMLReader::CDATA){
+  while ($xml->read()) {
+    if ($xml->name == 'item' && $xml->nodeType == XMLReader::ELEMENT) {
+      while ($xml->read() && $xml->name != 'item') {
+        if ($xml->name[0]!='#') $name = $xml->name;
+        if ($xml->nodeType == XMLReader::TEXT || $xml->nodeType == XMLReader::CDATA) {
           $arr[$i][$name] = strip_tags($xml->value, '<a><br/>');
         }
       }
@@ -92,7 +100,16 @@ if(@filemtime($file) < $TIME-$arr[2]) {
 // $arr = unserialize(file_get_contents($file)); print_r($arr); exit;
 
 $tmpl = new template;
+// правильное кэширование
+header('Expires: '.gmdate('D, d M Y H:i:s', $TIME + $ttl).' GMT');
+if (isset($_SERVER['HTTP_IF_MODIFIED_SINCE'])) {
+  if (strtotime(substr($_SERVER['HTTP_IF_MODIFIED_SINCE'], 5)) >= $mtime) {
+    header('HTTP/1.1 304 Not Modified', 304, TRUE); exit;
+  }
+}
+header('Last-Modified: '.gmdate('D, d M Y H:i:s', $mtime).' GMT', TRUE);
 $tmpl->SendHeaders();
+header('Cache-Control: public', TRUE);
 $compress->Enable();
 $tmpl->Vars['TITLE'] = 'Просмотр новостной ленты';
 $tmpl->Vars['LIST'] = array();
@@ -100,18 +117,18 @@ $tmpl->Vars['LIST'] = array();
 $arr = unserialize(file_get_contents($file));
 
 // если это не просмотр одной отдельной новости то используем цикл
-if(!isset($_GET['e'])) {
+if (!isset($_GET['e'])) {
   $tmpl->Vars['VIEWONE'] = FALSE;
   $total = sizeof($arr);
   $arr = array_slice($arr, $n, $USER['np']);
   $cnt = sizeof($arr);
-  for($i=0; $i<$cnt; $i++) {
+  for ($i=0; $i<$cnt; $i++) {
     // чтобы не было ошибок, если канал не содержит некоторых данных, используем пустые
-    if(!isset($arr[$i]['description'])) $arr[$i]['description'] = NULL;
-    if(!isset($arr[$i]['pubDate'])) $arr[$i]['pubDate'] = NULL;
-    if(!isset($arr[$i]['link'])) $arr['link'] = NULL;
+    if (!isset($arr[$i]['description'])) $arr[$i]['description'] = NULL;
+    if (!isset($arr[$i]['pubDate'])) $arr[$i]['pubDate'] = NULL;
+    if (!isset($arr[$i]['link'])) $arr['link'] = NULL;
     // обрезаем новость если слишком длинная
-    if(isset($arr[$i]['description'][520])) {
+    if (isset($arr[$i]['description'][520])) {
       $arr[$i]['description'] = mb_substr($arr[$i]['description'], 0, 255, 'UTF-8');
       $arr[$i]['description'] = strip_tags($arr[$i]['description'], '<br/>');
       $arr[$i]['description'] = preg_replace('/&([a-z]){0,6}$/', NULL, $arr[$i]['description']);
@@ -138,8 +155,8 @@ if(!isset($_GET['e'])) {
    $tmpl->Vars['NEXT'] = isset($arr[$item+1]) ? ($item+1) : FALSE;
    $tmpl->Vars['PREV'] = isset($arr[$item-1]) ? ($item-1) : FALSE;
    $arr = $arr[$item];
-   if(!isset($arr['link'])) $arr['link'] = NULL;
-   if(!isset($arr[$item]['pubDate'])) $arr[$item]['pubDate'] = NULL;
+   if (!isset($arr['link'])) $arr['link'] = NULL;
+   if (!isset($arr[$item]['pubDate'])) $arr[$item]['pubDate'] = NULL;
    $arr['more'] = FALSE;
    $tmpl->Vars['LIST'][] = $arr;
 }
