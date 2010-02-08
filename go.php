@@ -5,7 +5,7 @@ if(strpos($url, $_SERVER['HTTP_HOST'])){
   Header('Location: '.$url);
   exit;
 }
-Header('Content-Type: application/xhtml+xml;charset=utf-8');
+Header('Content-Type: text/html; charset=utf-8');
 Header('Cache-Control: no-cache, must-revalidate');
 print('<?xml version="1.0" encoding="utf-8"?>
 <!DOCTYPE html PUBLIC "-//WAPFORUM//DTD XHTML Mobile 1.0//EN" "http://www.wapforum.org/DTD/xhtml-mobile10.dtd">
