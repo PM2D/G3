@@ -5,6 +5,7 @@ switch($arr['type']) {
   case 'jpeg':
   case 'jpg':
   case 'gif':
+  case 'png':
    $arr['handler'] = '/ddir/_handlers/img.php?f='.$arr['id'];
   break;
   case 'zip':
