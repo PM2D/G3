@@ -1,12 +1,12 @@
 <?php
 // This file is a part of GIII (g3.steelwap.org)
-require($_SERVER['DOCUMENT_ROOT'].'/etc/main.php');
+require ($_SERVER['DOCUMENT_ROOT'].'/etc/main.php');
 
 $path = $_SERVER['DOCUMENT_ROOT'].'/av/';
 
-if(!isset($USER['id']) || 3==$USER['id']) raise_error('Дocтуп зaпpeщён.');
+if (!isset($USER['id']) || 3==$USER['id']) raise_error('Дocтуп зaпpeщён.');
 
-if(!is_writable($path))
+if (!is_writable($path))
   raise_error('Heвoзмoжнo пpoизвoдить зaпиcь - дocтуп к пaпкe зaпpeщён.');
 
 $tmpl = new template;
@@ -18,24 +18,24 @@ $uid =& $USER['id'];
 $mysql = new mysql;
 $av = $mysql->GetField('`avatar`', 'users', '`id`='.$uid);
 
-if(isset($_POST['import'])){
+if (isset($_POST['import'])) {
 
-  if(!isset($_POST['url']) || !$_POST['url']) raise_error('Boзмoжнo нe зaпoлнeнo пoлe.');
+  if (!isset($_POST['url']) || !$_POST['url']) raise_error('Boзмoжнo нe зaпoлнeнo пoлe.');
 
   $url =& $_POST['url'];
   $ext = substr($url, strrpos($url, '.')+1);
   $ext = strtolower($ext);
-  if(!in_array($ext, explode(',', $CFG['AVATAR']['allowed'])) || !trim($url) || substr($url, 0, 7)!='http://')
+  if (!in_array($ext, explode(',', $CFG['AVATAR']['allowed'])) || !trim($url) || substr($url, 0, 7)!='http://')
     raise_error('Heвepный url.');
 
-  if(!$f = fopen($url, 'rb')) raise_error('Heвepный url.');
+  if (!$f = fopen($url, 'rb')) raise_error('Heвepный url.');
   $data = fread($f, $CFG['AVATAR']['max']);
-  if(!feof($f)){
+  if (!feof($f)) {
     fclose($f);
     raise_error('Boзмoжнo фaйл cлишкoм бoльшoй.');
-  };
+  }
   fclose($f);
-  if($av) unlink($_SERVER['DOCUMENT_ROOT'].$av);
+  if ($av) unlink($_SERVER['DOCUMENT_ROOT'].$av);
   $f = fopen($path.$uid.'.'.$ext, 'wb');
   fwrite($f, $data);
   fclose($f);
@@ -45,22 +45,22 @@ if(isset($_POST['import'])){
   $tmpl->Vars['BACK'] = FALSE;
   echo $tmpl->Parse('notice.tmpl');
 
-} elseif(isset($_POST['do'])) {
+} elseif (isset($_POST['do'])) {
 
-  if(isset($_FILES['userfile']) && is_uploaded_file($_FILES['userfile']['tmp_name'])){
+  if (isset($_FILES['userfile']) && is_uploaded_file($_FILES['userfile']['tmp_name'])) {
 
     $file =& $_FILES['userfile'];
     $ext = substr($file['name'], strrpos($file['name'], '.')+1);
     $ext = strtolower($ext);
-    if(!in_array($ext, explode(',', $CFG['AVATAR']['allowed']))) raise_error('Фaйл нeдoпуcтимoгo фopмaтa.');
-    if($file['error']) raise_error($file['error']);
-    if($file['size']>$CFG['AVATAR']['max'])
+    if (!in_array($ext, explode(',', $CFG['AVATAR']['allowed']))) raise_error('Фaйл нeдoпуcтимoгo фopмaтa.');
+    if ($file['error']) raise_error($file['error']);
+    if ($file['size']>$CFG['AVATAR']['max'])
       raise_error('Фaйл cлишкoм бoльшoй ('.round($file['size']/1024,1).'kb > '.round($max/1024,1).'kb)');
-    if($av) unlink($_SERVER['DOCUMENT_ROOT'].$av);
-    if(move_uploaded_file($file['tmp_name'], $path.$uid.'.'.$ext)){
+    if ($av) unlink($_SERVER['DOCUMENT_ROOT'].$av);
+    if (move_uploaded_file($file['tmp_name'], $path.$uid.'.'.$ext)) {
       chmod($path.$uid.'.'.$ext, 0666);
       $mysql->Update('users', array('avatar'=>'/av/'.$uid.'.'.$ext), '`id`='.$uid.' LIMIT 1');
-    };
+    }
 
   } else raise_error('Вероятно файл слишком большой.');
 
@@ -82,19 +82,19 @@ if(isset($_POST['import'])){
 }
 
 // если изображение загружалось и оно шире 100px, изменяем его размер
-if(isset($_POST['do']) or isset($_POST['import'])){
+if (isset($_POST['do']) or isset($_POST['import'])) {
   // открываем изображение
-  if($ext=='gif'){
+  if ($ext=='gif') {
     $img1 = imagecreatefromgif($path.$uid.'.'.$ext);
-  } elseif($ext=='jpg' || $ext=='jpeg'){
+  } elseif ($ext=='jpg' || $ext=='jpeg') {
     $img1 = imagecreatefromjpeg($path.$uid.'.'.$ext);
-  } elseif($ext=='png'){
+  } elseif ($ext=='png') {
     $img1 = imagecreatefrompng($path.$uid.'.'.$ext);
   } else exit;
   // получаем оригинальный размер изображения
   $ox = imagesx($img1);
   $oy = imagesy($img1);
-  if($ox>100){
+  if ($ox>100) {
     // расчитываем высоту согласно пропорциям и изменяем размер изображения
     $px = 100;
     $py = round($oy/round($ox/$px, 1));
@@ -102,14 +102,14 @@ if(isset($_POST['do']) or isset($_POST['import'])){
     imagecopyresampled($img2, $img1, 0, 0, 0, 0, $px, $py, $ox, $oy);
     imagedestroy($img1);
     // сохраняем изображение
-    if($ext=='gif'){
+    if ($ext=='gif') {
       imagegif($img2, $path.$uid.'.'.$ext);
-    } elseif($ext=='jpg' || $ext=='jpeg'){
+    } elseif ($ext=='jpg' || $ext=='jpeg') {
       imagejpeg($img2, $path.$uid.'.'.$ext);
     } else {
       imagepng($img2, $path.$uid.'.'.$ext);
     }
-  };
-};
+  }
+}
 
 ?>

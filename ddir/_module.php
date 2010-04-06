@@ -40,6 +40,7 @@ function install() {
     save_cfg();
   }
   fstools::make_dir($_SERVER['DOCUMENT_ROOT'].'/var/cache/zip');
+  fstools::make_dir($_SERVER['DOCUMENT_ROOT'].'/var/cache/imgs');
   fstools::make_dir($_SERVER['DOCUMENT_ROOT'].'/tmp/mp3');
   fstools::make_dir($_SERVER['DOCUMENT_ROOT'].'/tmp/jar');
   include($_SERVER['DOCUMENT_ROOT'].'/etc/ddir/listroot.php');

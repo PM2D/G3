@@ -54,7 +54,7 @@ if (!isset($_GET['edit'])) {
   if (FALSE !== $tmpl->Vars['HAVEBLOG']) $score += 10;
   if ($UD['about']) $score += 10;
   if ($UD['icq']) $score += 10;
-  if ($UD['mail']) $score += 10;
+  if ($UD['email']) $score += 10;
   if ($UD['from']) $score += 10;
   if ($UD['jabber']) $score += 20; // поддержим jabber :)
   $tmpl->Vars['UD']['score'] = $score;
