@@ -22,7 +22,7 @@ while($arr = $mysql->FetchAssoc()){
   $tmpl->Vars['THEMES'][] = $arr;
 }
 
-include($_SERVER['DOCUMENT_ROOT'].'/tmpl/'.$USER['tmpl'].'/nav.php');
+$tmpl->UseNav();
 $tmpl->Vars['NAV']['pos'] = $n;
 $tmpl->Vars['NAV']['total'] = $mysql->GetFoundRows();
 $tmpl->Vars['NAV']['limit'] = $USER['np'];
