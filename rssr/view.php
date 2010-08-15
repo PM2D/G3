@@ -22,12 +22,10 @@ if (file_exists($file)) {
 $ttl = $arr[2];
 
 if ($mtime < $TIME-$ttl) {
-  $url = $arr[0];
-  $slpos = strpos($url, '/');
-  $host = substr($url, 0, $slpos);
-  $uri = substr($url, $slpos);
+  $url = parse_url('http://'.$arr[0]);
+  if (!isset($url['query'])) $url['query'] = NULL;
   // создаем новое подключение
-  $http = new httpquery($host, $uri);
+  $http = new httpquery($url['host'], $url['path'].'?'.$url['query']);
   // добавляем для прикола user-agent и отправляем GET-запрос
   $http->sendHeaders['User-Agent'] = 'G3-RSSReader/2.0.2';
   $http->SendQuery();
@@ -63,13 +61,15 @@ if ($mtime < $TIME-$ttl) {
 		'<br>'=>'<br/>',
 		'<li>'=>'<br/>&middot; ',
 		'"http:'=>'"/go.php?http:',
-		'\'http:'=>'\'/go.php?http:',
+		'\'http:'=>'\'/go.php?http:'
 	));
+  // для картинок отправляем на ресайзер
+  $data = strtr($data, array('src="/go.php?'=>'src="img.php?'));
   // мега костыль для тех лент, которые не используют нормальные &amp;
   $data = preg_replace('/&([a-z]*([\s=]|$))/', '&amp;\\1', $data);
   // на всякий случай
   $data = trim($data);
-  if(!$data) throw new Exception('No data in '.$url.' ?');
+  if(!$data) throw new Exception('No data in '.$url['host'].$url['path'].'?'.$url['query']);
   // парсим xml в массив
   // может и не самый лучший способ, но работает нормально (вроде :))
   $xml = new XMLReader;
@@ -81,7 +81,7 @@ if ($mtime < $TIME-$ttl) {
       while ($xml->read() && $xml->name != 'item') {
         if ($xml->name[0]!='#') $name = $xml->name;
         if ($xml->nodeType == XMLReader::TEXT || $xml->nodeType == XMLReader::CDATA) {
-          $arr[$i][$name] = strip_tags($xml->value, '<a><br/>');
+          $arr[$i][$name] = strip_tags($xml->value, '<a><img><br/>');
         }
       }
       $i++;
@@ -130,7 +130,7 @@ if (!isset($_GET['e'])) {
     // обрезаем новость если слишком длинная
     if (isset($arr[$i]['description'][520])) {
       $arr[$i]['description'] = mb_substr($arr[$i]['description'], 0, 255, 'UTF-8');
-      $arr[$i]['description'] = strip_tags($arr[$i]['description'], '<br/>');
+      $arr[$i]['description'] = strip_tags($arr[$i]['description'], '<br/><img>');
       $arr[$i]['description'] = preg_replace('/&([a-z]){0,6}$/', NULL, $arr[$i]['description']);
       $arr[$i]['description'] .= '...';
       $arr[$i]['more'] = 'view.php?i='.($id+1).'&amp;e='.($i+$n).'&amp;'.SID;
