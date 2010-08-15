@@ -22,34 +22,19 @@ if (substr($url, 0, 5) != 'http:') {
   header('HTTP/1.1 204 No Content', TRUE, 204);
   exit;
 }
-$data = file_get_contents($url);
-
-if (0 < strlen($data)) {
+$cached = $_SERVER['DOCUMENT_ROOT'].'/var/cache/imgs/'.abs(crc32($url)).'.jpg';
+if (!file_exists($cached)) {
+  $data = file_get_contents($url);
   $img1 = imagecreatefromstring($data);
   $ox = imagesx($img1);
   $oy = imagesy($img1);
-  if (isset($_POST['w'])) {
-    if (641>$_POST['w'] && 0<$_POST['w']) $px=intval($_POST['w']); else $px=92;
-    $py = round($oy / round($ox/$px, 1));
-    $img2 = imagecreatetruecolor($px, $py);
-    imagecopyresampled($img2, $img1, 0, 0, 0, 0, $px, $py, $ox, $oy);
-    header('Content-Type: image/jpeg');
-    header('Content-Disposition: ; filename="'.basename($url).'"');
-    imagejpeg($img2);
-  } else {
-    $cached = $_SERVER['DOCUMENT_ROOT'].'/var/cache/imgs/'.abs(crc32($url)).'.jpg';
-    if (!file_exists($cached)) {
-      $px = 92;
-      $py = round($oy / round($ox/$px, 1));
-      $img2 = imagecreatetruecolor($px, $py);
-      imagecopyresampled($img2, $img1, 0, 0, 0, 0, $px, $py, $ox, $oy);
-      imagejpeg($img2, $cached);
-    }
-    header('Content-Type: image/jpeg');
-    header('Content-Disposition: ; filename="'.basename($url).'"');
-    readfile($cached);
-  }
-} else {
-  header('HTTP/1.1 204 No Content', TRUE, 204);
+  $px = 92;
+  $py = round($oy / round($ox/$px, 1));
+  $img2 = imagecreatetruecolor($px, $py);
+  imagecopyresampled($img2, $img1, 0, 0, 0, 0, $px, $py, $ox, $oy);
+  imagejpeg($img2, $cached);
 }
+header('Content-Type: image/jpeg');
+header('Content-Disposition: ; filename="'.basename($url).'"');
+readfile($cached);
 ?>
