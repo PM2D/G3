@@ -11,7 +11,29 @@ $n = intval($n);
 $mysql = new mysql;
 $category = $mysql->GetRow('*', 'filex_cats', '`id`='.$cid);
 
-if(!$category['id']) raise_error('Heт тaкой категории.', 'index.php?'.SID);
+if (!$category['id']) raise_error('Heт тaкой категории.', 'index.php?'.SID);
+
+if ($category['passw']) {
+  if (isset($_COOKIE['fc'.$category['id'].'p']) && $_COOKIE['fc'.$category['id'].'p']) {
+    if ($_COOKIE['fc'.$category['id'].'p']!=$category['passw']) {
+      setcookie('fc'.$category['id'].'p', NULL, $TIME-3600, '/filex/view.php', $_SERVER['HTTP_HOST']);
+    }
+  } elseif (isset($_POST['passw'])) {
+    if ($_POST['passw']!=$category['passw']) {
+      raise_error('Неверный пароль. Доступ запрещен.', 'index.php?'.SID);
+    } else {
+      setcookie('fc'.$category['id'].'p', $_POST['passw'], $TIME+2592000, '/filex/view.php', $_SERVER['HTTP_HOST']);
+    }
+  } else {
+    $tmpl = new template;
+    $tmpl->SendHeaders();
+    $compress->Enable();
+    $tmpl->Vars['TITLE'] = 'Обменник - '.$category['title'].' - пароль';
+    $tmpl->Vars['CID'] = $category['id'];
+    echo $tmpl->Parse('filex/passw.tmpl');
+    exit;
+  }
+}
 
 $tmpl = new template;
 $tmpl->SendHeaders();
@@ -23,11 +45,11 @@ $rating = new rating;
 
 $tmpl->Vars['FILEVIEW'] = isset($_GET['f']);
 
-if($tmpl->Vars['FILEVIEW']) {
+if ($tmpl->Vars['FILEVIEW']) {
 
   $fid = intval($_GET['f']);
   $file = $mysql->GetRow('`filex_files`.*,`users`.`login`', 'filex_files` LEFT JOIN `users` ON `filex_files`.`uid`=`users`.`id', '`filex_files`.`id`='.$fid);
-  if(!$file) raise_error('Heт тaкoгo файла.');
+  if (!$file) raise_error('Heт тaкoгo файла.');
   // получаем id "соседних" файлов
   $file['back'] = $mysql->GetField('`id`', 'filex_files', '`cid`='.$cid.' AND `id`<'.$fid.' ORDER BY `id` DESC');
   $file['next'] = $mysql->GetField('`id`', 'filex_files', '`cid`='.$cid.' AND `id`>'.$fid.' ORDER BY `id` ASC');
@@ -43,18 +65,18 @@ if($tmpl->Vars['FILEVIEW']) {
   // предпросмотр по умолчанию false (используется для изображений)
   $tmpl->Vars['PREV'] = FALSE;
 
-  switch($file['type']) {
+  switch ($file['type']) {
 
    case 'gif':
    case 'jpg':
    case 'jpeg':
    case 'png':
-    if(!$file['width']) {
-     if($file['type']=='gif') {
+    if (!$file['width']) {
+     if ($file['type']=='gif') {
       $img = imagecreatefromgif($_SERVER['DOCUMENT_ROOT'].'/filex/files/'.$file['filename']);
-     } elseif($file['type']=='jpg' || $file['type']=='jpeg') {
+     } elseif ($file['type']=='jpg' || $file['type']=='jpeg') {
       $img = imagecreatefromjpeg($_SERVER['DOCUMENT_ROOT'].'/filex/files/'.$file['filename']);
-     } elseif($file['type']=='png') {
+     } elseif ($file['type']=='png') {
       $img = imagecreatefrompng($_SERVER['DOCUMENT_ROOT'].'/filex/files/'.$file['filename']);
      };
      $file['width'] = $upd['width'] = imagesx($img);
@@ -114,21 +136,24 @@ if($tmpl->Vars['FILEVIEW']) {
   $mysql->Query('SELECT SQL_CALC_FOUND_ROWS `filex_files`.*,`users`.`login`
 FROM `filex_files` LEFT JOIN `users` ON `filex_files`.`uid`=`users`.`id`
 WHERE `cid`='.$cid.' ORDER BY `id` DESC LIMIT '.$n.','.$USER['np']);
+  $total = $mysql->GetFoundRows();
 
   $tmpl->Vars['FILES'] = array();
 
-  while($arr = $mysql->FetchAssoc()) {
+  while ($arr = $mysql->FetchAssoc()) {
 
     $arr['time'] = format_date($arr['time']);
+    /*
     $rating->SetKey('/filex/'.$arr['id']);
     $arr['rating'] = round($rating->GetAverage());
+    */
     $tmpl->Vars['FILES'][] = $arr;
 
   }
 
   $tmpl->UseNav();
   $tmpl->Vars['NAV']['pos'] = $n;
-  $tmpl->Vars['NAV']['total'] = $mysql->GetFoundRows();
+  $tmpl->Vars['NAV']['total'] = $total;
   $tmpl->Vars['NAV']['limit'] = $USER['np'];
   $tmpl->Vars['NAV']['add'] = 'c='.$category['id'];
 

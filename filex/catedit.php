@@ -23,6 +23,7 @@ if(isset($_POST['title'])){
   $tmpl->Vars['TITLE'] = 'Обновление категории';
   $upd['title'] = stripslashes(htmlspecialchars($_POST['title']));
   $upd['about'] = stripslashes(htmlspecialchars($_POST['about']));
+  $upd['passw'] = stripslashes(htmlspecialchars($_POST['passw']));
   $upd['types'] = stripslashes(htmlspecialchars($_POST['types']));
   $upd['max'] = intval($_POST['max']);
   $upd['limit'] = intval($_POST['limit']);
@@ -33,6 +34,7 @@ if(isset($_POST['title'])){
   $upd['about'] = preg_replace('/(&[a-z]{2,4})</', '$1;<', $upd['about']);
   $upd['title'] = $mysql->EscapeString($upd['title']);
   $upd['types'] = $mysql->EscapeString($upd['types']);
+  $upd['passw'] = $mysql->EscapeString($upd['passw']);
   $upd['about'] = $mysql->EscapeString(nl2br($upd['about']));
   if($mysql->Update('filex_cats', $upd, '`id`='.$cid.' LIMIT 1')){
     $tmpl->Vars['MESSAGE'] = 'Категория измeнена.';

@@ -6,6 +6,7 @@ if(1>$USER['state']) include($_SERVER['DOCUMENT_ROOT'].'/etc/bancheck.php');
 $tmpl = new template;
 $tmpl->SendHeaders();
 $compress->Enable();
+$tmpl->Vars['TITLE'] = 'Обменник - Загрузка';
 
 $path = $_SERVER['DOCUMENT_ROOT'].'/filex/files/';
 
