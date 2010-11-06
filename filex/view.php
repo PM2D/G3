@@ -13,7 +13,7 @@ $category = $mysql->GetRow('*', 'filex_cats', '`id`='.$cid);
 
 if (!$category['id']) raise_error('Heт тaкой категории.', 'index.php?'.SID);
 
-if ($category['passw']) {
+if (1>$USER['state'] && $category['passw']) {
   if (isset($_COOKIE['fc'.$category['id'].'p']) && $_COOKIE['fc'.$category['id'].'p']) {
     if ($_COOKIE['fc'.$category['id'].'p']!=$category['passw']) {
       setcookie('fc'.$category['id'].'p', NULL, $TIME-3600, '/filex/view.php', $_SERVER['HTTP_HOST']);
@@ -136,7 +136,6 @@ if ($tmpl->Vars['FILEVIEW']) {
   $mysql->Query('SELECT SQL_CALC_FOUND_ROWS `filex_files`.*,`users`.`login`
 FROM `filex_files` LEFT JOIN `users` ON `filex_files`.`uid`=`users`.`id`
 WHERE `cid`='.$cid.' ORDER BY `id` DESC LIMIT '.$n.','.$USER['np']);
-  $total = $mysql->GetFoundRows();
 
   $tmpl->Vars['FILES'] = array();
 
@@ -153,7 +152,7 @@ WHERE `cid`='.$cid.' ORDER BY `id` DESC LIMIT '.$n.','.$USER['np']);
 
   $tmpl->UseNav();
   $tmpl->Vars['NAV']['pos'] = $n;
-  $tmpl->Vars['NAV']['total'] = $total;
+  $tmpl->Vars['NAV']['total'] = $mysql->GetFoundRows();
   $tmpl->Vars['NAV']['limit'] = $USER['np'];
   $tmpl->Vars['NAV']['add'] = 'c='.$category['id'];
 
