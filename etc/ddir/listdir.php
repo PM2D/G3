@@ -5,15 +5,15 @@ if(!file_exists($_SERVER['DOCUMENT_ROOT'].'/ddir'.$dir['path'])) exit;
 $infiles = array();
 $indirs = array();
 $d = dir($_SERVER['DOCUMENT_ROOT'].'/ddir'.$dir['path']);
-while($fpath = $d->Read()) {
-  if($fpath[0]!='.' && $fpath[0]!='_' && $fpath!='index.php') {
+while ($fpath = $d->Read()) {
+  if ($fpath[0]!='.' && $fpath[0]!='_' && $fpath!='index.php') {
     $fpath = stripslashes(htmlspecialchars($fpath));
     // получаем расширение (тип) файла и отделяем его от имени, а также проверяем файл ли это
     $pos = strrpos($fpath, '.');
-    if($pos) {
+    if ($pos) {
       $type = substr($fpath, $pos+1);
       $name = fname(substr($fpath, 0, $pos));
-      if(!in_array($type, explode(',', $CFG['DDIR']['ico']))) $type = 'file';
+      if (!in_array($type, explode(',', $CFG['DDIR']['ico']))) $type = 'file';
       $infiles[] = array(
 	'id' => 0,
 	'did' => $dir['id'],
@@ -40,13 +40,13 @@ while($fpath = $d->Read()) {
 }
 $d->Close();
 
-function MultiInsert($table, array $data){
-  if(empty($data)) return;
+function MultiInsert($table, array $data) {
+  if (empty($data)) return;
   $query = 'INSERT INTO `'.$table.'` VALUES';
   $cnt = sizeof($data);
-  for($i=0; $i<$cnt; $i++){
+  for ($i=0; $i<$cnt; $i++) {
     $vals = '';
-    foreach($data[$i] as $key=>$val){
+    foreach ($data[$i] as $key=>$val) {
       $vals .= ",'".$val."'";
     }
     $query .= ' ('.substr($vals, 1).'),';

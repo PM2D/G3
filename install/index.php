@@ -14,21 +14,21 @@ a:hover,a:active { color: #EE0000; text-decoration: underline }
 </style></head><body>
 <div style="background: #5080B0 url(bg.gif); margin: 2%; border: 2px solid #000000; padding: 2%; text-align: center; color: #000000">');
 
-if(file_exists($_SERVER['DOCUMENT_ROOT'].'/var/.installed')) {
+if (file_exists($_SERVER['DOCUMENT_ROOT'].'/var/.installed')) {
    exit('<b>Внимание!</b><br />'.
 	'Блокировка активна. В целях безопасности при активной блокировке продолжение установки будет невозможно.<br />'.
 	'Для снятия блокировки необходимо удалить файл /var/.installed.'.
 	'</div></body></html>');
 }
 
-if(substr($_SERVER['DOCUMENT_ROOT'], -1) == '/') $_SERVER['DOCUMENT_ROOT'] = substr($_SERVER['DOCUMENT_ROOT'], 0, -1);
+if (substr($_SERVER['DOCUMENT_ROOT'], -1) == '/') $_SERVER['DOCUMENT_ROOT'] = substr($_SERVER['DOCUMENT_ROOT'], 0, -1);
 
-if(!extension_loaded('mysqli')) {
+if (!extension_loaded('mysqli')) {
   exit('<span class="err">Продолжение установки невозможно т.к. расширение mysqli не обнаружено.'.
 	'Используйте no-mysqli патч если доступен.</span></div></body></html>');
 
 }
-if(substr(phpversion(), 0, 1) < 5) {
+if (substr(phpversion(), 0, 1) < 5) {
   exit('<span class="err">Установка и работа скрипта невозможна т.к. ваша версия PHP < 5</span></div></body></html>');
 }
 
@@ -40,13 +40,13 @@ class mysql {
   static public $connected = FALSE;
 
   public function __construct($DBHOST, $DBUSER, $DBPASS, $DBNAME) {
-    if(isset(mysql::$obj->thread_id)) return;
+    if (isset(mysql::$obj->thread_id)) return;
     mysql::$obj = new mysqli;
     global $CFG;
     mysql::$obj->init();
     mysql::$obj->options(MYSQLI_INIT_COMMAND, 'SET NAMES utf8');
     mysql::$obj->real_connect($DBHOST, $DBUSER, $DBPASS, $DBNAME);
-    if(mysql::$obj->thread_id) {
+    if (mysql::$obj->thread_id) {
       mysql::$connected = TRUE;
     } else {
       $this->error = mysql::$obj->error;
@@ -55,7 +55,7 @@ class mysql {
 
   public function Query($sql) {
     $this->res = mysql::$obj->query($sql);
-    if(FALSE===$this->res) $this->error =& mysql::$obj->error;
+    if (FALSE===$this->res) $this->error =& mysql::$obj->error;
     return $this->res;
   }
 
@@ -66,7 +66,7 @@ class mysql {
   public function Insert($table, array $data) {
     $fields = '';
     $vals = '';
-    foreach($data as $key=>$val) {
+    foreach ($data as $key=>$val) {
      $fields .= ',`'.$key.'`';
      $vals .= ",'".$val."'";
     }
@@ -85,20 +85,20 @@ class mysql {
 
 // функция для получения GET переменных
 function &getvar($idx){
-  if(!isset($_GET[$idx])) $_GET[$idx] = NULL;
+  if (!isset($_GET[$idx])) $_GET[$idx] = NULL;
   return $_GET[$idx];
 }
 
 // функция для получения POST переменных
 function &postvar($idx){
-  if(!isset($_POST[$idx])) $_POST[$idx] = NULL;
+  if (!isset($_POST[$idx])) $_POST[$idx] = NULL;
   return $_POST[$idx];
 }
 
 
 $step =& getvar('s');
 
-switch($step){
+switch ($step) {
 
  case 1:
   include('step1.php');

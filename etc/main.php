@@ -1,12 +1,12 @@
 <?php
 // This file is a part of GIII (g3.steelwap.org)
-define('CMS_VERSION', '3.2.0');
+define('CMS_VERSION', '3.2.1');
 
 // функция подсчета времени генерации
 function perf() {
   static $start = 0;
   list($usec, $sec) = explode(' ', microtime());
-  if($start) return round($usec + $sec - $start, 4);
+  if ($start) return round($usec + $sec - $start, 4);
   else $start = ($usec + $sec);
 }
 
@@ -36,9 +36,9 @@ class online {
     $this->arr = file($this->path);
     $c = online::$count = count($this->arr);
     $t = $GLOBALS['TIME']-300;
-    for($i=0; $i<$c; $i++){
+    for ($i=0; $i<$c; $i++) {
       $a = explode('|:|', $this->arr[$i]);
-      if($a[3]<$t){
+      if ($a[3]<$t) {
         unset($this->arr[$i]);
         online::$count--;
       } else {
@@ -52,9 +52,9 @@ class online {
     $in[0] = $USER['id'];
     $in[1] = $USER['login'];
     $in[2] = htmlspecialchars(strtok($_SERVER['HTTP_USER_AGENT'],' '));
-    for($i=0; $i<online::$count; $i++) {
+    for ($i=0; $i<online::$count; $i++) {
       $a = explode('|:|', $this->arr[$i]);
-      if($a[0]==$in[0] && $a[2]==$in[2]) {
+      if ($a[0]==$in[0] && $a[2]==$in[2]) {
         unset($this->arr[$i]);
         online::$count--;
         break;
@@ -76,10 +76,10 @@ class online {
   }
   // подсчет пользователей онлайн по REQUEST_URI
   public function CountIn($place = NULL) {
-    if(NULL==$place) return 0;
+    if (NULL==$place) return 0;
     $cnt = 0;
     $len = strlen($place);
-    for($i=0; $i<online::$count; $i++) {
+    for ($i=0; $i<online::$count; $i++) {
       $a = explode('|:|', $this->arr[$i]);
       // REQUEST_URI может быть неполным
       if($place==substr($a[5], 0, $len)) $cnt++;
@@ -105,8 +105,10 @@ class compress {
 
   public function __construct($level = 3) {
     compress::$level = $level;
-    if(isset($_SERVER['HTTP_TE'])) {
+    if (isset($_SERVER['HTTP_TE'])) {
       $_SERVER['HTTP_ACCEPT_ENCODING'] =& $_SERVER['HTTP_TE'];
+    } elseif (!isset($_SERVER['HTTP_ACCEPT_ENCODING'])) { // и такое бывает довольно нередко
+      $level = 0;
     }
     if(1>$level) $_SERVER['HTTP_ACCEPT_ENCODING'] = 'identity';
   }
@@ -152,13 +154,13 @@ class mysql {
   static public $connected = FALSE;
 
   public function __construct() {
-    if(mysql::$connected) return;
+    if (mysql::$connected) return;
     mysql::$obj = new mysqli;
     global $CFG;
     mysql::$obj->init();
     mysql::$obj->options(MYSQLI_INIT_COMMAND, 'SET NAMES utf8');
     mysql::$obj->real_connect($CFG['MYSQL']['dbhost'], $CFG['MYSQL']['dbuser'], $CFG['MYSQL']['dbpass'], $CFG['MYSQL']['dbname']);
-    if(mysql::$obj->error) {
+    i f(mysql::$obj->error) {
       exit('Невозможно подключиться к базе данных: '.mysql::$obj->error);
     } else {
       mysql::$connected = TRUE;
@@ -167,7 +169,7 @@ class mysql {
 
   public function Query($sql) {
     $this->res = mysql::$obj->query($sql);
-    if(FALSE===$this->res) $this->error = mysql::$obj->error;
+    if (FALSE===$this->res) $this->error = mysql::$obj->error;
     return $this->res;
   }
 
@@ -185,12 +187,12 @@ class mysql {
   }
 
   public function FetchAssoc($res = FALSE) {
-    if(FALSE===$res) $res = $this->res;
+    if (FALSE===$res) $res = $this->res;
     return $res->fetch_assoc();
   }
 
   public function FetchRow($res = FALSE) {
-    if(FALSE===$res) $res = $this->res;
+    if (FALSE===$res) $res = $this->res;
     return $res->fetch_row();
   }
 
@@ -205,9 +207,9 @@ class mysql {
 
   public function Update($table, array $data, $where) {
     $set = '';
-    foreach($data as $field=>$value) {
-      if(empty($value)) $value = 'NULL';
-      elseif($value[0]!='`') $value = "'".$value."'";
+    foreach ($data as $field=>$value) {
+      if (empty($value)) $value = 'NULL';
+      elseif ($value[0]!='`') $value = "'".$value."'";
       $set .= ',`'.$field.'`='.$value;
     }
     $set = substr($set,1);
@@ -218,7 +220,7 @@ class mysql {
   public function Insert($table, array $data) {
     $fields = '';
     $vals = '';
-    foreach($data as $key=>$val) {
+    foreach ($data as $key=>$val) {
      $fields .= ',`'.$key.'`';
      $vals .= ",'".$val."'";
     }
@@ -229,7 +231,7 @@ class mysql {
   }
 
   public function Delete($table, $where = NULL) {
-    if(NULL!=$where) $this->res = $this->query('DELETE FROM `'.$table.'` WHERE '.$where);
+    if (NULL!=$where) $this->res = $this->query('DELETE FROM `'.$table.'` WHERE '.$where);
     else $this->res = $this->query('TRUNCATE TABLE `'.$table.'`');
     return (FALSE===$this->res) ? FALSE : TRUE;
   }
@@ -344,9 +346,9 @@ final class tags {
 
 // функция записи в лог
 function to_log($str) {
-  if(date('d', filemtime($_SERVER['DOCUMENT_ROOT'].'/var/log.dat')) != date('d', $GLOBALS['TIME'])){
+  if (date('d', filemtime($_SERVER['DOCUMENT_ROOT'].'/var/log.dat')) != date('d', $GLOBALS['TIME'])) {
     fclose(fopen($_SERVER['DOCUMENT_ROOT'].'/var/log.dat', 'w'));
-  };
+  }
   $str = strtr($str, "\n", ' ');
   $f = fopen($_SERVER['DOCUMENT_ROOT'].'/var/log.dat', 'a');
   fwrite($f, date('d.m H:i', $GLOBALS['TIME']).'||'.$str."\n");
@@ -355,22 +357,22 @@ function to_log($str) {
 
 // функция для лёгкого получения GET переменных
 function &getvar($idx) {
-  if(!isset($_GET[$idx])) $_GET[$idx] = NULL;
+  if (!isset($_GET[$idx])) $_GET[$idx] = NULL;
   return $_GET[$idx];
 }
 
 // функция для лёгкого получения POST переменных
 function &postvar($idx) {
-  if(!isset($_POST[$idx])) $_POST[$idx] = NULL;
+  if (!isset($_POST[$idx])) $_POST[$idx] = NULL;
   return $_POST[$idx];
 }
 
 // функция вывода ошибок
 function raise_error($desc, $back = FALSE) {
   global $USER;
-  if(!isset($USER['tmpl'])) $USER['tmpl'] = 'Default';
+  if (!isset($USER['tmpl'])) $USER['tmpl'] = 'Default';
   $tmpl = new template;
-  if(!headers_sent()) $tmpl->SendHeaders();
+  if (!headers_sent()) $tmpl->SendHeaders();
   $tmpl->Vars['MESSAGE'] = $desc;
   $tmpl->Vars['BACK'] = $back;
   echo $tmpl->Parse('error.tmpl');
@@ -380,18 +382,18 @@ function raise_error($desc, $back = FALSE) {
 // функции проверки доступности модуля
 function IsModInstalled($name) {
   static $modules = NULL;
-  if(NULL == $modules) $modules = explode(',', $GLOBALS['CFG']['MODS']['active']); // с 3.1 проверка в active, а не installed
+  if (NULL == $modules) $modules = explode(',', $GLOBALS['CFG']['MODS']['active']); // с 3.1 проверка в active, а не installed
   return in_array($name, $modules);
 }
 
 // функция форматирования даты (сегодня/вчера/позавчера)
 function format_date($time) {
   static $now = NULL;
-  if(NULL == $now) $now = floor($GLOBALS['TIME']/86400);
+  if (NULL == $now) $now = floor($GLOBALS['TIME']/86400);
   $day = floor($time/86400);
-  if($now==$day) return 'ceгoдня в '.date('G:i', $time);
-  elseif(($now-1)==$day) return 'вчepa в '.date('G:i', $time);
-  elseif(($now-2)==$day) return 'пoзaвчepa в '.date('G:i', $time);
+  if ($now==$day) return 'ceгoдня в '.date('G:i', $time);
+  elseif (($now-1)==$day) return 'вчepa в '.date('G:i', $time);
+  elseif (($now-2)==$day) return 'пoзaвчepa в '.date('G:i', $time);
   else return date('d.m.y в G:i', $time);
 }
 

@@ -3,12 +3,12 @@
 require($_SERVER['DOCUMENT_ROOT'].'/etc/main.php');
 require($_SERVER['DOCUMENT_ROOT'].'/etc/ddir/require.php');
 
-if(!IsModInstalled('ddir'))
+if (!IsModInstalled('ddir'))
   raise_error('Данный модуль на данный момент не установлен.');
 
 $did =& getvar('d');
 $did = intval($did);
-if(1>$did) $did = 2043925204;
+if (1>$did) $did = 2043925204;
 
 $n =& getvar('n');
 $n = intval($n);
