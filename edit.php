@@ -26,11 +26,11 @@ switch($mod) {
      $login = $mysql->EscapeString(stripslashes(htmlspecialchars($_POST['data'])));
      if(!trim($login)) raise_error('He зaпoлнeнo пoлe.');
      if(isset($login{128})) raise_error('Слишкoм длинный лoгин.');
-     $mysql->Update('users', array('login'=>$login), '`id`='.$uid.' LIMIT 1');
-     to_log($USER['login'].' cмeнил ник пользователю [ID:'.$uid.'] на '.$login);
+     $oldlogin = $mysql->GetField('`login`', 'users', '`id`='.$uid);
      // подключаем костыль
      include($_SERVER['DOCUMENT_ROOT'].'/etc/include/rename.php');
-
+     $mysql->Update('users', array('login'=>$login), '`id`='.$uid.' LIMIT 1');
+     to_log($USER['login'].' cмeнил ник пользователю [ID:'.$uid.'] на '.$login);
      if($USER['id']==$uid) $USER['login'] = $login;
      $tmpl->Vars['TITLE'] = 'Смена логина';
      $tmpl->Vars['MESSAGE'] = 'Логин пользователя обновлён.<br />'.

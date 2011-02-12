@@ -160,7 +160,7 @@ class mysql {
     mysql::$obj->init();
     mysql::$obj->options(MYSQLI_INIT_COMMAND, 'SET NAMES utf8');
     mysql::$obj->real_connect($CFG['MYSQL']['dbhost'], $CFG['MYSQL']['dbuser'], $CFG['MYSQL']['dbpass'], $CFG['MYSQL']['dbname']);
-    i f(mysql::$obj->error) {
+    if(mysql::$obj->error) {
       exit('Невозможно подключиться к базе данных: '.mysql::$obj->error);
     } else {
       mysql::$connected = TRUE;
