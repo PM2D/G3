@@ -21,7 +21,7 @@ try {
   $errs++;
 }
 
-if(1>$err) {
+if(1>$errs) {
   print('<span class="ok">Процесс создания структуры таблиц блaгoпoлучно завершён.</span><hr />'.
 	'[<a href="index.php?s=4">Продолжить</a>]');
 } else {
