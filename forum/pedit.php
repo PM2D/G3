@@ -37,7 +37,7 @@ if(isset($_POST['msg'])) {
   $smiles->ToImg($upd['msg']);
   $tags->ToHtm($upd['msg']);
   $upd['msg'] = preg_replace('/(&[a-z]{2,4})</', '$1;<', $upd['msg']);
-  $upd['msg'] = nl2br($upd['msg']);
+  $upd['msg'] = nl2br(trim($upd['msg']));
   $upd['msg'] = $mysql->EscapeString($upd['msg']);
   $upd['sign'] = $mysql->EscapeString($upd['sign']);
   $upd['sign'] = substr($upd['sign'], 0, 255);

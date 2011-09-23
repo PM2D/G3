@@ -78,7 +78,10 @@ if (!isset($_GET['edit'])) {
     $upd['bday'] = intval($_POST['bday']);
     $upd['bmonth'] = intval($_POST['bmonth']);
     $upd['byear'] = intval($_POST['byear']);
-    $upd['about'] = $mysql->EscapeString(nl2br(stripslashes(htmlspecialchars($_POST['about']))));
+    $_POST['about'] = trim($_POST['about']);
+    $_POST['about'] = stripslashes(htmlspecialchars($_POST['about']));
+    $_POST['about'] = nl2br($_POST['about']);
+    $upd['about'] = $mysql->EscapeString($_POST['about']);
 
     if ($mysql->Update('users', $upd, '`id`='.$USER['id'].' LIMIT 1')) {
       $tmpl->Vars['TITLE'] = 'Обновление профиля';

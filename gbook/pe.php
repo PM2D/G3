@@ -36,7 +36,7 @@ if(isset($_POST['msg'])) {
   $tags = new tags;
   $tags->ToHtm($text);
   $text = preg_replace('/(&[a-z]{2,4})</', '$1;<', $text);
-  $text = $mysql->EscapeString(nl2br($text));
+  $text = $mysql->EscapeString(nl2br(trim($text)));
   $podp = $mysql->EscapeString($podp);
   $podp = preg_replace('/&([a-z]){2,4}$/', NULL, substr($podp, 0, 255));
   $mysql->Update('gbook', array('msg'=>$text,'sign'=>$podp), '`id`='.$pid.' LIMIT 1');
