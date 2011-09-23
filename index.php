@@ -93,6 +93,8 @@ $tmpl->Vars['VOTES'] = IsModInstalled('votes');
 
 $tmpl->Vars['LINKS'] = IsModInstalled('links');
 
+$tmpl->Vars['LETTERS'] = IsModInstalled('letters');
+
 $tmpl->Vars['ASACTIVE'] = $CFG['AS']['active'];
 
 $mysql->Close();

@@ -10,11 +10,13 @@
 <div class="frame">
   <small><img src="ico/[*=$USER['icons']*]/pic1.gif" alt="&gt;" />
   [*IF(3!=$USER['id']):*]
-   <a href="letters/?[*=SID*]">Записки</a>
-   [*IF($USER['newl']):*]
-    <b style="text-decoration: blink">[[*=$USER['newl']*]]</b>
+   [*IF($LETTERS):*]
+     <a href="letters/?[*=SID*]">Записки</a>
+     [*IF($USER['newl']):*]
+      <b style="text-decoration: blink">[[*=$USER['newl']*]]</b>
+     [*ENDIF*]
+     |
    [*ENDIF*]
-   |
    <a href="info.php?[*=SID*]">Пpoфиль</a> |
    <a href="options.php?[*=SID*]">Hacтpoйки</a>
    <br />
