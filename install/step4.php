@@ -30,8 +30,8 @@ if(isset($_POST['do'])) {
     $in1['pass'] = $mysql->EscapeString(stripslashes(htmlspecialchars($pas)));
     $in1['state'] = 2;
     $in1['np'] = 6;
-    $in1['style'] = 'GreenGlass';
-    $in1['icons'] = 'XP';
+    $in1['style'] = 'OrangeGlass';
+    $in1['icons'] = 'KDE-3.5';
     $in1['tmpl'] = 'Default';
     $in1['status'] = 'Admin';
     $in1['name'] = '';
@@ -43,7 +43,7 @@ if(isset($_POST['do'])) {
     $in1['bday'] = 0;
     $in1['bmonth'] = 0;
     $in1['byear'] = 0;
-    $in1['about'] = 0;
+    $in1['about'] = NULL;
     $in1['posts'] = 0;
     $in1['avatar'] = '';
     $in1['regdat'] = $time;

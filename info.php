@@ -94,6 +94,7 @@ if (!isset($_GET['edit'])) {
     $tmpl->Vars['TITLE'] = 'Редактирование профиля';
     $tmpl->Vars['EDIT'] = TRUE;
     $tmpl->Vars['UD'] = $mysql->GetRow('*', 'users', '`id`='.$USER['id']);
+    if (!$tmpl->Vars['UD']['icq']) $tmpl->Vars['UD']['icq'] = NULL;
 
     $online->Add('Peдaктиpуeт пpoфиль');
 
