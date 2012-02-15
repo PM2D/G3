@@ -8,15 +8,17 @@ $TIME = $_SERVER['REQUEST_TIME'];
 //include_once($_SERVER['DOCUMENT_ROOT'].'/etc/ipaf.php');
 
 // определение модели телефона с оперы-мини и замена http_user_agent на него
-if(isset($_SERVER['HTTP_X_OPERAMINI_PHONE_UA']))
+if (isset($_SERVER['HTTP_X_OPERAMINI_PHONE_UA']))
   $_SERVER['HTTP_USER_AGENT'] = '(OperaMini)'.$_SERVER['HTTP_X_OPERAMINI_PHONE_UA'];
 /*
   Oпределение реального ip. Внимание:
   теоретически может использоваться как для определения реального ip,
   так и злоумышленником для его подмены через отправляемые http залоловки
 */
-if(isset($_SERVER['HTTP_X_FORWARDED_FOR']))
+if (isset($_SERVER['HTTP_X_FORWARDED_FOR']))
   $_SERVER['REMOTE_ADDR'] =& $_SERVER['HTTP_X_FORWARDED_FOR'];
+elseif (isset($_SERVER['HTTP_X_REAL_IP']))
+  $_SERVER['REMOTE_ADDR'] =& $_SERVER['HTTP_X_REAL_IP'];
 
 // стартуем сессию
 //session_save_path($_SERVER['DOCUMENT_ROOT'].'/tmp/sess');
@@ -31,13 +33,13 @@ $CFG = parse_ini_file($_SERVER['DOCUMENT_ROOT'].'/etc/globals.conf', TRUE);
 $USER =& $_SESSION['U'];
 
 // если сессия пользователя не существует, то подключаем скрипты инициализации пользователя
-if(!isset($_SESSION['U'])){
+if (!isset($_SESSION['U'])) {
   require($_SERVER['DOCUMENT_ROOT'].'/etc/userinit.php');
 }
 
 // проверка новых записок раз в 60сек
-if(3!=$USER['id'] && 1>$USER['newl'] && $USER['lchk']<($TIME-60)){
-  if(IsModInstalled('letters')) {
+if (3!=$USER['id'] && 1>$USER['newl'] && $USER['lchk']<($TIME-60)) {
+  if (IsModInstalled('letters')) {
     $mysql = new mysql;
     $USER['newl'] = $mysql->GetField('COUNT(*)', 'letters', '`to`='.$USER['id'].' AND `new`>0');
   }
