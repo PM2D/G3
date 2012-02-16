@@ -21,6 +21,9 @@ switch($arr['type']) {
    $arr['handler'] = '/ddir/_handlers/mp3.php?f='.$arr['id'];
   break;
   case '3gp':
+  case 'mp4':
+  case 'flv':
+  case 'ogm':
   case 'avi':
   case 'mpg':
   case 'wmv':
