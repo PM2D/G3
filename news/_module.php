@@ -23,16 +23,27 @@ CREATE TABLE `news_comms` (
 ) ENGINE=MyISAM DEFAULT CHARSET=utf8;
 ';
 
-function install(){
+function install() {
   create_db_tables();
+  global $CFG;
+  $CFG['NEWS']['guests'] = FALSE;
+  save_cfg();
 }
 
-function uninstall(){
+function uninstall() {
   drop_db_tables();
+  global $CFG;
+  unset($CFG['NEWS']);
+  save_cfg();
 }
 
-function update(){
+function update() {
   update_db_tables();
+  global $CFG;
+  if (!isset($CFG['NEWS']['guests'])) {
+    $CFG['NEWS']['guests'] = FALSE;
+    save_cfg();
+  }
 }
 
 ?>

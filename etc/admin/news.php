@@ -1,6 +1,6 @@
 <?php
 // This file is a part of GIII (g3.steelwap.org)
-if(isset($_GET['clear'])){
+if (isset($_GET['clear'])) {
   $mysql = new mysql;
   $mysql->Delete('news');
   $mysql->Delete('news_comms');
@@ -10,9 +10,9 @@ if(isset($_GET['clear'])){
   echo $tmpl->Parse('notice.tmpl');
 }
 
-if(isset($_POST['do'])){
+if (isset($_POST['do'])) {
 
-  $CFG['CHAT']['guests'] = (isset($_POST['guests']) && $_POST['guests']);
+  $CFG['NEWS']['guests'] = (isset($_POST['guests']) && $_POST['guests']);
   save_cfg();
   $tmpl->Vars['MESSAGE'] = 'Настройки изменены.';
   $tmpl->Vars['BACK'] = 'admin.php?'.SID;
@@ -20,7 +20,7 @@ if(isset($_POST['do'])){
 
 } else {
 
-  $tmpl->Vars['GUESTS'] = $CFG['CHAT']['guests'];
+  $tmpl->Vars['GUESTS'] = $CFG['NEWS']['guests'];
   echo $tmpl->Parse('admin/news_options.tmpl');
 
 }
