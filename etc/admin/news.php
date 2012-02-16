@@ -8,6 +8,7 @@ if (isset($_GET['clear'])) {
   $tmpl->Vars['MESSAGE'] = 'Произведена операция очистки новостей.';
   $tmpl->Vars['BACK'] = FALSE;
   echo $tmpl->Parse('notice.tmpl');
+  exit;
 }
 
 if (isset($_POST['do'])) {
