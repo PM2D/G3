@@ -81,7 +81,7 @@ if (isset($_POST['import'])) {
 
 }
 
-// если изображение загружалось и оно шире 100px, изменяем его размер
+// если изображение загружалось и оно шире 128px, изменяем его размер
 if (isset($_POST['do']) or isset($_POST['import'])) {
   // открываем изображение
   if ($ext=='gif') {
@@ -94,9 +94,9 @@ if (isset($_POST['do']) or isset($_POST['import'])) {
   // получаем оригинальный размер изображения
   $ox = imagesx($img1);
   $oy = imagesy($img1);
-  if ($ox>100) {
+  if ($ox>128) {
     // расчитываем высоту согласно пропорциям и изменяем размер изображения
-    $px = 100;
+    $px = 128;
     $py = round($oy/round($ox/$px, 1));
     $img2 = imagecreatetruecolor($px, $py);
     imagecopyresampled($img2, $img1, 0, 0, 0, 0, $px, $py, $ox, $oy);
