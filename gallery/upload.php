@@ -65,7 +65,14 @@ if(isset($_POST['import'])) {
   }
   $in['title'] = stripslashes(htmlspecialchars($in['title']));
   $in['title'] = $mysql->EscapeString($in['title']);
-  $data = fread($f, $CFG['GALLERY']['max']);
+  // имлорт файла частями по 1кб
+  $part = 1024;
+  $now = 0;
+  $data = NULL;
+  do {
+    $now += $part;
+    $data .= fread($f, $now);
+  } while ($now<$CFG['GALLERY']['max'] && !feof($f));
   if(!feof($f)) {
     fclose($f);
     raise_error('Возможно фaйл cлишкoм бoльшoй', 'upload.php?'.SID);
@@ -81,7 +88,8 @@ if(isset($_POST['import'])) {
   $tmpl->Vars['MESSAGE'] = $USER['login'].', файл был благополучно загружeн.';
   $tmpl->Vars['BACK'] = 'index.php?'.SID;
   echo $tmpl->Parse('notice.tmpl');
-  exit;
+
+  $mysql->Update('gallery_albums', array('time'=>$GLOBALS['TIME']), '`uid`='.$uid.' LIMIT 1');
 
 } elseif(isset($_POST['do'])) {
 
