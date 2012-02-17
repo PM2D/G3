@@ -29,7 +29,14 @@ if (isset($_POST['import'])) {
     raise_error('Heвepный url.');
 
   if (!$f = fopen($url, 'rb')) raise_error('Heвepный url.');
-  $data = fread($f, $CFG['AVATAR']['max']);
+  // получаем файл частями по 1кб (сразу весь далеко не всегда получается)
+  $part = 1024;
+  $now = 0;
+  $data = NULL;
+  do {
+    $now += $part;
+    $data .= fread($f, $now);
+  } while ($now<$CFG['AVATAR']['max'] && !feof($f));
   if (!feof($f)) {
     fclose($f);
     raise_error('Boзмoжнo фaйл cлишкoм бoльшoй.');
