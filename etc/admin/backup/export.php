@@ -33,11 +33,7 @@ foreach($tables as $table) {
       $str .= "\n(";
       $cnt = count($row);
       for($j=0; $j<$cnt; $j++) {
-        if(''==$row[$j]) {
-          $str .= 'NULL,';
-        } else {
-          $str .= "'".$mysql->EscapeString($row[$j])."',";
-        }
+        $str .= "'".$mysql->EscapeString($row[$j])."',";
       }
       $str = substr($str, 0, -1);
       $str .= "),";
