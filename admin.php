@@ -146,7 +146,7 @@ switch($mod) {
 
  case 'update':
   $tmpl->Vars['TITLE'] = 'Проверка обновлений';
-  $http = new httpquery('gear.steelwap.org', '/last.php');
+  $http = new httpquery('g3.pm2d.ru', '/last.php');
   // возможно пригодится для будущей статистики
   $http->sendHeaders['User-Host'] = $_SERVER['HTTP_HOST'];
   $http->sendHeaders['User-Version'] = CMS_VERSION;
