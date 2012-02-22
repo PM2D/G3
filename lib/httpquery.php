@@ -1,5 +1,5 @@
 <?php
-// This file is a part of GIII (g3.steelwap.org)
+// This file is a part of AugurCMS (g3.pm2d.ru)
 
 // класс для работы с http (by DreamDragon aka PM2D) version 0.2
 

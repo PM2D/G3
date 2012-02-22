@@ -1,5 +1,5 @@
 <?php
-// This file is a part of GIII (g3.steelwap.org)
+// This file is a part of AugurCMS (g3.pm2d.ru)
 $path = isset($_SERVER['QUERY_STRING']) ? $_SERVER['QUERY_STRING'] : NULL;
 if(FALSE!==strpos($path, ':')) exit;
 if(extension_loaded('ffmpeg')){

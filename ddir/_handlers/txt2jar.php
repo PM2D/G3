@@ -1,6 +1,6 @@
 <?php
 // This file is a part of G3 (g3.steelwap.org)
-require($_SERVER['DOCUMENT_ROOT'].'/etc/main.php');
+require($_SERVER['DOCUMENT_ROOT'].'/lib/main.php');
 
 if(!extension_loaded('zip'))
   raise_error('Расширение zip недоступно.');

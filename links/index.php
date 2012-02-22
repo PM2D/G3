@@ -1,5 +1,5 @@
 <?php
-// This file is a part of GIII (g3.steelwap.org)
+// This file is a part of AugurCMS (g3.pm2d.ru)
 include($_SERVER['DOCUMENT_ROOT'].'/etc/main.php');
 
 if(!IsModInstalled('links'))

@@ -1,5 +1,5 @@
 <?php
-// This file is a part of GIII (g3.steelwap.org)
+// This file is a part of AugurCMS (g3.pm2d.ru)
 $url = htmlspecialchars(rawurldecode($_SERVER['QUERY_STRING']));
 if(strpos($url, $_SERVER['HTTP_HOST'])){
   Header('Location: '.$url);

@@ -1,5 +1,5 @@
 <?php
-// This file is a part of GIII (g3.steelwap.org)
+// This file is a part of AugurCMS (g3.pm2d.ru)
 
  if(function_exists('mb_strtolower')) $text = mb_strtolower($text,'UTF-8');
  $r = rand(0,3);

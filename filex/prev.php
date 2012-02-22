@@ -1,5 +1,5 @@
 <?php
-// This file is a part of GIII (g3.steelwap.org)
+// This file is a part of AugurCMS (g3.pm2d.ru)
 if(!isset($_GET['f']) || empty($_GET['f']) || FALSE!==strpos($_GET['f'], '..')) exit;
 $file = $_SERVER['DOCUMENT_ROOT'].'/filex/files/'.$_GET['f'];
 if(!file_exists($file)) exit;

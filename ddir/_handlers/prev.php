@@ -1,5 +1,5 @@
 <?php
-// This file is a part of GIII (g3.steelwap.org)
+// This file is a part of AugurCMS (g3.pm2d.ru)
 if (!isset($_SERVER['QUERY_STRING']) || empty($_SERVER['QUERY_STRING'])) exit;
 $file = $_SERVER['DOCUMENT_ROOT'].urldecode($_SERVER['QUERY_STRING']);
 if (file_exists($file) && filesize($file)>3072){

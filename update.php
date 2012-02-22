@@ -1,5 +1,5 @@
 <?php
-require($_SERVER['DOCUMENT_ROOT'].'/etc/main.php');
+require($_SERVER['DOCUMENT_ROOT'].'/lib/main.php');
 
 $mysql = new mysql;
 $mysql->Query('

@@ -1,5 +1,5 @@
 <?php
-// This file is a part of GIII (g3.steelwap.org)
+// This file is a part of AugurCMS (g3.pm2d.ru)
 // класс для оценок чего-либо v0.1 by DreamDragon aka PM2D
 class rating extends mysql {
   // установка ключа (id оценки) и шкалы

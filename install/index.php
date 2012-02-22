@@ -1,5 +1,5 @@
 <?php
-// This file is a part of GIII (g3.steelwap.org)
+// This file is a part of AugurCMS (g3.pm2d.ru)
 Header('Content-Type: application/xhtml+xml; charset=UTF-8');
 Header('Cache-Control: no-cache, no-store, must-revalidate');
 echo('<?xml version="1.0" encoding="UTF-8"?>

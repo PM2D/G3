@@ -1,6 +1,6 @@
 <?php
-// This file is a part of GIII (g3.steelwap.org)
-require($_SERVER['DOCUMENT_ROOT'].'/etc/main.php');
+// This file is a part of AugurCMS (g3.pm2d.ru)
+require($_SERVER['DOCUMENT_ROOT'].'/lib/main.php');
 if(1>$USER['state']) include($_SERVER['DOCUMENT_ROOT'].'/etc/bancheck.php');
 
 if(3==$USER['id'])

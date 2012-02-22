@@ -1,5 +1,5 @@
 <?php
-// This file is a part of GIII (g3.steelwap.org)
+// This file is a part of AugurCMS (g3.pm2d.ru)
 require ($_SERVER['DOCUMENT_ROOT'].'/etc/main.php');
 
 $path = $_SERVER['DOCUMENT_ROOT'].'/av/';

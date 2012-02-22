@@ -1,5 +1,5 @@
 <?php
-// This file is a part of GIII (g3.steelwap.org)
+// This file is a part of AugurCMS (g3.pm2d.ru)
 
 // функция для простой навигации
 function NAV($page_url, $pos, $total, $limit, $addvars=null){

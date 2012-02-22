@@ -1,5 +1,5 @@
 <?php
-// This file is a part of GIII (g3.steelwap.org)
+// This file is a part of AugurCMS (g3.pm2d.ru)
 if(isset($_GET['img'])){
  Header('Content-Type: image/gif');
  echo(base64_decode(

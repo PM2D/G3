@@ -1,5 +1,5 @@
 <?php
-require($_SERVER['DOCUMENT_ROOT'].'/etc/main.php');
+require($_SERVER['DOCUMENT_ROOT'].'/lib/main.php');
 // получение и обработка данных (ключ, оценка, куда возвращаться)
 $key = isset($_POST['key']) ? $_POST['key'] : getvar('key');
 $key = trim($key);

@@ -1,5 +1,5 @@
 <?php
-// This file is a part of GIII (g3.steelwap.org)
+// This file is a part of AugurCMS (g3.pm2d.ru)
 if (basename($_SERVER['PHP_SELF'])!='index.php') exit;
 
 echo('<b>Шаг 2. Настройка подключения к БД</b><hr />');
