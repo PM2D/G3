@@ -2,21 +2,21 @@
 // This file is a part of GIII (g3.steelwap.org)
 include($_SERVER['DOCUMENT_ROOT'].'/etc/main.php');
 
-if(2>$USER['state'])
+if (2>$USER['state'])
   raise_error('Доступ запрещен.');
 
-if(isset($_POST['name']) && isset($_POST['url'])) {
+if (isset($_POST['name']) && isset($_POST['url'])) {
 
   $name = stripslashes(htmlspecialchars($_POST['name']));
   $url = stripslashes(htmlspecialchars($_POST['url']));
 
-  if(substr($url, 0, 7) == 'http://') $url = substr($url, 7);
-  if(!strpos($url, '/')) $url .= '/';
+  if (substr($url, 0, 7) == 'http://') $url = substr($url, 7);
+  if (!strpos($url, '/')) $url .= '/';
   $slpos = strpos($url, '/');
   $host = substr($url, 0, $slpos);
   $uri = substr($url, $slpos);
 
-  if(ini_get('allow_url_fopen')) {
+  if (ini_get('allow_url_fopen')) {
 
     include($_SERVER['DOCUMENT_ROOT'].'/links/class.ico.php');
 
@@ -27,26 +27,26 @@ if(isset($_POST['name']) && isset($_POST['url'])) {
     $http->Close();
     $data = $http->responseData;
     $match = array();
-    preg_match('/rel="SHORTCUT\ ICON"\ href="([\S]+)"/i', $data, $match);
+    preg_match('/"([^"]*?favicon[^"]+)"/i', $data, $match);
 
-    if(isset($match[1])) {
+    if (isset($match[1])) {
       $ext = substr($match[1], strrpos($match[1], '.')+1);
       $ext = strtolower($ext);
 
-      if(substr($match[1], 0, 7) != 'http://') $match[1] = 'http://'.$host.$match[1];
+      if (substr($match[1], 0, 7) != 'http://') $match[1] = 'http://'.$host.'/'.$match[1];
 
       switch($ext) {
 
        case 'gif':
         copy($match[1], $_SERVER['DOCUMENT_ROOT'].'/links/favicons/'.$host.'.gif');
-        $icon = 'favicons/'.$host.'.gif';
+        $icon = $host.'.gif';
        break;
 
        case 'png':
         copy($match[1], $_SERVER['DOCUMENT_ROOT'].'/links/favicons/'.$host.'.gif');
         $img = imagecreatefrompng($_SERVER['DOCUMENT_ROOT'].'/links/favicons/'.$host.'.gif');
         imagegif($img, $_SERVER['DOCUMENT_ROOT'].'/links/favicons/'.$host.'.gif');
-        $icon = 'favicons/'.$host.'.gif';
+        $icon = $host.'.gif';
        break;
 
        case 'ico':
@@ -55,7 +55,7 @@ if(isset($_POST['name']) && isset($_POST['url'])) {
         $img = $ico->GetIcon(0);
         if($img) {
           imagegif($img, $_SERVER['DOCUMENT_ROOT'].'/links/favicons/'.$host.'.gif');
-          $icon = 'favicons/'.$host.'.gif';
+          $icon = $host.'.gif';
         } else {
           $icon = NULL;
         }
@@ -74,16 +74,16 @@ if(isset($_POST['name']) && isset($_POST['url'])) {
       $http->SendQuery();
       $http->GetResponse();
       $http->Close();
-      if(200 == $http->responseCode) {
+      if (200 == $http->responseCode) {
         $f = fopen($_SERVER['DOCUMENT_ROOT'].'/links/favicons/'.$host.'.gif', 'wb');
         fwrite($f, $http->responseData);
         fclose($f);
         $ico = new Ico($match[1]);
         $ico->SetBackgroundTransparent();
         $img = $ico->GetIcon(0);
-        if($img) {
+        if ($img) {
           imagegif($img, $_SERVER['DOCUMENT_ROOT'].'/links/favicons/'.$host.'.gif');
-          $icon = 'favicons/'.$host.'.gif';
+          $icon = $host.'.gif';
         } else {
           $icon = NULL;
         }
