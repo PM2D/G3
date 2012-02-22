@@ -46,8 +46,6 @@ if (!isset($_GET['edit'])) {
   if (FALSE !== $tmpl->Vars['UD']['site']) $score += 10;
   $tmpl->Vars['UD']['regdat'] = format_date($UD['regdat']);
   $tmpl->Vars['UD']['last'] = format_date($UD['last']);
-  include($_SERVER['DOCUMENT_ROOT'].'/etc/opsos.php');
-  $tmpl->Vars['UD']['op'] = GetOperator($UD['ip']);
   $tmpl->Vars['HAVEALBUM'] = IsModInstalled('gallery') ? file_exists($_SERVER['DOCUMENT_ROOT'].'/gallery/files/'.$UD['id']) : FALSE;
   if (FALSE !== $tmpl->Vars['HAVEALBUM']) $score += 10;
   $tmpl->Vars['HAVEBLOG'] = IsModInstalled('blogs') ? $mysql->IsExists('blogs', '`owner`='.$UD['id']) : FALSE;
