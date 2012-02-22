@@ -1,6 +1,6 @@
 <?php
 // This file is a part of GIII (g3.steelwap.org)
-define('CMS_VERSION', '3.2.1');
+define('CMS_VERSION', '3.2.2');
 
 // функция подсчета времени генерации
 function perf() {
@@ -331,8 +331,8 @@ final class tags {
     $str = preg_replace('!(^|[\s])\[s\]([^\[<]+)\[\/s\]([\s]|$)!is', '$1<s>$2</s>$3', $str);
     $str = preg_replace('!\[color=([\S]+)\]([^\[<]+)\[\/color\]!is', '<span style="color:$1">$2</span>', $str);
     $str = preg_replace('!\[url=((f|ht)tp[s]?://[^<> \n]+?)\](.+?)\[/url\]!i', '<a href="/go.php?$1">$3</a>', $str);
-    $str = preg_replace('!(^|[\s])(http://[\S]+)([^\s]|$)!i', '$1<small><a href="/go.php?$2">$2</a></small>$3', $str);
-    $str = preg_replace('!(^|[\s])([a-z0-9\.]{2,}\.(ru|tv|com|net|org|info|mobi)[\S]{0,})([\s]|$)!is', '$1<small><a href="/go.php?http://$2">$2</a></small>$4', $str);
+    $str = preg_replace('!(^|[\s])(http://[a-z0-9\.\-]{2,})([\s]|$)!i', '$1<small><a href="/go.php?$2">$2</a></small>$3', $str);
+    $str = preg_replace('!(^|[\s])([a-z0-9\.\-]{2,}\.(ru|tv|com|net|org|info|mobi)[\S]{0,})([\s]|$)!is', '$1<small><a href="/go.php?http://$2">$2</a></small>$4', $str);
   }
 
   static public function FromHtm(&$str) {
