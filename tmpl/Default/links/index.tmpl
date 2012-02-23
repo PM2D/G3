@@ -9,12 +9,12 @@
 [*ENDIF*]
 
 [*FOREACH($LINKS as $LINK):*]
-  <img src="[*=$LINK['icon']*]" alt="&gt;" />
+  <img src="favicons/[*=$LINK['icon']*]" alt="&gt;" />
   <a href="[*=$LINK['url']*]">[*=$LINK['name']*]</a>
   [*IF(1<$USER['state']):*]
     <div class="frame">
     <small>[<a href="del.php?n=[*=$LINK['id']*]&amp;[*=SID*]">удалить</a>]
-    [<a href="fetchicon.php?n=[*=$LINK['id']*]]&amp;[*=SID*]">обновить иконку</a>]</small>
+    [<a href="fetchicon.php?n=[*=$LINK['id']*]&amp;[*=SID*]">обновить иконку</a>]</small>
     </div>
   [*ENDIF*]
   <br />

@@ -19,103 +19,103 @@ switch($mod) {
  // --- Configs ---
  case 'modules':
   $tmpl->Vars['TITLE'] = 'Модули';
-  include($_SERVER['DOCUMENT_ROOT'].'/etc/admin/modules.php');
+  include($_SERVER['DOCUMENT_ROOT'].'/lib/admin/modules.php');
  break;
 
  case 'defs':
   $tmpl->Vars['TITLE'] = 'Умолчания';
-  include($_SERVER['DOCUMENT_ROOT'].'/etc/admin/defaults.php');
+  include($_SERVER['DOCUMENT_ROOT'].'/lib/admin/defaults.php');
  break;
 
  case 'upload':
   $tmpl->Vars['TITLE'] = 'Настройки загрузки';
-  include($_SERVER['DOCUMENT_ROOT'].'/etc/admin/upload.php');
+  include($_SERVER['DOCUMENT_ROOT'].'/lib/admin/upload.php');
  break;
 
  case 'smiles':
   $tmpl->Vars['TITLE'] = 'Управление смайлами';
-  include($_SERVER['DOCUMENT_ROOT'].'/etc/admin/smiles.php');
+  include($_SERVER['DOCUMENT_ROOT'].'/lib/admin/smiles.php');
  break;
 
  case 'cache':
   $tmpl->Vars['TITLE'] = 'Управление кэшем';
-  include($_SERVER['DOCUMENT_ROOT'].'/etc/admin/cache.php');
+  include($_SERVER['DOCUMENT_ROOT'].'/lib/admin/cache.php');
  break;
 
  // --- Info ---
  case 'refs':
   $tmpl->Vars['TITLE'] = 'Просмотр рефералов';
-  include($_SERVER['DOCUMENT_ROOT'].'/etc/admin/referals.php');
+  include($_SERVER['DOCUMENT_ROOT'].'/lib/admin/referals.php');
  break;
 
  case 'log':
   $tmpl->Vars['TITLE'] = 'Просмотр лога';
-  include($_SERVER['DOCUMENT_ROOT'].'/etc/admin/viewlog.php');
+  include($_SERVER['DOCUMENT_ROOT'].'/lib/admin/viewlog.php');
  break;
 
  case 'phpinfo':
   $tmpl->Vars['TITLE'] = 'Просмотр конфигурации сервера';
-  include($_SERVER['DOCUMENT_ROOT'].'/etc/admin/phpinfo.php');
+  include($_SERVER['DOCUMENT_ROOT'].'/lib/admin/phpinfo.php');
  break;
 
  // --- Ddir ---
  case 'ddir':
   $tmpl->Vars['TITLE'] = 'Настройки загруз-центра';
-  include($_SERVER['DOCUMENT_ROOT'].'/etc/admin/ddir.php');
+  include($_SERVER['DOCUMENT_ROOT'].'/lib/admin/ddir/ddir.php');
  break;
 
  // --- Filex ---
  case 'filex':
   $tmpl->Vars['TITLE'] = 'Настройки обменника';
-  include($_SERVER['DOCUMENT_ROOT'].'/etc/admin/filex.php');
+  include($_SERVER['DOCUMENT_ROOT'].'/lib/admin/filex/filex.php');
  break;
 
  // --- Forum ---
  case 'forum':
   $tmpl->Vars['TITLE'] = 'Управление разделами форума';
-  include($_SERVER['DOCUMENT_ROOT'].'/etc/admin/forum/forums.php');
+  include($_SERVER['DOCUMENT_ROOT'].'/lib/admin/forum/forums.php');
  break;
 
  case 'forumopts':
   $tmpl->Vars['TITLE'] = 'Настройки форума';
-  include($_SERVER['DOCUMENT_ROOT'].'/etc/admin/forum/options.php');
+  include($_SERVER['DOCUMENT_ROOT'].'/lib/admin/forum/options.php');
  break;
 
  case 'newf':
   $tmpl->Vars['TITLE'] = 'Создание нового форума';
-  include($_SERVER['DOCUMENT_ROOT'].'/etc/admin/forum/newf.php');
+  include($_SERVER['DOCUMENT_ROOT'].'/lib/admin/forum/newf.php');
  break;
 
  case 'delf':
   $tmpl->Vars['TITLE'] = 'Удаление форума';
-  include($_SERVER['DOCUMENT_ROOT'].'/etc/admin/forum/delf.php');
+  include($_SERVER['DOCUMENT_ROOT'].'/lib/admin/forum/delf.php');
  break;
 
  case 'editf':
   $tmpl->Vars['TITLE'] = 'Редактирование форума';
-  include($_SERVER['DOCUMENT_ROOT'].'/etc/admin/forum/editf.php');
+  include($_SERVER['DOCUMENT_ROOT'].'/lib/admin/forum/editf.php');
  break;
 
  case 'movef':
   $tmpl->Vars['TITLE'] = 'Перемещение форума';
-  include($_SERVER['DOCUMENT_ROOT'].'/etc/admin/forum/movef.php');
+  include($_SERVER['DOCUMENT_ROOT'].'/lib/admin/forum/movef.php');
  break;
 
  // --- Users ---
  case 'users':
   $tmpl->Vars['TITLE'] = 'Удаление пользователей';
-  include($_SERVER['DOCUMENT_ROOT'].'/etc/admin/users.php');
+  include($_SERVER['DOCUMENT_ROOT'].'/lib/admin/users.php');
  break;
 
  case 'deluser':
   $tmpl->Vars['TITLE'] = 'Удаление пользователя';
-  include($_SERVER['DOCUMENT_ROOT'].'/etc/admin/deluser.php');
+  include($_SERVER['DOCUMENT_ROOT'].'/lib/admin/deluser.php');
  break;
 
  // --- RSSReader ---
  case 'rssr':
   $tmpl->Vars['TITLE'] = 'Настройки rss-граббера';
-  include($_SERVER['DOCUMENT_ROOT'].'/etc/admin/rssr.php');
+  include($_SERVER['DOCUMENT_ROOT'].'/lib/admin/rssr/rssr.php');
  break;
 
  // --- Utilites ---
@@ -126,22 +126,22 @@ switch($mod) {
 
  case 'query':
   $tmpl->Vars['TITLE'] = 'Результат SQL запроса';
-  include($_SERVER['DOCUMENT_ROOT'].'/etc/admin/query.php');
+  include($_SERVER['DOCUMENT_ROOT'].'/lib/admin/query.php');
  break;
 
  case 'backup':
   $tmpl->Vars['TITLE'] = 'Резервное копирование';
-  include($_SERVER['DOCUMENT_ROOT'].'/etc/admin/backup/backup.php');
+  include($_SERVER['DOCUMENT_ROOT'].'/lib/admin/backup.php');
  break;
 
  case 'export':
   $tmpl->Vars['TITLE'] = 'Создание резервной копии';
-  include($_SERVER['DOCUMENT_ROOT'].'/etc/admin/backup/export.php');
+  include($_SERVER['DOCUMENT_ROOT'].'/lib/admin/export.php');
  break;
 
  case 'import':
   $tmpl->Vars['TITLE'] = 'Восстановление резервной копии';
-  include($_SERVER['DOCUMENT_ROOT'].'/etc/admin/backup/import.php');
+  include($_SERVER['DOCUMENT_ROOT'].'/lib/admin/import.php');
  break;
 
  case 'update':
@@ -173,22 +173,22 @@ switch($mod) {
  // --- Chat ---
  case 'chatopts':
   $tmpl->Vars['TITLE'] = 'Настройки чата';
-  include($_SERVER['DOCUMENT_ROOT'].'/etc/admin/chat/options.php');
+  include($_SERVER['DOCUMENT_ROOT'].'/lib/admin/chat/options.php');
  break;
 
  case 'newroom':
   $tmpl->Vars['TITLE'] = 'Создание комнаты';
-  include($_SERVER['DOCUMENT_ROOT'].'/etc/admin/chat/new.php');
+  include($_SERVER['DOCUMENT_ROOT'].'/lib/admin/chat/new.php');
  break;
 
  case 'editroom':
   $tmpl->Vars['TITLE'] = 'Переименовывание комнаты';
-  include($_SERVER['DOCUMENT_ROOT'].'/etc/admin/chat/edit.php');
+  include($_SERVER['DOCUMENT_ROOT'].'/lib/admin/chat/edit.php');
  break;
 
  case 'delroom':
   $tmpl->Vars['TITLE'] = 'Удаление комнаты';
-  include($_SERVER['DOCUMENT_ROOT'].'/etc/admin/chat/del.php');
+  include($_SERVER['DOCUMENT_ROOT'].'/lib/admin/chat/del.php');
  break;
 
  case 'clearch':
@@ -202,13 +202,13 @@ switch($mod) {
 
  case 'privch':
   $tmpl->Vars['TITLE'] = 'Приват чата';
-  include($_SERVER['DOCUMENT_ROOT'].'/etc/admin/chat/privch.php');
+  include($_SERVER['DOCUMENT_ROOT'].'/lib/admin/chat/privch.php');
  break;
 
  // --- News ---
  case 'newsopts':
   $tmpl->Vars['TITLE'] = 'Настройки новостей';
-  include($_SERVER['DOCUMENT_ROOT'].'/etc/admin/news.php');
+  include($_SERVER['DOCUMENT_ROOT'].'/lib/admin/news/news.php');
  break;
 
  // --- * ---

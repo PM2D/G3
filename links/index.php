@@ -1,6 +1,6 @@
 <?php
 // This file is a part of AugurCMS (g3.pm2d.ru)
-include($_SERVER['DOCUMENT_ROOT'].'/etc/main.php');
+require($_SERVER['DOCUMENT_ROOT'].'/lib/main.php');
 
 if(!IsModInstalled('links'))
   raise_error('Данный модуль на данный момент не установлен.');
