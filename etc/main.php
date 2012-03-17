@@ -13,9 +13,10 @@ function perf() {
 perf();
 
 // автозагрузка вспомогательных классов из lib
-function __autoload($classname) {
-  include($_SERVER['DOCUMENT_ROOT'].'/lib/'.$classname.'.php');
-}
+define('CLASS_DIR', $_SERVER['DOCUMENT_ROOT'].'/lib/');
+set_include_path(get_include_path().PATH_SEPARATOR.CLASS_DIR);
+spl_autoload_extensions('.php');
+spl_autoload_register();
 
 function exception_handler($e) {
   raise_error('Unhandled exception:<br />'.$e->getMessage()."\n");
