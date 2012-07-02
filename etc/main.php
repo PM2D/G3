@@ -332,7 +332,7 @@ final class tags {
     $str = preg_replace('!(^|[\s])\[s\]([^\[<]+)\[\/s\]([\s]|$)!is', '$1<s>$2</s>$3', $str);
     $str = preg_replace('!\[color=([\S]+)\]([^\[<]+)\[\/color\]!is', '<span style="color:$1">$2</span>', $str);
     $str = preg_replace('!\[url=((f|ht)tp[s]?://[^<> \n]+?)\](.+?)\[/url\]!i', '<a href="/go.php?$1">$3</a>', $str);
-    $str = preg_replace('!(^|[\s])(http://[a-z0-9\.\-]{2,})([\s]|$)!i', '$1<small><a href="/go.php?$2">$2</a></small>$3', $str);
+    $str = preg_replace('!(^|[\s])(http://[a-z0-9\.\-]{2,}/{0,}[\S]{0,})([\s]|$)!i', '$1<small><a href="/go.php?$2">$2</a></small>$3', $str);
     $str = preg_replace('!(^|[\s])([a-z0-9\.\-]{2,}\.(ru|tv|com|net|org|info|mobi)[\S]{0,})([\s]|$)!is', '$1<small><a href="/go.php?http://$2">$2</a></small>$4', $str);
   }
 
