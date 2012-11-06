@@ -21,6 +21,12 @@ CREATE TABLE `chatrooms` (
 
 function install(){
   create_db_tables();
+  global $CFG;
+  if ( !isset($CFG['CHAT']) )
+  {
+    $CFG['CHAT']['guests'] = 1;
+    save_cfg();
+  }
 }
 
 function uninstall(){
@@ -29,6 +35,12 @@ function uninstall(){
 
 function update(){
   update_db_tables();
+  global $CFG;
+  if ( !isset($CFG['CHAT']['guests']) )
+  {
+    $CFG['CHAT']['guests'] = 1;
+    save_cfg();
+  }
 }
 
 ?>

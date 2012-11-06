@@ -29,7 +29,8 @@ CREATE TABLE `files` (
 function install() {
   create_db_tables();
   global $CFG;
-  if(!isset($CFG['DDIR'])) {
+  if ( !isset($CFG['DDIR']) )
+  {
     // defaults:
     $CFG['DDIR']['sort'] = 0;
     $CFG['DDIR']['rev'] = FALSE;
@@ -57,7 +58,11 @@ function uninstall() {
 function update() {
   update_db_tables();
   global $CFG;
-  if(!isset($CFG['DDIR']['view'])) $CFG['DDIR']['view'] = 1;
+  if ( !isset($CFG['DDIR']['view']) )
+  {
+    $CFG['DDIR']['view'] = 1;
+    save_cfg();
+  }
   fstools::make_dir($_SERVER['DOCUMENT_ROOT'].'/var/cache/zip');
   fstools::make_dir($_SERVER['DOCUMENT_ROOT'].'/var/cache/imgs');
   fstools::make_dir($_SERVER['DOCUMENT_ROOT'].'/tmp/mp3');
