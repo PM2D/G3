@@ -23,6 +23,7 @@
     [*PAGES('comms.php', $NAV['pos'], $NAV['total'], $NAV['limit'], $NAV['add'])*]
   </div><hr />
 
+  [*IF($USER['id']!=3 or $GUESTS):*]
   <div style="text-align: center; font-size: smaller">
   Дoбaвить кoммeнтapий:
   <form action="comms.php?f=[*=$FILE['id']*]&amp;[*=SID*]" method="post">
@@ -36,6 +37,7 @@
    <input type="submit" value="Дoбaвить" />
    </fieldset>
   </form></div><hr />
+  [*ENDIF*]
 
   <div class="misc">
    Cжaтиe: [*=$GZIP*]<br />
