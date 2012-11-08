@@ -12,9 +12,9 @@ if(!$id) raise_error('???');
 if(3==$USER['id']) raise_error('Дocтуп зaпpeщeн.');
 
 if(isset($_GET['comm'])) {
-  $chk = $mysql->GetRow('`uid`', 'gallery_comms', '`id`='.$id);
+  $chk = $mysql->GetRow('`auid`,`uid`', 'gallery_comms', '`id`='.$id);
 } else {
-  $chk = $mysql->GetRow('`uid`,`type`', 'gallery_files', '`id`='.$id);
+  $chk = $mysql->GetRow('`uid` as `auid`,`uid`,`type`', 'gallery_files', '`id`='.$id);
 }
 
 if($USER['id']!=$chk['uid'] && 1>$USER['state']) raise_error('Heльзя удaлять чужиe файлы.');
@@ -48,7 +48,7 @@ if(!isset($_GET['comm']) && $chk) {
 
 } else raise_error('Ошибка при удалении.');
 
-$tmpl->Vars['BACK'] = 'view.php?a='.$chk['uid'].'&amp;'.SID;
+$tmpl->Vars['BACK'] = 'view.php?a='.$chk['auid'].'&amp;'.SID;
 echo $tmpl->Parse('notice.tmpl');
 
 ?>
