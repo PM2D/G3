@@ -11,7 +11,7 @@ $tmpl->Vars['EXTENSIONS'] = substr($tmpl->Vars['EXTENSIONS'], 0, -1);
 function inival($var){
   static $arr;
   if(!$arr) $arr = ini_get_all();
-  if(!$arr[$var]['local_value']) return 'Heт';
+  if(!isset($arr[$var]['local_value']) || !$arr[$var]['local_value']) return 'Heт';
   elseif(2>$arr[$var]['local_value']) return 'Дa';
   else return $arr[$var]['local_value'];
 }
