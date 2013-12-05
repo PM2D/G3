@@ -1,10 +1,11 @@
 <?php
 // This file is a part of GIII (g3.steelwap.org)
-$url = htmlspecialchars(rawurldecode($_SERVER['QUERY_STRING']));
+$url = rawurldecode($_SERVER['QUERY_STRING']);
 if(strpos($url, $_SERVER['HTTP_HOST'])){
-  Header('Location: '.$url);
+  Header('Location: '.strip_tags($url));
   exit;
 }
+$url = htmlspecialchars($url);
 Header('Content-Type: text/html; charset=utf-8');
 Header('Cache-Control: no-cache, must-revalidate');
 print('<?xml version="1.0" encoding="utf-8"?>
